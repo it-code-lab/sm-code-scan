@@ -2771,7 +2771,7 @@ function checkURL() {
     var LocationSearchStr = location.search;
     var find = '%20';
     var re = new RegExp(find, 'g');
-    var pageName = "home";
+    var pageName = "tutorial";
     var path = window.location.pathname;
 	
     LocationSearchStr = LocationSearchStr.replace(re, ' ');
@@ -2934,35 +2934,11 @@ function checkURL() {
     
 
     document.getElementById(pageName + "DivId").style.display = "block";
-	//document.getElementById(pageName + "DivId").style.width = "100%";
-	//document.getElementById("helpDisplayDivId").style.width = "30%";
-
-	//document.getElementById("mainContainer").style.width = "70%";
-
 
 
 
 	
-	// var myCookie = getCookie("cookname");
-	
-	// if (myCookie == null) {
-	// 	sessionStorage.setItem("userLoggedIn", "n");
-	// 	if (!onMobileBrowser()){
-	// 		document.getElementById("loginLinkId").style.display = "block";
-	// 	}
-	// 	document.getElementById("logoutLinkId").style.display = "none";
-    //     //********TEMPORARY - SM TODO********* */
-	// 	//document.getElementById("HelpTopicsLinkId").style.display = "none";
-    //     document.getElementById("HelpTopicsLinkId").style.display = "block";
-		
-	// } else {
-	// 	sessionStorage.setItem("userLoggedIn", "y");
-	// 	document.getElementById("loginLinkId").style.display = "none";
-	// 	document.getElementById("logoutLinkId").style.display = "block";
-	// 	if (sessionStorage.getItem("userLvl") == "9"){
-	// 		document.getElementById("HelpTopicsLinkId").style.display = "block";
-	// 	}
-	// }
+
 
     populateLanguages("helpTopics-lang-box");
 	try{
@@ -3083,22 +3059,37 @@ function getTutorial(tutorialStr){
             var path = window.location.pathname;
             var myUrl = path.substring(0, path.indexOf('/',path.indexOf('itcodescanner')) + 1)
 
-			// document.getElementById("languageScanResultDivId").style.display = "none";
-			// document.getElementById("languageOverride").style.display = "none";
-			// document.getElementById("helpDetailsDivId").style.display = "none";
-			// document.getElementById("loginDivId").style.display = "none";
-			// document.getElementById("contactusDivId").style.display = "none";
-			// document.getElementById("howtoDivId").style.display = "none";
-			// document.getElementById("homeDivId").style.display = "none";	
-			
-			// document.getElementById("filescannerDivId").style.display = "none";
-			// document.getElementById("projectscannerDivId").style.display = "none"
-			// document.getElementById("HelpTopicsDivId").style.display = "none";
-			// document.getElementById("helpDisplayDivId").style.display = "none";
-			// document.getElementById("tutorialDivId").style.display = "block";
-			// document.getElementById("tutorialDivId").style.width = "100%";	
-	
-		
+
+		    var tf = JSON.parse(sessionStorage.getItem("tutorialList"));
+
+            var nextTutorialTitle = "";
+            var nextTutorialTitleURL = "";
+            var rows = JSON.parse(tf);
+
+            rows = rows.filter(function(entry) {
+                return entry.discontinue == "0" && entry.technology == technology ;
+            });
+
+            var path = window.location.pathname;
+            var myUrl = path.substring(0, path.indexOf('/',path.indexOf('itcodescanner')) + 1);
+
+            for (var i = 0; i < rows.length; i++) {
+                if (rows[i].itemid == itemid){
+
+                    if (rows[i+1] != undefined) {
+                        itemName = rows[i+1].title;
+                        itemName = itemName.replaceAll(" " , "-");
+                        subpath = rows[i+1].subpath;
+                        subpath = subpath.replaceAll(" " , "-");
+                        nextTutorialTitleURL = myUrl + "tutorials/" + (rows[i+1].technology).toLowerCase() + "/" + subpath.toLowerCase() + "/" + itemName.toLowerCase();
+                        nextTutorialTitle = rows[i+1].title;
+                    }
+
+                    break;
+                }
+            }
+            
+
 			
             var newHTML = "<div classXX = 'songContainer' >" + '<a href ="#" class="tutorialTopLinkCls" onclick="showTechnology(' + "'" + technology + "'" + ');return false;" >' + technology + "</a>" + " > " + '<a href ="' + window.location.href + '" class="tutorialTopLinkCls"  >' + title + "</a>";
             newHTML = newHTML + "<div classXX = 'songContainerSub' > <h1 classXX='songContainerH1' > " + title + "</h1></div>";
@@ -3128,6 +3119,13 @@ function getTutorial(tutorialStr){
             if (description == undefined){
                 newHTML = "<div class = 'songContainer' >Page not found</div>";
             }
+
+            if (nextTutorialTitle != "") {
+                newHTML = newHTML + '<br><br>'  + 'Next: <a href ="' + nextTutorialTitleURL + '" class="tutorialTopLinkCls"  >' + nextTutorialTitle + "</a> <br> <br>";
+
+            }
+
+
             document.getElementById("tutorialDivId").innerHTML = newHTML;
 
             var elemId = "tutorialDiv-" + itemid;
@@ -3141,6 +3139,7 @@ function getTutorial(tutorialStr){
             document.querySelector('meta[name="description"]').setAttribute("content", metaDesc);
             document.querySelector('meta[name="keywords"]').setAttribute("content", metaKey);
             document.title = technology + " " + subpath + ". " + title ;
+            showTechnology(technology);
 
             // if (localStorage.getItem("cookieAccepted") == "y"){
             //     document.getElementById("cookie-div-id").style.display = "none"
