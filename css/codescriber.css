@@ -1063,7 +1063,6 @@ animation-delay: 0.4s;
     font-size: 14px;
     letter-spacing: 1px;
     background: #fff;
-    border-radiusXX: 20px;	
 	border: 1px solid rgba(0, 0, 0, 0.3);
 	
    
@@ -1092,7 +1091,6 @@ animation-delay: 0.4s;
     letter-spacing: 1px;
     background: #fff;
 	border: 1px solid rgba(0, 0, 0, 0.3);
-	border-radiusXX: 20px;
 	outline: none;
 	font-family: 'Ubuntu', sans-serif;
 	text-align: center;
@@ -1262,7 +1260,7 @@ animation-delay: 0.4s;
 }
 
 		/*background-color: #AED6F1 ;*/
-}
+
 /* SM: End: ***********Above styles are for contact us display **************/
 
 /* SM: Start: ***********Below styles are for Captcha display **************/
@@ -1355,8 +1353,6 @@ animation-delay: 0.4s;
   margin-bottom: 16px;
 }
 
-.cookie-consent-banner__actions {    
-}
 
 .cookie-consent-banner__header {
   margin-bottom: 8px;
@@ -1441,8 +1437,6 @@ animation-delay: 0.4s;
 	margin-bottom: 5px;
 }
 .menuBtn {
-	margin-topXXX: 5px;
-	margin-bottomXX: 5px;
 	padding-left: 10px;
 	padding-right: 10px;
 }
@@ -1562,11 +1556,7 @@ a.fileLink:hover{
 
 /* SM: End: ***********Above styles are for splitter **************/
 /* SM: Start: ***********Below styles are for file selector **************/
-#selectfile:hover {
-	/*
-	background-color: #04AA6D;
-	*/
- }
+
 
 /* SM: End: ***********Above styles are for file selector **************/
 
