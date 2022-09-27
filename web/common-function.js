@@ -3059,6 +3059,7 @@ function getTutorial(tutorialStr){
             var path = window.location.pathname;
             var myUrl = path.substring(0, path.indexOf('/',path.indexOf('itcodescanner')) + 1)
 
+            //START: Find the next tutorial to be put at the bottom of the page
 
 		    var tf = JSON.parse(sessionStorage.getItem("tutorialList"));
 
@@ -3088,7 +3089,7 @@ function getTutorial(tutorialStr){
                     break;
                 }
             }
-            
+            //END: Find the next tutorial to be put at the bottom of the page
 
 			
             var newHTML = "<div classXX = 'songContainer' >" + '<a href ="#" class="tutorialTopLinkCls" onclick="showTechnology(' + "'" + technology + "'" + ');return false;" >' + technology + "</a>" + " > " + '<a href ="' + window.location.href + '" class="tutorialTopLinkCls"  >' + title + "</a>";
@@ -3127,9 +3128,11 @@ function getTutorial(tutorialStr){
 
 
             document.getElementById("tutorialDivId").innerHTML = newHTML;
-
+            showTechnology(technology);
+            //START: Change the background color of the active tutorial link 
             var elemId = "tutorialDiv-" + itemid;
             document.getElementById(elemId).style.backgroundColor = "orange";
+            //END: Change the background color of the active tutorial link
 
             var metaDesc = shortdescription   ;
 
@@ -3139,7 +3142,7 @@ function getTutorial(tutorialStr){
             document.querySelector('meta[name="description"]').setAttribute("content", metaDesc);
             document.querySelector('meta[name="keywords"]').setAttribute("content", metaKey);
             document.title = technology + " " + subpath + ". " + title ;
-            showTechnology(technology);
+            
 
             // if (localStorage.getItem("cookieAccepted") == "y"){
             //     document.getElementById("cookie-div-id").style.display = "none"
