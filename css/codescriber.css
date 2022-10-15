@@ -1999,6 +1999,7 @@ input:checked + .slider:after
   padding: 10px;
   margin: 10px;
   overflow:auto;
+  position: relative
 }
 
 .codescript2-desc {
@@ -2009,6 +2010,7 @@ input:checked + .slider:after
   margin: 10px;
   box-shadow: rgb(34, 34, 34) 1px 1px 3px;
   overflow:auto;
+  position: relative
 }
 
 .codescript3-desc {
@@ -2020,6 +2022,7 @@ input:checked + .slider:after
   margin: 10px;
   box-shadow: rgb(34, 34, 34) 1px 1px 3px;
   overflow:auto;
+  position: relative
 }
 
 .codescript1{
