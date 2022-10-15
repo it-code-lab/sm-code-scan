@@ -112,14 +112,14 @@
       <div id="page-content-wrapper">
          <!-- Top navigation-->
          <div class="topnav" id="myTopnav">
-            <a id="homeLinkId" href="javascript:goToHome()">HOME</a>
-            <a id="tutorialLinkId" href="javascript:goToTutorial()">TUTORIALS</a>
-            <a id="projectscannerLinkId" href="javascript:goToProjectscanner()">PROJECT SCANNER</a>
-            <a id="filescannerLinkId" href="javascript:goToFilescanner()">FILE SCANNER</a>
-            <a id="HelpTopicsLinkId" style="display:none" href="javascript:goToHelpTopics()">HELP TOPICS</a>
-            <a id="howtoLinkId" href="javascript:goToHowToVideos()">HOW TO VIDEOS</a>
-            <a id="contactusLinkId" href="javascript:goToContactUs()">CONTACT US</a>
-            <a id="loginLinkId" href="javascript:goToLogin()">LOG IN</a>
+            <a id="homeLinkId" href="/itcodescanner/?target=home">HOME</a>
+            <a id="tutorialLinkId" href="/itcodescanner/?target=tutorial">TUTORIALS</a>
+            <a id="projectscannerLinkId" href="/itcodescanner/?target=projectscanner">PROJECT SCANNER</a>
+            <a id="filescannerLinkId" href="/itcodescanner/?target=filescanner">FILE SCANNER</a>
+            <a id="HelpTopicsLinkId" style="display:none" href="/itcodescanner/?target=HelpTopics">HELP TOPICS</a>
+            <a id="howtoLinkId" href="/itcodescanner/?target=howto">HOW TO VIDEOS</a>
+            <a id="contactusLinkId" href="/itcodescanner/?target=contactus">CONTACT US</a>
+            <a id="loginLinkId" href="/itcodescanner/?target=login">LOG IN</a>
             <a id="logoutLinkId" style="display:none" href="javascript:Logout()">LOGOUT</a>
             <a id="buymecoffee" href="https://www.buymeacoffee.com/smah" target="_blank">
                <i id="coffeeBtn" class="fas fa-coffee"
@@ -134,7 +134,7 @@
          <!-- End of Top navigation-->
          <!-- Page content-->
          <div id="loaderDivId">
-            <img src='/itcodescanner/images/codescan.png' alt='Loading..' style="margin:auto">
+            <!-- <img src='/itcodescanner/images/codescan.png' alt='Loading..' style="margin:auto"> -->
             <div class="loader">
                <i class="loaderDot"></i>
                <i class="loaderDot"></i>
@@ -193,7 +193,7 @@
                            <p><button onclick="Show('howto')">Go</button></p>
                         </div>
                      </div>
-                     <div style="background-color: rgba(9, 84, 132); width: 100%; margin: 0px; padding: 20px; ">
+                     <div  style="display:none; background-color: rgba(9, 84, 132); width: 100%; margin: 0px; padding: 20px; ">
                         <label style="color: white"> Lots of programming languages supported. Some of them are listed
                            below. </label>
                         <hr style="color: #ccc">
@@ -948,6 +948,51 @@
          <!--**************START: HELP DISPLAY DIV**************-->
       </div>
    </div>
+   <div class="footerDiv">
+   <footer>
+      <div class="footer-main">
+        <div class="footer-col1">
+          <ul>
+            <li>
+               <img src="/itcodescanner/assets/favicon-1.png" alt="IT Code Scanner" class="languageicon">
+            </li>
+    
+          </ul>
+        </div>
+    
+        <div class="footer-col2">
+          <h3 class="footer-heading">
+            Key Links
+          </h3>
+          <div class="footer-languages">
+            <a href="/itcodescanner/?target=home">Home</a>
+            <a href="/itcodescanner/?target=tutorial">Tutorials</a>
+            <a href="/itcodescanner/?target=projectscanner">Project Scanner</a>
+            <a href="/itcodescanner/?target=filescanner">File Scanner</a>
+            <a href="/itcodescanner/?target=contactus">Contact Us</a>
+          </div>
+        </div>
+    
+        <div class="footer-col3">
+          <h3 class="footer-heading">
+            Follow Us
+          </h3>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/profile.php?id=100077594436233">
+               <i class="fa fa-facebook-square" style="font-size:48px;color:white"></i>
+            </a>
+     
+          </div>
+        </div>
+      </div>
+    
+      <p class="footer-terms">
+        <a href="#">© 2022 IT Code Scanner. All rights reserved</a>
+    
+      </p>
+    </footer>
+    </div>
+
    <div id="cookie-div-id" class="cookie-consent-banner">
       <div class="cookie-consent-banner__inner">
          <div class="cookie-consent-banner__copy">

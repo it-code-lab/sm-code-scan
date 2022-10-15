@@ -2851,7 +2851,7 @@ function checkURL() {
         if (screen.width < 700 || window.innerWidth < 700){
             document.getElementById("tutorialSearchDivId").style.display = "none";
         }else {
-            populateTutorialList();
+            //populateTutorialList();
         }
         
 
@@ -3080,9 +3080,9 @@ function getTutorial(tutorialStr){
                     if (rows[i+1] != undefined) {
                         itemName = rows[i+1].title;
                         itemName = itemName.replaceAll(" " , "-");
-                        subpath = rows[i+1].subpath;
-                        subpath = subpath.replaceAll(" " , "-");
-                        nextTutorialTitleURL = myUrl + "tutorials/" + (rows[i+1].technology).toLowerCase() + "/" + subpath.toLowerCase() + "/" + itemName.toLowerCase();
+                        nextSubpath = rows[i+1].subpath;
+                        nextSubpath = nextSubpath.replaceAll(" " , "-");
+                        nextTutorialTitleURL = myUrl + "tutorials/" + (rows[i+1].technology).toLowerCase() + "/" + nextSubpath.toLowerCase() + "/" + itemName.toLowerCase();
                         nextTutorialTitle = rows[i+1].title;
                     }
 
@@ -3161,6 +3161,11 @@ function getTutorial(tutorialStr){
               let jsonLdScript = document.querySelector('script[type="application/ld+json"]');
               jsonLdScript.innerHTML = JSON.stringify(structuredData);
 
+              
+              $('html, body').animate({
+                    scrollTop: $("#tutorialDivId").offset().top - 40
+                }, 100);	
+            
         },
         error: function(xhr, status, error) {
             //console.log(error);
@@ -3228,31 +3233,32 @@ function editItem( btn ){
    toolbarHTML = toolbarHTML  + "<div class = 'toolBar'><div>" +
    "<button  type='button' class='itmUpdBtn itmToggledBtn btn btn-primary' onclick=toggleDescView('" + itemid + "') >Toggle View</button>" + 
    "<label class='toolBarlabel'>Paragraphs</label>" +
-   "<button  type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','paragraph1') >P1</button>" +
-   "<button  type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','paragraph2') >P2</button>" +
+   "<button title='paragraph1' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','paragraph1') >P1</button>" +
+   "<button title='paragraph2' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','paragraph2') >P2</button>" +
    "<label class='toolBarlabel'>Ordered Lists</label>" +
-   "<button  type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','orderedlist') >OL1</button>" +
-   "<button  type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','suborderedlist') >OL2</button>" +
+   "<button title='ordered-list' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','orderedlist') >OL1</button>" +
+   "<button title='sub-ordered-list' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','suborderedlist') >OL2</button>" +
    "<label class='toolBarlabel'>Unordered Lists</label>" +
-   "<button  type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','unorderedlist') >UL1</button>" +
-   "<button  type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','subunorderedlist') >UL2</button>" +
-   "<button  type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','sub2unorderedlist') >UL3</button>" +
+   "<button title='un-ordered-list' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','unorderedlist') >UL1</button>" +
+   "<button title='sub-un-ordered-list' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','subunorderedlist') >UL2</button>" +
+   "<button title='sub2-un-ordered-list' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','sub2unorderedlist') >UL3</button>" +
    "<label class='toolBarlabel'>Code Snippets</label>" +
-   "<button  type='button' class='itmUpdBtn btn btn-primary' onclick=addComponent('" + itemid + "','codescript1') >Dark Intellij</button>" +
-   "<button  type='button' class='itmUpdBtn btn btn-primary' onclick=addComponent('" + itemid + "','codescript2') >Add Code Style2</button>" +
-   "<button  type='button' class='itmUpdBtn btn btn-primary' onclick=addComponent('" + itemid + "','codescript3') >Command line</button>" +
+   "<button title='Code-Dark Intellij' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','codescript1') >Dark</button>" +
+   "<button title='Code-Light-VSCode' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','codescript2') >Light</button>" +
+   "<button title='Code-CommandLine'' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','codescript3') >Cmd</button>" +
    "<label class='toolBarlabel'>Headers</label>" +
-   "<button  type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header1') >H1</button>" +
-   "<button  type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header2') >H2</button>" +
-   "<button  type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header3') >H3</button>" +
+   "<button title='header1' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header1') >H1</button>" +
+   "<button title='header2' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header2') >H2</button>" +
+   "<button title='header3-padding' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header3') >H3</button>" +
+   "<button title='header3' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header4') >H4</button>" +
    "<label class='toolBarlabel'>Images</label>" +
-   "<button  type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image1') >I1</button>" +
-   "<button  type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image2') >I2</button>" +
-   "<button  type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image3') >I3</button>" +
+   "<button title='Image-Full-width' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image1') >I1</button>" +
+   "<button title='Image-Smaller' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image2') >I2</button>" +
+   "<button title='Image-Smallest' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image3') >I3</button>" +
    "<label class='toolBarlabel'>Messages</label>" +
-   "<button  type='button' class='itmUpdBtn btn btn-primary' onclick=addComponent('" + itemid + "','warning') >Warning</button>" +
-   "<button  type='button' class='itmUpdBtn btn btn-primary' onclick=addComponent('" + itemid + "','error') >Error</button>" +
-   "<button  type='button' class='itmUpdBtn btn btn-primary' onclick=addComponent('" + itemid + "','greenmsg') >Success</button>" + 
+   "<button title='Warning'' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','warning') >Warn</button>" +
+   "<button title='Error' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','error') >Err</button>" +
+   "<button title='Green-Success' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','greenmsg') >Succ</button>" + 
    "<label for='insertInner'>Insert component before active Div:</label>" +
    "<input type='checkbox' id='insertInner' >" +
    "</div>" ;
@@ -3339,6 +3345,14 @@ function deleteCurrentComponent(btn){
     //console.log("btn.parentElement.innerHTML = " + btn.parentElement.innerHTML);
     btn.parentElement.remove();
     //btn.parentElement.innerHTML = "";
+}
+
+function copyCurrentComponent(btn){
+    var text = btn.parentElement.textContent;
+    text = text.substring(1, text.lastIndexOf('Copy'));
+
+    navigator.clipboard.writeText(text);
+    console.log(text);
 }
 
 function showImage(event) {
@@ -3493,12 +3507,12 @@ function addComponent(itemid, type){
 
     var randomId = type + "-" + Math.floor(Math.random() * 1000000);
     if (type == "codescript1"){
-        document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  class = 'codescript1-desc'> <pre> TODO Edit - Code Script Style1 </pre><button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>" + partTwoHTML;
+        document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  class = 'codescript1-desc'> <pre> TODO Edit - Code Script Style1 </pre><button class='copyDiv' onclick=copyCurrentComponent(this) >Copy</button><button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>" + partTwoHTML;
     } else if (type == "codescript2") {
-        document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  class = 'codescript2-desc'> <pre> TODO Edit - Code Script Style2</pre> <button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>"+ partTwoHTML;
+        document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  class = 'codescript2-desc'> <pre> TODO Edit - Code Script Style2</pre><button class='copyDiv' onclick=copyCurrentComponent(this) >Copy</button> <button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>"+ partTwoHTML;
 
     }else if (type == "codescript3") {
-        document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  class = 'codescript3-desc'> <pre> TODO Edit - Code Script Style3 </pre><button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>"+ partTwoHTML;
+        document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  class = 'codescript3-desc'> <pre> TODO Edit - Code Script Style3 </pre><button class='copyDiv' onclick=copyCurrentComponent(this) >Copy</button><button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>"+ partTwoHTML;
 
     }else if (type == "header1") {
         document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  ><h1 class = 'header1-desc'> TODO Edit - Header1 </h1><button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>"+ partTwoHTML;
@@ -3508,6 +3522,8 @@ function addComponent(itemid, type){
 
     }else if (type == "header3") {
         document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  ><h3 class = 'header3-desc'> TODO Edit - Header3 </h3><button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>"+ partTwoHTML;
+    }else if (type == "header4") {
+        document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  ><h3 class = 'header4-desc'> TODO Edit - Header4 </h4><button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>"+ partTwoHTML;
 
     }else if (type == "image1") {
         var imagename = document.getElementById("image-" + itemid).value;
