@@ -2087,6 +2087,7 @@ margin-top: 40px !important;
     background-color:transparent;
     padding:5px ;
     border-radius: 5px;
+    display:none; /*Temporary change as copy format is not correct*/
   }
 
   .copyDiv:hover {
