@@ -3143,7 +3143,7 @@ function getTutorial(tutorialStr){
             document.querySelector('meta[name="keywords"]').setAttribute("content", metaKey);
             document.title = technology + " " + subpath + ". " + title ;
             
-
+            sessionStorage.setItem("lastUrl", window.location.href);
             // if (localStorage.getItem("cookieAccepted") == "y"){
             //     document.getElementById("cookie-div-id").style.display = "none"
             // }
