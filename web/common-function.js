@@ -4612,7 +4612,10 @@ function populateTutorialList(rows = "") {
         subpath = rows[i].subpath;
         subpath = subpath.replaceAll(" " , "-");
 
-        tutorialTitleURL = myUrl + "tutorials/" + (rows[i].technology).toLowerCase() + "/" + subpath.toLowerCase() + "/" + itemName.toLowerCase();
+        technology = rows[i].technology;
+        technology = technology.replaceAll(" " , "-");
+
+        tutorialTitleURL = myUrl + "tutorials/" + technology.toLowerCase() + "/" + subpath.toLowerCase() + "/" + itemName.toLowerCase();
 
         technologySqueezed = rows[i].technology;		 
 		technologySqueezed = technologySqueezed.replaceAll(' ', '')
