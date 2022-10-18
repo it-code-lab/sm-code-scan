@@ -3082,7 +3082,9 @@ function getTutorial(tutorialStr){
                         itemName = itemName.replaceAll(" " , "-");
                         nextSubpath = rows[i+1].subpath;
                         nextSubpath = nextSubpath.replaceAll(" " , "-");
-                        nextTutorialTitleURL = myUrl + "tutorials/" + (rows[i+1].technology).toLowerCase() + "/" + nextSubpath.toLowerCase() + "/" + itemName.toLowerCase();
+                        nextTechnology = (rows[i+1].technology).toLowerCase();
+                        nextTechnology = nextTechnology.replaceAll(" " , "-");
+                        nextTutorialTitleURL = myUrl + "tutorials/" + nextTechnology + "/" + nextSubpath.toLowerCase() + "/" + itemName.toLowerCase();
                         nextTutorialTitle = rows[i+1].title;
                     }
 
