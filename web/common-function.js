@@ -2885,6 +2885,7 @@ function checkURL() {
             document.getElementById("tutorialEditDivId").innerHTML = "";
             getTutorial(tutorialStr);
         }else {
+            tutorialStr = decodeURI(tutorialStr);
             document.getElementById("tutorialDivId").style.display = "none";
             document.getElementById("tutorialEditDivId").style.display = "none";
             document.getElementById("tutorialListDivId").style.display = "block";
