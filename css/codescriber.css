@@ -767,11 +767,15 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_collapsible
 }
 
 .bannerLargeText{
-  font-family: 'Libre Franklin', sans-serif;  margin: auto; text-align: center; width: 100%;
+  margin: auto; text-align: center; width: 100%;
+  font-family: Georgia !important; 
+  font-size: 60px ;
 }
 
 .bannerSmallText{
-  font-family: 'Libre Franklin', sans-serif; margin: auto; text-align: center; width: 100%;
+  margin: auto; text-align: center; width: 100%;
+  font-size: 30px ; 
+  font-family: 'Brush Script MT', cursive !important;
 }
 
 
@@ -880,9 +884,7 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_collapsible
 
 
 
-  .homeCardText {
-    font: 24px Arial, sans-serif; margin-top: 5px;
-  }
+
 	.splitter{
 		display: none;
 	}
@@ -913,6 +915,13 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_collapsible
 /*************************************************************/
 
 /* SM: END: ***********Above styles are for Top Navigation Bar **************/
+
+.homeCardText {
+  font: 20px Arial, sans-serif; margin-top: 5px;
+  padding: 10px;
+  text-transform: uppercase;
+}
+
 /* SM: Start: ***********Below styles are for loading animation **************/
 
 
@@ -1614,6 +1623,7 @@ button.btnNewWindow::before {
   width: 80%;
   min-width: 500px;
   padding: 30px;
+
 }
 
 .bannerinner{
@@ -1698,6 +1708,10 @@ button.btnNewWindow::before {
   font-family: arial;
    float: left; 
   margin: 10px;
+  cursor: pointer;
+  background-color: #095984;
+  color: white;
+  padding: 2px;
 }
 
 
@@ -2356,3 +2370,33 @@ footer {
 
 
 /************** End  ****************************/
+
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  top: 30px;
+  left: 10px;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 101;
+  
+}
+
+.dropdown-content:hover {
+  display: block;
+}
+.dropdown-content a {
+  color: #f2f2f2;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+#tutorialLinkId:hover + .dropdown-content {display: block; } 
+
+

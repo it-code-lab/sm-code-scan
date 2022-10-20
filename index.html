@@ -113,7 +113,15 @@
          <!-- Top navigation-->
          <div class="topnav" id="myTopnav">
             <a id="homeLinkId" href="/itcodescanner/?target=home">HOME</a>
-            <a id="tutorialLinkId" href="/itcodescanner/?target=tutorial">TUTORIALS</a>
+
+            <a id="tutorialLinkId" href="/itcodescanner/?target=tutorial">TUTORIALS <i  class="fa fa-caret-down"></i></a> 
+            <div id="dropDownTutListId" class="dropdown-content">
+               <a href="#">Link 1</a>
+               <a href="#">Link 2</a>
+               <a href="#">Link 3</a>
+            </div>   
+                     
+
             <a id="projectscannerLinkId" href="/itcodescanner/?target=projectscanner">PROJECT SCANNER</a>
             <a id="filescannerLinkId" href="/itcodescanner/?target=filescanner">FILE SCANNER</a>
             <a id="HelpTopicsLinkId" style="display:none" href="/itcodescanner/?target=HelpTopics">HELP TOPICS</a>
@@ -131,6 +139,7 @@
                <i class="fa fa-bars"></i>
             </a>
          </div>
+         
          <!-- End of Top navigation-->
          <!-- Page content-->
          <div id="loaderDivId">
@@ -150,47 +159,46 @@
                <div id="homeDivId">
                   <div class="bannerParent">
                      <div class="bannerContainer">
-                        <div class="bannerContent">
-                           <div class="bannerinner">
+                        <div class="bannerContent" >
+                           <!-- <div class="bannerinner">
                               <i class='fas fa-desktop desktop-icon'></i> <i class="divider"></i> IT CODE SCANNER
-                           </div>
-                           <label class="bannerLargeText">Making
-                              code maintenance and development easy</label>
+                           </div> -->
+                           <label class="bannerLargeText">IT Code Scanner</label>
                            <br>
                            <hr>
-                           <label class="bannerSmallText">Spend
-                              less time in understanding the code</label>
+                           <label class="bannerSmallText" >Spend
+                              less time in learning the code</label>
                         </div>
                      </div>
                      <div id="homeCardsContainerDivId">
-                        <div class="menucard">
+                        <div class="menucard" onclick="Show('tutorial')"">
                            <img src="/itcodescanner/images/tutorials.png" alt="Tutorials" class="homeCardImg">
                            <div class="homeCardText">Tutorials</div>
                            <hr>
                            <div class="cardMsg">Tutorials and sample programs.</div>
-                           <p><button onclick="Show('tutorial')">Go</button></p>
+                           <!-- <p><button onclick="Show('tutorial')">Go</button></p> -->
                         </div>
-                        <div class="menucard">
+                        <div class="menucard" onclick="Show('projectscanner')">
                            <img src="/itcodescanner/images/prjscan.png" alt="Project Scan" class="homeCardImg">
                            <div class="homeCardText">Project Scanner</div>
                            <hr>
                            <div class="cardMsg">Scan all the files in the project folder and see the help content for
                               easy interpretation.</div>
-                           <p><button onclick="Show('projectscanner')">Go</button></p>
+                           <!-- <p><button onclick="Show('projectscanner')">Go</button></p> -->
                         </div>
-                        <div class="menucard">
+                        <div class="menucard" onclick="Show('filescanner')">
                            <img src="/itcodescanner/images/filescan.png" alt="File Scan" class="homeCardImg">
                            <div class="homeCardText">File Scanner</div>
                            <hr>
                            <div class="cardMsg">Scan single file or program and see the help content</div>
-                           <p><button onclick="Show('filescanner')">Go</button></p>
+                           <!-- <p><button onclick="Show('filescanner')">Go</button></p> -->
                         </div>
-                        <div class="menucard">
+                        <div class="menucard" onclick="Show('howto')">
                            <img src="/itcodescanner/images/howto.png" alt="File Scan" class="homeCardImg">
                            <div class="homeCardText">How to use</div>
                            <hr>
                            <div class="cardMsg">Video guides</div>
-                           <p><button onclick="Show('howto')">Go</button></p>
+                           <!-- <p><button onclick="Show('howto')">Go</button></p> -->
                         </div>
                      </div>
                      <div  style="display:none; background-color: rgba(9, 84, 132); width: 100%; margin: 0px; padding: 20px; ">

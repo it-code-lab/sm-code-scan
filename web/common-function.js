@@ -1543,8 +1543,12 @@ function autocomplete(inp, arr) {
                                     /*close the list of autocompleted values,
                                     (or any other open lists of autocompleted values:*/
                                     closeAllLists();
-
-                                    populateSubCategory();
+                                    if (inp.id == "tutorial-search-box"){
+                                        searchTutorial(); 
+                                    } else {
+                                        populateSubCategory();
+                                    }
+                                    
                                 });
                         a.appendChild(b);
                     }
@@ -1710,6 +1714,7 @@ function getTutorialList() {
     var tags = sessionStorage.getItem("tutorialList")
     if (tags != null) {
         if ((tags != "")  && (tags != "null")) {
+            populateTutorialsDropDownDisplay();
             return;
         }
     }
@@ -1730,6 +1735,7 @@ function getTutorialList() {
 			//the.LanguageHelpCodeAndIds_LclJson = response;
 
             sessionStorage.setItem("tutorialList", JSON.stringify(response));
+            populateTutorialsDropDownDisplay();
         },
         error: function(xhr, status, error) {
 					  console.log(error);
@@ -1737,7 +1743,29 @@ function getTutorialList() {
         }
     });
 }
+function populateTutorialsDropDownDisplay(){
+    var tf = JSON.parse(sessionStorage.getItem("tutorialList"));
+    var rows = JSON.parse(tf);
+    rows = rows.filter(function(entry) {
+        return entry.discontinue == "0";
+    });
+    var innHTML = "";
 
+    for (var i = 0; i < rows.length; i++)  {
+        if (i == 0) {
+            innHTML = innHTML + "<a href='/itcodescanner/tutorials/" + rows[i].technology + "'>"+ rows[i].technology +"</a>";
+        }else if (rows[i].technology != rows[i-1].technology){
+            innHTML = innHTML + "<a href='/itcodescanner/tutorials/" + rows[i].technology + "'>"+ rows[i].technology +"</a>";
+        }
+        // if (i == 0) {
+        //     innHTML = innHTML + "<a href='javascript:showTechnology("+ '"' + rows[i].technology + '"' + ")'>"+ rows[i].technology +"</a>";
+        // }else if (rows[i].technology != rows[i-1].technology){
+        //     innHTML = innHTML + "<a href='javascript:showTechnology("+ '"' + rows[i].technology + '"' + ")'>"+ rows[i].technology +"</a>";
+        // }       
+    }
+    document.getElementById("dropDownTutListId").innerHTML = innHTML;
+
+}
 function getHelpDetails(codeId) {
 
 
@@ -2704,6 +2732,9 @@ function Show(pageName) {
 			document.getElementById("homeDivId").style.width = "100%";
 			//document.getElementById("mainContainer").style.width = "100%";
 	}
+
+    //Scroll to top
+    $('html,body').scrollTop(0);
 }
 
 function showCreateAccount(){
@@ -2835,27 +2866,33 @@ function checkURL() {
         document.getElementById("helpDisplayDivId").style.display = "none";
         
         document.getElementById("tutorialDivId").style.display = "block";
-        //document.getElementById("tutorialDivId").style.width = "80%";	
 
-        //document.getElementById("tutorialListDivId").style.display = "block";
-        //document.getElementById("tutorialListDivId").style.display = "none";
-
-        //document.getElementById("tutorialListDivId").style.width = "200px";	
         document.getElementById("tutorialEditDivId").style.display = "block"; 
         
-        document.getElementById("mainContainer").style.width = "100%"; 
-        document.getElementById("tutorialEditDivId").style.width = "20%";	
-        document.getElementById("tutorialEditDivId").innerHTML = "";
+
         var tutorialStr = path.substring(path.indexOf("tutorials/") + 10);
         
         if (screen.width < 700 || window.innerWidth < 700){
-            document.getElementById("tutorialSearchDivId").style.display = "none";
+            //document.getElementById("tutorialSearchDivId").style.display = "none";
+            document.getElementById("tutorialEditDivId").style.display = "none";
         }else {
             //populateTutorialList();
         }
         
-
-        getTutorial(tutorialStr);
+        if (tutorialStr.indexOf('/') > 0){
+            document.getElementById("mainContainer").style.width = "100%"; 
+            document.getElementById("tutorialEditDivId").style.width = "20%";	
+            document.getElementById("tutorialEditDivId").innerHTML = "";
+            getTutorial(tutorialStr);
+        }else {
+            document.getElementById("tutorialDivId").style.display = "none";
+            document.getElementById("tutorialEditDivId").style.display = "none";
+            document.getElementById("tutorialListDivId").style.display = "block";
+            document.getElementById("tutorialListDivId").style.width = "100%";
+            //populateTutorialList();
+            showTechnology(tutorialStr)
+        }
+        
         
         return;
     }
