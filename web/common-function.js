@@ -3265,7 +3265,7 @@ function editItem( btn ){
 
    newHTML = newHTML +
    "<br><br><div class = 'editFieldHead'>Short Description: </div><br>" +
-   "<input type='text' id='shortdescription-" + itemid + "' style='width:95%; margin:auto;' value='" + shortdescription + "'>";
+   "<textarea id='shortdescription-" + itemid + "' style='width:95%; margin:auto;' >" + shortdescription + "</textarea>";
 
    toolbarHTML = "";
    //toolbarHTML =  "<button  type='button' class='itmToggledBtn btn btn-primary' onclick=toggleDescView('" + itemid + "') >Toggle View</button>" + "<br>" ;
@@ -3340,7 +3340,7 @@ function editItem( btn ){
 
    newHTML = newHTML +
    "<br><br><div class = 'editFieldHead'>Keywords (tags): </div><br>" +
-   "<input type='text' id='keywords-" + itemid + "' style='width:95%; margin:auto;' value='" + keywords + "'>";
+   "<textarea id='keywords-" + itemid + "' style='width:95%; margin:auto;' >" + keywords + "</textarea>";
 
 
    newHTML = newHTML +
