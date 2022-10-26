@@ -1998,7 +1998,7 @@ input:checked + .slider:after
 .paragraph1-desc{
   /* color: #4d5b7c; */
   font-size: 16px;
-  font-family: Inter,sans-serif;
+  /* font-family: Inter,sans-serif; */
   /* margin: 10px; */
   
   text-align: justify;
