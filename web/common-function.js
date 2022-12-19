@@ -1557,7 +1557,7 @@ function autocomplete(inp, arr) {
                         var searchText = val.toUpperCase()
                         var rows = JSON.parse(tf);
                         rows = rows.filter(function(entry) {
-                            return (entry.title.toUpperCase() === arr[i].toUpperCase()) && (entry.title.toUpperCase().includes(searchText) 
+                            return (entry.title.toUpperCase() === arr[i].toUpperCase() && entry.discontinue == "0") && (entry.title.toUpperCase().includes(searchText) 
                                  || entry.technology.toUpperCase().includes(searchText) 
                                  || entry.shortdescription.toUpperCase().includes(searchText) 
                                  || entry.keywords.toUpperCase().includes(searchText)) ;
