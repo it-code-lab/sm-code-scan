@@ -1493,7 +1493,7 @@ function autocomplete(inp, arr) {
                 var tf = JSON.parse(sessionStorage.getItem("tutorialList"));
 
                 //SM: DO NOT DELETE: options to 3 char
-                if (val.length < 3) {
+                if (val.length < 2) {
                 	return false;
                 }
 
