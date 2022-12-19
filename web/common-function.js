@@ -1490,10 +1490,12 @@ function autocomplete(inp, arr) {
                     return false;
                 }
 
+                var tf = JSON.parse(sessionStorage.getItem("tutorialList"));
+
                 //SM: DO NOT DELETE: options to 3 char
-                //if (val.length < 3) {
-                //	return false;
-                //}
+                if (val.length < 3) {
+                	return false;
+                }
 
                 currentFocus = -1;
                 /*create a DIV element that will contain the items (values):*/
@@ -1551,6 +1553,39 @@ function autocomplete(inp, arr) {
                                     
                                 });
                         a.appendChild(b);
+                    }else {
+                        var searchText = val.toUpperCase()
+                        var rows = JSON.parse(tf);
+                        rows = rows.filter(function(entry) {
+                            return (entry.title.toUpperCase() === arr[i].toUpperCase()) && (entry.title.toUpperCase().includes(searchText) 
+                                 || entry.technology.toUpperCase().includes(searchText) 
+                                 || entry.shortdescription.toUpperCase().includes(searchText) 
+                                 || entry.keywords.toUpperCase().includes(searchText)) ;
+                        });
+
+                        if (rows.length > 0){
+                            b = document.createElement("DIV");
+                            b.innerHTML = arr[i];
+                            b.innerHTML += "<input type='hidden' value='" +
+                            arr[i] + "'>";
+                            b.addEventListener(
+                                "click",
+                                function(e) {
+                                    /*insert the value for the autocomplete text field:*/
+                                    inp.value = this.getElementsByTagName("input")[0].value;
+                                    /*close the list of autocompleted values,
+                                    (or any other open lists of autocompleted values:*/
+                                    closeAllLists();
+                                    if (inp.id == "tutorial-search-box"){
+                                        searchTutorial(); 
+                                    } else {
+                                        populateSubCategory();
+                                    }
+                                    
+                                });
+                                a.appendChild(b);
+                        }
+                        
                     }
                 }
             });
