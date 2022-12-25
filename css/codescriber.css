@@ -1763,7 +1763,7 @@ button.btnNewWindow::before {
 	top: 0;
 	left: 0;
 	right: 0;
-	font-size: 16px;
+	font-size: 14px;
 	text-transform: uppercase;
 }
 
@@ -1831,7 +1831,7 @@ button.btnNewWindow::before {
 .switch {
   position: relative;
   display: inline-block;
-  width: 130px;
+  width: 80px;
   height: 24px;
 }
 
@@ -1874,9 +1874,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(105px);
-  -ms-transform: translateX(105px);
-  transform: translateX(105px);
+  -webkit-transform: translateX(55px);
+  -ms-transform: translateX(55px);
+  transform: translateX(55px);
 }
 
 /* Rounded sliders */
