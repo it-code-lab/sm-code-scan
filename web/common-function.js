@@ -3166,8 +3166,14 @@ function getTutorial(tutorialStr){
             }
             //END: Find the next tutorial to be put at the bottom of the page
 
-			
-            var newHTML = "<div classXX = 'songContainer' >" + '<a href ="#" class="tutorialTopLinkCls" onclick="showTechnology(' + "'" + technology + "'" + ');return false;" >' + technology + "</a>" + " > " + '<a href ="' + window.location.href + '" class="tutorialTopLinkCls"  >' + title + "</a>";
+
+            var tutorialUrl = path.substring(0, path.indexOf('/',path.indexOf('itcodescanner')) + 1) +"?target=tutorial";
+            var technologyUrl = path.substring(0, path.indexOf('/',path.indexOf('itcodescanner')) + 1) +"tutorials/" + technology;
+
+            var newHTML = "<div classXX = 'songContainer' >" + 
+            '<a href ="'+ tutorialUrl +'" class="tutorialTopLinkCls" ' + ' >' + "Tutorials</a>" + " > " + 
+            '<a href ="'+ technologyUrl +'" class="tutorialTopLinkCls"  >' + technology + "</a>" + " > " + 
+            '<a href ="' + window.location.href + '" class="tutorialTopLinkCls"  >' + title + "</a>";
             newHTML = newHTML + "<div classXX = 'songContainerSub' > <h1 classXX='songContainerH1' > " + title + "</h1></div>";
 
             if (sessionStorage.getItem("userLoggedIn") == "n") {
