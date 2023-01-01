@@ -69,11 +69,18 @@
 		overflow: hidden;  
 		
 	}	
-  .menucard {
-    width: 95%;
-  }
+
 }
 
 /*************************************************************/
 /******************* END - FOR SCREENS <= 700px **************/
 /*************************************************************/
+@media screen and (max-width: 840px) {
+	.menucard {
+		width: 95%;
+	}
+	
+	.cardsContainerDivClassPadd {
+		width: 90%;
+	}
+}

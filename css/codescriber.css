@@ -1530,7 +1530,7 @@ button.btnNewWindow::before {
    /* border-radius: 10px; */
    border: 1px solid rgba(0, 0, 0, 0.2);
    word-wrap: break-word;
-   min-width: 300px;
+   /* min-width: 300px; */
   
    height: auto;
 }
@@ -1553,7 +1553,7 @@ button.btnNewWindow::before {
    /* border-radius: 10px; */
    border: 1px solid rgba(0, 0, 0, 0.2);
    word-wrap: break-word;
-   min-width: 300px;
+   /* min-width: 300px; */
   
    height: auto;
    font-size: small;
@@ -1678,18 +1678,24 @@ button.btnNewWindow::before {
 
 .cardsContainerDivClassPadd {
 	display: block;
-	margin: auto;
+	/* margin: auto; */
+  margin: 10px;
+
 	margin-top: 20px;
 	padding: 5px;
 	padding-top: 50px;
+  float: left;
 	/* display: table; */
-	 width: 90%;  /*Jun-30-22: Removed as was going outside of outer div. Added back as category header toggle width issue*/
+	 /* width: 90%;   */
+   /*Jun-30-22: Removed as was going outside of outer div. Added back as category header toggle width issue*/
 	/* max-width: 350px; */
 	/*border-radius: 10px; */
 	box-shadow: rgb(34, 34, 34) 1px 1px 2px;
 	/* background-color: #D9E6E6; */
 	background-color: #fff;
 	position: relative;
+  /* height: 200px; */
+  overflow: auto;
 }
 
 /* SM: Start: ***********Below styles are for show all/less switch  **************/
@@ -2275,6 +2281,19 @@ footer {
   font-size: 14px !important;
 }
 
-
+.goToTechLink{
+	float: right; margin: 0px; padding: 0px;
+	cursor: pointer;
+	background-color: #F9907A;
+	box-shadow: 0 0 1px #F9907A;
+	color: white;
+	border-radius: 24px;
+  width: 80px;
+  height: 24px;
+  margin: auto;
+  text-align: center;
+  font-size: 14px;
+  text-decoration: none;
+}
 
 

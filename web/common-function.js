@@ -2704,6 +2704,7 @@ function Show(pageName) {
 		document.getElementById("tutorialListDivId").style.display = "block";
 		document.getElementById("tutorialListDivId").style.width = "100%";        
         populateTutorialList();
+        $( ".cardsContainerDivClassPadd" ).css( "height", "200px" );
 		
     }else if (pageName == "login"){
 		document.getElementById("filescannerDivId").style.display = "none";
@@ -3089,7 +3090,8 @@ function checkURL() {
         
         document.getElementById("tutorialListDivId").style.width = "100%";	
         populateTutorialList();
-        //document.getElementById("mainContainer").style.width = "100%";			
+        //document.getElementById("mainContainer").style.width = "100%";
+        $( ".cardsContainerDivClassPadd" ).css( "height", "200px" );	
     }
     else if (pageName == "home"){
 			document.getElementById("filescannerDivId").style.display = "none";
@@ -4601,7 +4603,8 @@ function showTechnology(tech){
 
     var tf = JSON.parse(sessionStorage.getItem("tutorialList"));
     var rows = JSON.parse(tf);
-
+    var elementId = "menucardparent-" + tech
+    elementId = elementId.replaceAll(" ","");
     if (tech != ""){
         tech = tech.toUpperCase();
         rows = rows.filter(function(entry) {
@@ -4610,6 +4613,9 @@ function showTechnology(tech){
     }    
 
     populateTutorialList(rows);
+    
+    document.getElementById(elementId).style.width = "95%";
+    // document.getElementById(elementId).style.overflow = "expand";
 }
 
 function searchTutorial(){
@@ -4680,6 +4686,8 @@ function populateTutorialList(rows = "") {
     var path = window.location.pathname;
     var myUrl = path.substring(0, path.indexOf('/',path.indexOf('itcodescanner')) + 1);
     var technologySqueezed = "";
+    var technologyOrig = "";
+    var technologyUrl = "";
 
     var defaultDisplayCount = 1000;
     var technologyMaxCount = 0;
@@ -4693,10 +4701,13 @@ function populateTutorialList(rows = "") {
         subpath = rows[i].subpath;
         subpath = subpath.replaceAll(" " , "-");
 
+        technologyOrig = rows[i].technology;
         technology = rows[i].technology;
+        
         technology = technology.replaceAll(" " , "-");
 
         tutorialTitleURL = myUrl + "tutorials/" + technology.toLowerCase() + "/" + subpath.toLowerCase() + "/" + itemName.toLowerCase();
+        technologyUrl = myUrl + "tutorials/" + technologyOrig;
 
         technologySqueezed = rows[i].technology;		 
 		technologySqueezed = technologySqueezed.replaceAll(' ', '')
@@ -4706,7 +4717,8 @@ function populateTutorialList(rows = "") {
         if (i == 0) {
             innerHTML = innerHTML + '<div id="menucardparent-' + technologySqueezed + '" class="cardsContainerDivClassPadd"  > <div class="technologyHeader" >' + rows[i].technology + 
 			
-			 '<label class="switch technologyToggleLbl"  ><input class="toggleInput"  type="checkbox" checked data-cat="'+ rows[i].technology + '"  onchange="handleShowToggle(this);" ><span class="slider round"></span></label>' +
+			//  '<label class="switch technologyToggleLbl"  ><input class="toggleInput"  type="checkbox" checked data-cat="'+ rows[i].technology + '"  onchange="handleShowToggle(this);" ><span class="slider round"></span></label>' +
+             '<a class="goToTechLink" href ="'+ technologyUrl +'"> GO </a>' +
 			
 			'</div>';
             startingCharURL= myUrl + "starting/bollywood-tutorials-starting-with-" + rows[i].technology;
@@ -4726,8 +4738,9 @@ function populateTutorialList(rows = "") {
            currDisplayCount = 0;
 
             innerHTML = innerHTML + '</div><div id="menucardparent-' + technologySqueezed + '" class="cardsContainerDivClassPadd"  ><div class="technologyHeader">' + rows[i].technology + 
-			 '<label class="switch technologyToggleLbl"  ><input class="toggleInput"   type="checkbox" checked data-cat="'+ rows[i].technology + '"  onchange="handleShowToggle(this);" ><span class="slider round"></span></label>' +
-			'</div>';
+			//  '<label class="switch technologyToggleLbl"  ><input class="toggleInput"   type="checkbox" checked data-cat="'+ rows[i].technology + '"  onchange="handleShowToggle(this);" ><span class="slider round"></span></label>' +
+            '<a class="goToTechLink" href ="'+ technologyUrl +'"> GO </a>' +
+            '</div>';
 
             startingCharURL= myUrl + "starting/bollywood-tutorials-starting-with-" + rows[i].technology;
          }

@@ -44,9 +44,6 @@
 		overflow: hidden;  
 		
 	}	
-  .menucard {
-    width: 300px; 
-  }	
 
   #tutorialLinkId:hover + .dropdown-content {display: block; } 
 }
@@ -54,3 +51,12 @@
 /*************************************************************/
 /******************* END - FOR SCREENS > 700px ***************/
 /*************************************************************/
+@media (min-width: 840px){
+	.menucard {
+		/* width: 300px;  */
+		width: 46%;
+	  }	
+	  .cardsContainerDivClassPadd {
+		width: 46%;
+	  }
+}
