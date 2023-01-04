@@ -4632,6 +4632,7 @@ function searchTutorial(){
     }    
 
     populateTutorialList(rows);
+    $( ".cardsContainerDivClassPadd" ).css( "width", "95%" );
 }
 function populateTutorialDropDown(fieldId = "tutorial-search-box") {
 
