@@ -1624,12 +1624,14 @@ button.btnNewWindow::before {
 	/*width: 98%;*/
 	color: #fff;
 	padding: 10px;
-	position: absolute;
+	position: sticky;
 	top: 0;
 	left: 0;
 	right: 0;
 	font-size: 14px;
 	text-transform: uppercase;
+  z-index: 100;
+  margin-bottom: 5px;
 }
 
 .technologyFooter{
@@ -1683,7 +1685,7 @@ button.btnNewWindow::before {
 
 	margin-top: 20px;
 	padding: 5px;
-	padding-top: 50px;
+	padding-top: 5px;
   float: left;
 	/* display: table; */
 	 /* width: 90%;   */

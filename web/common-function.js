@@ -4716,7 +4716,11 @@ function populateTutorialList(rows = "") {
         technologyMaxCount = sessionStorage.getItem("max-count-" + technologySqueezed);
 
         if (i == 0) {
-            innerHTML = innerHTML + '<div id="menucardparent-' + technologySqueezed + '" class="cardsContainerDivClassPadd"  > <div class="technologyHeader" >' + rows[i].technology + 
+            innerHTML = innerHTML + '<div id="menucardparent-' + technologySqueezed + '" class="cardsContainerDivClassPadd"  > <div class="technologyHeader" >' ;
+            if (the.smusr){
+                innerHTML = innerHTML + rows[i].technologyseq + '. ';
+            }   
+            innerHTML = innerHTML + rows[i].technology + 
 			
 			//  '<label class="switch technologyToggleLbl"  ><input class="toggleInput"  type="checkbox" checked data-cat="'+ rows[i].technology + '"  onchange="handleShowToggle(this);" ><span class="slider round"></span></label>' +
              '<a class="goToTechLink" href ="'+ technologyUrl +'"> GO </a>' +
@@ -4738,7 +4742,13 @@ function populateTutorialList(rows = "") {
 
            currDisplayCount = 0;
 
-            innerHTML = innerHTML + '</div><div id="menucardparent-' + technologySqueezed + '" class="cardsContainerDivClassPadd"  ><div class="technologyHeader">' + rows[i].technology + 
+            innerHTML = innerHTML + '</div><div id="menucardparent-' + technologySqueezed + '" class="cardsContainerDivClassPadd"  ><div class="technologyHeader">' ;
+        
+            if (the.smusr){
+                innerHTML = innerHTML + rows[i].technologyseq + '. ';
+            } 
+            
+            innerHTML = innerHTML + rows[i].technology + 
 			//  '<label class="switch technologyToggleLbl"  ><input class="toggleInput"   type="checkbox" checked data-cat="'+ rows[i].technology + '"  onchange="handleShowToggle(this);" ><span class="slider round"></span></label>' +
             '<a class="goToTechLink" href ="'+ technologyUrl +'"> GO </a>' +
             '</div>';
