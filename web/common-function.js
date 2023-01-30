@@ -697,7 +697,7 @@ function getCodeLanguages(codetext) {
 										/* ***TEMPORARY**SM-T002***Refer User Guide********_Reenabled for logged in users
 										*/
 										
-										if ((sessionStorage.getItem("userLoggedIn") == "y") && (sessionStorage.getItem("userLvl") == "9") ){
+										if ((localStorage.getItem("userLoggedIn") == "y") && (localStorage.getItem("userLvl") == "9") ){
 											var msg = "Code Language is " + r_code_language + " based on '" + r_id_by_file_contents[j] + "' present at position " + indices[m] +
 												". If scan criteria looks incorrect, make the update and then scan the code again.";
 											the.codeLanguage = r_code_language;
@@ -1275,7 +1275,7 @@ function c_L_C(hlpCdId) {
 			//*****DO NOT DELETE*********
 			//refreshCaptchatwo();
 			
-			if ((sessionStorage.getItem("userLoggedIn") == "n") || (sessionStorage.getItem("userLvl") != "9") ){
+			if ((localStorage.getItem("userLoggedIn") == "n") || (localStorage.getItem("userLvl") != "9") ){
 				document.getElementById("helpDisplayLoggedInOnly").style.display = "none";
 			}
 			
@@ -1334,7 +1334,7 @@ function addHelp() {
     document.getElementById('copyright_check').checked = false;
     document.getElementById('do_not_use_for_scan').checked = false;
 
-	if ((sessionStorage.getItem("userLoggedIn") == "n") || (sessionStorage.getItem("userLvl") != "9") ){
+	if ((localStorage.getItem("userLoggedIn") == "n") || (localStorage.getItem("userLvl") != "9") ){
 		document.getElementById("helpDisplayLoggedInOnly").style.display = "none";
 	}
 	
@@ -1830,7 +1830,7 @@ function addOrUpdateHelpDetails() {
     var myCodeId = the.selectedCodeId;
     var newCodeLanguage = document.getElementById("language-box").value;
 	
-	if (sessionStorage.getItem("userLoggedIn") == "n"){
+	if (localStorage.getItem("userLoggedIn") == "n"){
 		//myUrl = window.location.protocol + "//" + window.location.host +  window.location.pathname + "?target=login";
 		
 		document.getElementById("helpAddUpdateMsg").innerHTML =  'Please Login';
@@ -1882,7 +1882,7 @@ function addOrUpdateHelpDetails() {
 
 	
     if (document.getElementById('terms_conditions').checked == false) {
-		if ((sessionStorage.getItem("userLoggedIn") == "n") || (sessionStorage.getItem("userLvl") != "9") ) {
+		if ((localStorage.getItem("userLoggedIn") == "n") || (localStorage.getItem("userLvl") != "9") ) {
 			document.getElementById("helpAddUpdateMsg").innerHTML = "Please accept terms and conditions";
 			return;
 		}
@@ -1941,7 +1941,7 @@ function addOrUpdateHelpDetails() {
                 } else if (response == "emailed"){
 					document.getElementById("helpAddUpdateMsg").innerHTML = "Thank you for your contribution. The updates have been sent for processing and will be recorded within 24 hours.";
 										
-                } else if (sessionStorage.getItem("userLoggedIn") == "n") {
+                } else if (localStorage.getItem("userLoggedIn") == "n") {
                     document.getElementById("helpAddUpdateMsg").innerHTML = "Thank you for your contribution. The updates have been sent for processing.";
 
 				}
@@ -2233,16 +2233,16 @@ function getStoredProjectList() {
 	var myCookie = getCookie("cookname");
 	
 	if (myCookie == null) {
-		sessionStorage.setItem("userLoggedIn", "n");
+		localStorage.setItem("userLoggedIn", "n");
 		return;
 	} else {
 		if (myCookie == ""){
-			sessionStorage.setItem("userLoggedIn", "n");
-			sessionStorage.setItem("userLvl", "");
+			localStorage.setItem("userLoggedIn", "n");
+			localStorage.setItem("userLvl", "");
 			return;
 		} else {
-			sessionStorage.setItem("userLoggedIn", "y");
-			if (sessionStorage.getItem("userLvl") != "9"){
+			localStorage.setItem("userLoggedIn", "y");
+			if (localStorage.getItem("userLvl") != "9"){
 				return;
 			}
 		}			
@@ -2592,6 +2592,9 @@ function Show(pageName) {
     x = document.getElementById("logoutLinkId");
     x.classList.remove("active");
 
+    x = document.getElementById("profileLinkId");
+    x.classList.remove("active");
+
     x = document.getElementById("contactusLinkId");
     x.classList.remove("active");
 
@@ -2664,7 +2667,7 @@ function Show(pageName) {
 		
     } else if (pageName == "projectscanner") {
 
-		if ((sessionStorage.getItem("userLoggedIn") == "y") && (sessionStorage.getItem("userLvl") == "9") ){
+		if ((localStorage.getItem("userLoggedIn") == "y") && (localStorage.getItem("userLvl") == "9") ){
 			document.getElementById("addNewProjBtnId").style.display = "block";
 		}else {
 			document.getElementById("addNewProjBtnId").style.display = "none";
@@ -2728,6 +2731,11 @@ function Show(pageName) {
 		
 
 		showHelpDivMessage("Login to add or make updates to the help scan codes");
+    }else if (pageName == "profile"){
+
+        showProfile();
+		
+
 	} else if (pageName == "contactus"){
 		document.getElementById("filescannerDivId").style.display = "none";
 		document.getElementById("HelpTopicsDivId").style.display = "none";
@@ -2856,20 +2864,21 @@ function checkURL() {
     var myCookie = getCookie("cookname");
 	
 	if (myCookie == null) {
-		sessionStorage.setItem("userLoggedIn", "n");
+		localStorage.setItem("userLoggedIn", "n");
 		if (!onMobileBrowser()){
 			document.getElementById("loginLinkId").style.display = "block";
 		}
 		document.getElementById("logoutLinkId").style.display = "none";
-
+        document.getElementById("profileLinkId").style.display = "none";
 		document.getElementById("HelpTopicsLinkId").style.display = "none";
         //document.getElementById("HelpTopicsLinkId").style.display = "block";
 		
 	} else {
-		sessionStorage.setItem("userLoggedIn", "y");
+		localStorage.setItem("userLoggedIn", "y");
 		document.getElementById("loginLinkId").style.display = "none";
 		document.getElementById("logoutLinkId").style.display = "block";
-		if (sessionStorage.getItem("userLvl") == "9"){
+        document.getElementById("profileLinkId").style.display = "block";
+		if (localStorage.getItem("userLvl") == "9"){
 			document.getElementById("HelpTopicsLinkId").style.display = "block";
             the.smusr = true;
 		}
@@ -3023,7 +3032,7 @@ function checkURL() {
 
     if (pageName == "HelpTopics") {
 
-		if ((sessionStorage.getItem("userLoggedIn") == "n") || (sessionStorage.getItem("userLvl") != "9") ){
+		if ((localStorage.getItem("userLoggedIn") == "n") || (localStorage.getItem("userLvl") != "9") ){
 			//pageName = "projectscanner";
 			Show("projectscanner");
 			return
@@ -3034,7 +3043,7 @@ function checkURL() {
 
     } else if (pageName == "projectscanner") {
         populateStoredProjectList();
-		if ((sessionStorage.getItem("userLoggedIn") == "y") && (sessionStorage.getItem("userLvl") == "9") ){
+		if ((localStorage.getItem("userLoggedIn") == "y") && (localStorage.getItem("userLvl") == "9") ){
 			document.getElementById("addNewProjBtnId").style.display = "block";
 		}
 		document.getElementById("projectscannerDivId").style.width = "100%";
@@ -3057,7 +3066,9 @@ function checkURL() {
 		refreshCaptcha();
 		document.getElementById("helpDisplayDivId").style.display = "none";
 		//showHelpDivMessage("Contact us if you have any questions, feedback or are interested in purchasing the software. Some features have been disabled on the web version for security reasons. Full feature software can be used for software training/development, creating references and documentation for the software application. <br><br> If you found the site helpful, you can support our work by buying me a coffee by clicking on the coffee button at the top.");
-		
+	
+    } else if (pageName == "profile"){
+		showProfile();	
 	} else if (pageName == "howto"){
 			document.getElementById("filescannerDivId").style.display = "none";
 			document.getElementById("HelpTopicsDivId").style.display = "none";
@@ -3178,9 +3189,9 @@ function getTutorial(tutorialStr){
             '<a href ="' + window.location.href + '" class="tutorialTopLinkCls"  >' + title + "</a>";
             newHTML = newHTML + "<div classXX = 'songContainerSub' > <h1 classXX='songContainerH1' > " + title + "</h1></div>";
 
-            if (sessionStorage.getItem("userLoggedIn") == "n") {
+            if (localStorage.getItem("userLoggedIn") == "n") {
        
-            } else if (sessionStorage.getItem("userLvl") == "9") {
+            } else if (localStorage.getItem("userLvl") == "9") {
 
                 sessionStorage.setItem("data-description", description);
 
@@ -3459,12 +3470,12 @@ function showImage(event) {
 
 
 function uploadFile(event) {
-    if (sessionStorage.getItem("userLoggedIn") == "n") {
+    if (localStorage.getItem("userLoggedIn") == "n") {
 
         error_message = "Not authorized";
         return;
 
-    } else if (sessionStorage.getItem("userLvl") != "9") {
+    } else if (localStorage.getItem("userLvl") != "9") {
         error_message = "Not authorized";
         return;
     }
@@ -3715,11 +3726,89 @@ function submitQuiz(){
     } else{
         var percent = rtans*100/(rtans + wans);
         percent = percent.toFixed(2);
-        document.getElementById("qzres").innerHTML = "You scored " + percent + "%. Click on the button below to retry.";
+        if (localStorage.getItem("userLoggedIn") == "n"){
+            document.getElementById("qzres").innerHTML = "You scored " + percent + "%. Click on the button below to retry.<br> Scores get saved for "+ '<a href="/readernook/?target=login">logged in</a>' +" users.";
+        }else {
+            document.getElementById("qzres").innerHTML = "You scored " + percent + "%. Click on the button below to retry.<br> The score has been recorded on the profile.";
+            var userdata = localStorage.getItem("userdata");
+            var userObjs ;
+            var newscores = [];
+            var date = new Date();
+            let options = {  
+                weekday: "long", year: "numeric", month: "short",  
+                day: "numeric", hour: "2-digit", minute: "2-digit"  
+            };  
+
+            var newscore = {"quiz": document.URL, "percent": percent, "time": date.toLocaleTimeString("en-us", options) };
+            
+            if (userdata != "") {
+                userObjs =  JSON.parse(userdata);
+                newscores = userObjs.scores;
+                newscores.push(newscore);
+                userObjs.scores = newscores;
+            }else {
+                newscores.push(newscore);
+                userObjs = {scores: newscores};
+            }
+            
+            
+            var newdata = JSON.stringify(userObjs);
+
+            localStorage.setItem("userdata", newdata);
+            updateInfo(newdata);
+        }
         document.getElementById("sbmtqzdivid").style.display = "none";
         document.getElementById("retryqzdivid").style.display = "block";
 
     }
+}
+
+function showProfile(){
+    var userdata = localStorage.getItem("userdata");
+    var userObjs ;
+    var scoresList ;
+    var newHTML = "";
+    if (userdata != null) {
+        userObjs =  JSON.parse(userdata);
+        scoresList = userObjs.scores;
+        newHTML = newHTML + "<div class='scoresheader'>Quiz Scores</div>"; 
+        newHTML = newHTML + "<table class ='scorestablecls' ><tr><th>Quiz</th><th>Score</th><th>Datetime</th></tr>";
+        for (var key in scoresList) {
+            var obj = scoresList[key];
+            var qzURL = (obj.quiz).split("/tutorials/");
+            var link = qzURL[1];
+
+            newHTML = newHTML + "<tr><td> <a class= 'tutorialLink' href='" + obj.quiz+ "'> " + link +" </a></td><td>" +obj.percent + "% </td><td>" +obj.time + "</td></tr>"
+            
+        }
+        newHTML = newHTML + "</table>";
+    }else {
+        newHTML = newHTML + "<div class='scoresheader'>Quiz Scores</div> No scores found"; 
+    }
+
+    document.getElementById("HelpTopicsDivId").style.display = "none";
+    document.getElementById("accActivatedDivId").style.display = "none";
+    document.getElementById("contactusDivId").style.display = "none";
+    document.getElementById("filescannerDivId").style.display = "none";
+    document.getElementById("forgotPWDivId").style.display = "none";
+    document.getElementById("forgotPasswordSecDivId").style.display = "none";
+    document.getElementById("helpDetailsDivId").style.display = "none";
+    document.getElementById("homeDivId").style.display = "none";
+    document.getElementById("howtoDivId").style.display = "none";
+    document.getElementById("languageOverride").style.display = "none";
+    document.getElementById("languageScanResultDivId").style.display = "none";
+    document.getElementById("loginDivId").style.display = "none";
+    document.getElementById("loginSecDivId").style.display = "none";
+    document.getElementById("projectscannerDivId").style.display = "none";
+    document.getElementById("registerSecDivId").style.display = "none";
+    document.getElementById("tutorialDivId").style.display = "none";
+    document.getElementById("tutorialEditDivId").style.display = "none";
+    document.getElementById("tutorialListDivId").style.display = "none";
+    document.getElementById("helpDisplayDivId").style.display = "none";
+
+
+    document.getElementById("profileDivId").style.display = "block";
+    document.getElementById("profileDivId").innerHTML = newHTML;
 }
 
 function refreshPage(){
@@ -3729,7 +3818,7 @@ function refreshPage(){
 
 function updateItem(itemid, createNewItem) {
 
-    var usremail = sessionStorage.getItem("userEmail");
+    var usremail = localStorage.getItem("userEmail");
 
     var title = "(New) Please Edit";
 	
@@ -3775,13 +3864,13 @@ function updateItem(itemid, createNewItem) {
     }
 
     if (itemid == "" && createNewItem == "y") {
-        if (sessionStorage.getItem("userLoggedIn") == "n") {
+        if (localStorage.getItem("userLoggedIn") == "n") {
 
             error_message = "Not authorized";
             document.getElementById("updateitemerrormsg-" + itemid).innerHTML = "<font color = #cc0000>" + error_message + "</font> ";            
             return;
 
-        } else if (sessionStorage.getItem("userLvl") != "9") {
+        } else if (localStorage.getItem("userLvl") != "9") {
             error_message = "Not authorized";
             document.getElementById("updateitemerrormsg-" + itemid).innerHTML = "<font color = #cc0000>" + error_message + "</font> ";
             return;
@@ -3820,13 +3909,13 @@ function updateItem(itemid, createNewItem) {
         discontinue = document.getElementById("discontinue-" + itemid).value;
 
 
-        if (sessionStorage.getItem("userLoggedIn") == "n") {
+        if (localStorage.getItem("userLoggedIn") == "n") {
 
             error_message = "Not authorized";
             document.getElementById("updateitemerrormsg-" + itemid).innerHTML = "<font color = #cc0000>" + error_message + "</font> ";
             return;
 
-        } else if (sessionStorage.getItem("userLvl") != "9") {
+        } else if (localStorage.getItem("userLvl") != "9") {
             error_message = "Not authorized";
             document.getElementById("updateitemerrormsg-" + itemid).innerHTML = "<font color = #cc0000>" + error_message + "</font> ";
             return;
@@ -3894,6 +3983,36 @@ function updateItem(itemid, createNewItem) {
     });
 }
 
+
+function updateInfo(data){
+
+    var StrFunction = "updateinfo"
+
+    var usremail = localStorage.getItem("userEmail");
+
+    if (usremail == null){
+        return;        
+    }else if (usremail == "Guest"){
+        return;        
+    }
+
+    $.ajax({
+        url: '/readernook/php/process.php',
+        data: {
+            usremail: usremail,
+            data: data,
+            usrfunction: StrFunction
+        },
+        type: 'POST',
+        dataType: 'json',
+        success: function(retstatus) {
+
+        },
+        error: function(xhr, status, error) {
+
+        }
+    });
+}
 
 function activateAccount(pass){
 	
@@ -5377,11 +5496,13 @@ function login(){
 					  loggedIn = "Y";
 					  document.getElementById("loginLinkId").style.display = "none";
 					  document.getElementById("logoutLinkId").style.display = "block";
+                      document.getElementById("profileLinkId").style.display = "block";
 					  //Show("projectscanner");
 					  
-					  sessionStorage.setItem("userLoggedIn", "y");
-					  sessionStorage.setItem("userLvl", retstatus.substring(2,3));
-					  sessionStorage.setItem("userEmail", StrEmail);
+					  localStorage.setItem("userLoggedIn", "y");
+					  localStorage.setItem("userLvl", retstatus.substring(2,3));
+                      localStorage.setItem("userdata", retstatus.substring(3));
+					  localStorage.setItem("userEmail", StrEmail);
 					  getStoredProjectList();
 					var myUrl = window.location.protocol + "//" + window.location.host +
 					window.location.pathname ;
@@ -5397,7 +5518,7 @@ function login(){
 					
 					  
 					  //document.getElementById("addNewProjBtnId").style.display = "block";
-					  //sessionStorage.setItem("userLoggedIn", "y");
+					  //localStorage.setItem("userLoggedIn", "y");
 					  
 					}
 					
@@ -5472,11 +5593,12 @@ function loginWithoutRefresh(){
 					  document.getElementById("loginLinkId").style.display = "none";
 					  document.getElementById("SubloginDivId").style.display = "none";
 					  document.getElementById("logoutLinkId").style.display = "block";
+                      document.getElementById("profileLinkId").style.display = "block";
 					  document.getElementById("helpAddUpdateMsg").innerHTML = "";
 					  //Show("projectscanner");
 					  
-					  sessionStorage.setItem("userLoggedIn", "y");
-					  sessionStorage.setItem("userLvl", retstatus.substring(2,3));				
+					  localStorage.setItem("userLoggedIn", "y");
+					  localStorage.setItem("userLvl", retstatus.substring(2,3));				
 				  
 					}
 					
@@ -5521,7 +5643,8 @@ function Logout(){
 					document.getElementById("loginLinkId").style.display = "block";
 				  }
 				  document.getElementById("logoutLinkId").style.display = "none";
-				  sessionStorage.setItem("userLoggedIn", "n");
+                  document.getElementById("profileLinkId").style.display = "none";
+				  localStorage.setItem("userLoggedIn", "n");
 				  sessionStorage.setItem("SavedProjectsList", null);
 				  //Show("projectscanner");
 
@@ -5874,7 +5997,7 @@ function contactus(){
 	  }
 
 	  if (the.captcha != document.getElementById("enteredCaptchaText").value ){
-		 if ((sessionStorage.getItem("userLoggedIn") == "n") || (sessionStorage.getItem("userLvl") != "9")){
+		 if ((localStorage.getItem("userLoggedIn") == "n") || (localStorage.getItem("userLvl") != "9")){
 			 error_message = "Entered code is incorrect";
 			 document.getElementById("contactuserrormsg").innerHTML = "<font color = #cc0000>" + error_message + "</font> ";
 			 return;
