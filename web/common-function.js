@@ -3727,7 +3727,7 @@ function submitQuiz(){
         var percent = rtans*100/(rtans + wans);
         percent = percent.toFixed(2);
         if (localStorage.getItem("userLoggedIn") == "n"){
-            document.getElementById("qzres").innerHTML = "You scored " + percent + "%. Click on the button below to retry.<br> Scores get saved for "+ '<a href="/readernook/?target=login">logged in</a>' +" users.";
+            document.getElementById("qzres").innerHTML = "You scored " + percent + "%. Click on the button below to retry.<br> Scores get saved for "+ '<a href="/itcodescanner/?target=login">logged in</a>' +" users.";
         }else {
             document.getElementById("qzres").innerHTML = "You scored " + percent + "%. Click on the button below to retry.<br> The score has been recorded on the profile.";
             var userdata = localStorage.getItem("userdata");
@@ -3768,7 +3768,7 @@ function showProfile(){
     var userObjs ;
     var scoresList ;
     var newHTML = "";
-    if (userdata != null) {
+    if ((userdata != null) && (userdata != "")) {
         userObjs =  JSON.parse(userdata);
         scoresList = userObjs.scores;
         newHTML = newHTML + "<div class='scoresheader'>Quiz Scores</div>"; 
