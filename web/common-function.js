@@ -3317,7 +3317,7 @@ function editItem( btn ){
    "<button  type='button' class='itmUpdBtn itmToggledBtn btn btn-primary' onclick=toggleDescView('" + itemid + "') >Toggle View</button>" + 
    "<label class='toolBarlabel'>Paragraphs</label>" +
    "<button title='paragraph1' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','paragraph1') >P1</button>" +
-   "<button title='paragraph2' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','paragraph2') >P2</button>" +
+   "<button title='paragraph2 white BG' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','paragraph2') >P2</button>" +
    "<label class='toolBarlabel'>Ordered Lists</label>" +
    "<button title='ordered-list' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','orderedlist') >OL1</button>" +
    "<button title='sub-ordered-list' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','suborderedlist') >OL2</button>" +
@@ -3342,6 +3342,12 @@ function editItem( btn ){
    "<button title='Warning'' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','warning') >Warn</button>" +
    "<button title='Error' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','error') >Err</button>" +
    "<button title='Green-Success' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','greenmsg') >Succ</button>" + 
+
+   "<label class='toolBarlabel'>Quiz</label>" +
+   "<button title='Quiz1'' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','qz1') >Q1</button>" +
+   "<button title='Quiz2' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','qz2') >Q2</button>" +
+   "<button title='Submit Quiz Button' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','sbmtqz') >SbmtQz</button>" +
+
    "<label for='insertInner'>Insert component before active Div:</label>" +
    "<input type='checkbox' id='insertInner' >" +
    "</div>" ;
@@ -3650,8 +3656,70 @@ function addComponent(itemid, type){
     }else if (type == "sub2unorderedlist") {
         document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  ><ul class = 'sub2unordered-list-desc'> <li>TODO</li><li> Edit - list</li> </ul><button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>"+ partTwoHTML;
 
+    }else if (type == "qz1") {
+        var tempCompHTML = partOneHTML + "<div id= '" + randomId + "-qs' onmousedown=setLastFocusedDivId(this.id)  class = 'qz1-qs'> TODO Edit - Write Question <button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>"
+         //+ "<div id= '" + randomId + "-allans' onmousedown=setLastFocusedDivId(this.id)  class = 'qz1-allans'> "
+         + "<div id= '" + randomId + "-ans1' onmousedown=setLastFocusedDivId(this.id)  class = 'qz1-ans'> <input class='dynamicradio' type ='radio' name ='" + randomId + "' value='x'/>Option1 <button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>"         
+         + "<div id= '" + randomId + "-ans2' onmousedown=setLastFocusedDivId(this.id)  class = 'qz1-ans'> <input class='dynamicradio' type ='radio' name ='" + randomId + "' value='q'/>Option2 <button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>"         
+         + "<div id= '" + randomId + "-ans3' onmousedown=setLastFocusedDivId(this.id)  class = 'qz1-ans'> <input class='dynamicradio' type ='radio' name ='" + randomId + "' value='e'/>Option3 <button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>"         
+         + "<div id= '" + randomId + "-ans4' onmousedown=setLastFocusedDivId(this.id)  class = 'qz1-ans'> <input class='dynamicradio' type ='radio' name ='" + randomId + "' value='t'/>Option4 <button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>";         
+
+         //+ " <button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>"
+         if (the.smusr){
+            tempCompHTML= tempCompHTML + "<div id= '" + randomId + "-rtans' onmousedown=setLastFocusedDivId(this.id)  class = 'qz1-rtans'> TODO Edit - Correct Answer <button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>";
+         }
+
+         document.getElementById(componentid).innerHTML = tempCompHTML + partTwoHTML;
+    }else if (type == "sbmtqz") {
+        document.getElementById(componentid).innerHTML = partOneHTML 
+         + "<div id= 'qzmsg' onmousedown=setLastFocusedDivId(this.id)  class = 'qzerr-div'> <div id= 'qzerr'></div><div id= 'qzres'></div>  <button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>" 
+         + "<div id= 'sbmtqzdivid' onmousedown=setLastFocusedDivId(this.id)  class = 'sbmtqz-div' onclick='submitQuiz()'> Submit <button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>"
+         + "<div id= 'retryqzdivid' onmousedown=setLastFocusedDivId(this.id)  class = 'sbmtqz-div' onclick='refreshPage()'> Retry <button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>"+ partTwoHTML;
+
     }
 
+    
+
+}
+
+function submitQuiz(){
+    var obj = JSON.parse(document.getElementById("hdmidivid").innerText);
+    var keys = Object.keys(obj);
+    var elems = document.getElementsByClassName("dynamicradio");
+    var rtans = 0;
+    var wans = 0;
+    document.getElementById("qzerr").innerHTML = "";
+
+    for(i = 0; i < elems.length; i++){
+        if (elems[i].checked){
+            if (elems[i].value == obj[elems[i].name] ){
+                rtans = rtans + 1;
+                elems[i].parentElement.style.backgroundColor = "#C1F1E0";
+            } else{
+                wans = wans + 1;
+                elems[i].parentElement.style.backgroundColor = "#FDCFC0";
+            }
+        } else if (elems[i].value == obj[elems[i].name]) {
+            elems[i].parentElement.style.backgroundColor = "#C1F1E0";
+        } else{
+            elems[i].parentElement.style.backgroundColor = "white";
+        }
+    }
+
+    if (rtans + wans < keys.length ){
+        for(i = 0; i < elems.length; i++){
+            elems[i].parentElement.style.backgroundColor = "white";
+        }
+
+        document.getElementById("qzerr").innerHTML = "Please provide a response to all the questions";
+    } else{
+        var percent = rtans*100/(rtans + wans);
+        percent = percent.toFixed(2);
+        document.getElementById("qzres").innerHTML = "You scored " + percent + "%. Click on the button below to retry.";
+        document.getElementById("sbmtqzdivid").style.display = "none";
+        document.getElementById("retryqzdivid").style.display = "block";
+
+    }
 }
 
 function refreshPage(){
@@ -3674,6 +3742,38 @@ function updateItem(itemid, createNewItem) {
         document.getElementById("updateitemerrormsg-" + itemid).innerHTML = "<font color = #cc0000>" + error_message + "</font> ";
         return;        
     }
+
+    
+    var ele = document.getElementsByClassName('dynamicradio');
+              
+    for(i = 0; i < ele.length; i++) {
+        //if(ele[i].checked)
+        //console.log(ele[i].parentElement.innerText);
+        ele[i].value = ele[i].parentElement.innerText;
+        
+
+        //document.getElementById("result").innerHTML = "Gender: "+ele[i].value;
+    }
+
+    var elem = document.getElementsByClassName('qz1-rtans');
+    var kys = {};
+    var ki = "";  
+    var val = "";        
+    for(i = 0; i < elem.length; i++) {
+
+        
+        //ki = elem[i].id;
+        //kys.ki = elem[i].innerText;
+
+        ki = elem[i].id;
+        ki = ki.replace("-rtans","");
+
+        val = elem[i].innerText;
+        val = val.replace(/(\r\n|\n|\r)/gm,"");
+        kys[ki] = val;
+
+    }
+
     if (itemid == "" && createNewItem == "y") {
         if (sessionStorage.getItem("userLoggedIn") == "n") {
 
@@ -3706,7 +3806,17 @@ function updateItem(itemid, createNewItem) {
 		
         description = document.getElementById("description-" + itemid).innerHTML;
 		
-		
+        var keys = Object.keys(kys);
+
+        if (keys.length > 0){
+            if (description.includes("hdmidivid")){
+                description = description.substring(0, description.indexOf("hdmidivid") - 9);
+            } 
+            
+            description = description + "<div id='hdmidivid' class='hdmicls'>"+ JSON.stringify(kys) +"</div>";
+            
+            
+        }		
         discontinue = document.getElementById("discontinue-" + itemid).value;
 
 

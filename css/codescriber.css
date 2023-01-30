@@ -788,6 +788,7 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_collapsible
   font: 20px Arial, sans-serif; margin-top: 5px;
   padding: 10px;
   text-transform: uppercase;
+  height: 70px;
 }
 
 /* SM: Start: ***********Below styles are for loading animation **************/
@@ -1878,6 +1879,40 @@ input:checked + .slider:after
   text-justify: inter-word;
 }
 
+.paragraph2-desc{
+  /* color: #4d5b7c; */
+  font-size: 16px;
+  /* font-family: Inter,sans-serif; */
+  /* margin: 10px; */
+  
+  text-align: justify;
+  text-justify: inter-word;
+  background-color: #fff !important;
+}
+
+.paragraph2-desc > *{
+  background-color: #fff !important;
+}
+
+.qz1-qs{
+  margin-top: 20px;
+}
+.qz2-qs{
+  margin-top: 20px;
+}
+.sbmtqz-div{
+  margin-top: 20px;
+  cursor: pointer;
+  background-color: #095484;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.sbmtqz-div:hover {
+  background-color: #04AA6D;
+}
+
 .codescript1-desc {
   background-color: #2b2b2b;
   width: 90%;
@@ -1961,6 +1996,13 @@ margin-top: 40px !important;
     display: none;
   }
 
+  .qz1-rtans{
+    display: none;
+  }
+
+  .hdmicls{
+    display: none;
+  }
 
   .deleteDiv:after {
     content: '×'; /* UTF-8 symbol */
@@ -2005,7 +2047,38 @@ margin-top: 40px !important;
   display: block;
 } 
 
+.editDescriptionDiv .qz1-rtans {
+  display: block;
+} 
 
+.editDescriptionDiv .hdmicls {
+  display: block;
+} 
+
+.qz1-ans{
+  padding: 5px;
+  margin: 5px;
+  border: 2px solid rgb(215, 213, 213);
+  border-radius: 5px;
+}
+
+.qzerr-div{
+  color: #CC0000;
+  min-height: 24px;
+  margin: 5px;
+}
+.sbmtqz-div{
+  margin: auto;
+  text-align: center;
+  width: 200px;
+  border: 2px solid rgb(215, 213, 213);
+  border-radius: 5px;
+  padding: 5px;
+
+}
+#retryqzdivid{
+  display: none;
+}
 
 
 .subordered-list-desc{
