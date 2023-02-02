@@ -3284,6 +3284,20 @@ function editItem( btn ){
     keywords = btn.dataset.keywords;
     discontinue = btn.dataset.discontinue;
 
+    $.ajax({
+        url: '/readernook/php/process.php',
+        data: {usrfunction: "checksession"},
+        type: 'POST',
+        dataType: 'json',
+        success: function (retstatus) {
+            if (retstatus == "err"){
+                alert("Please relogin");
+            }
+        },
+        error: function(xhr, status, error) {
+            //console.log("")
+        }
+    });
 
    var newHTML = "<div class = 'songContainer' >";
    newHTML = newHTML + " ";
