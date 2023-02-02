@@ -3291,7 +3291,8 @@ function editItem( btn ){
         dataType: 'json',
         success: function (retstatus) {
             if (retstatus == "err"){
-                alert("Please relogin");
+                //alert("Please relogin");
+                goToLogin();
             }
         },
         error: function(xhr, status, error) {
@@ -3338,8 +3339,10 @@ function editItem( btn ){
    toolbarHTML = "";
    //toolbarHTML =  "<button  type='button' class='itmToggledBtn btn btn-primary' onclick=toggleDescView('" + itemid + "') >Toggle View</button>" + "<br>" ;
 
-   toolbarHTML = toolbarHTML  + "<div class = 'toolBar'><div>" +
-   "<button  type='button' class='itmUpdBtn itmToggledBtn btn btn-primary' onclick=toggleDescView('" + itemid + "') >Toggle View</button>" + 
+   toolbarHTML = toolbarHTML  + "<div id='toolBarId' class = 'toolBar'><div>" +
+   "<button  title='toggle desc view' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=toggleDescView('" + itemid + "') >TglDesc</button>" + 
+   "<button  title='toggle hide' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=toggleToolBarView() >TglHide</button>" + 
+
    "<label class='toolBarlabel'>Paragraphs</label>" +
    "<button title='paragraph1' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','paragraph1') >P1</button>" +
    "<button title='paragraph2 white BG' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','paragraph2') >P2</button>" +
@@ -3447,6 +3450,16 @@ function editItem( btn ){
    document.getElementById("mainContainer").style.width = "100%"; 
    document.getElementById("tutorialEditDivId").style.width = "20%";
 
+}
+
+function toggleToolBarView(){
+    console.log(document.getElementById("toolBarId").clientHeight);
+
+    if(document.getElementById("toolBarId").clientHeight > 50){
+        document.getElementById("toolBarId").style.height = "50px";
+    }else {
+        document.getElementById("toolBarId").style.height = "100%";
+    }
 }
 
 function deleteCurrentComponent(btn){
@@ -3973,6 +3986,12 @@ function updateItem(itemid, createNewItem) {
         success: function(retstatus) {
             //alert("Inside login success retstatus =" + retstatus);
             //console.log( "Inside updateItem success retstatus =" + retstatus);
+
+            if (retstatus == "err"){
+                //alert("Please relogin");
+                goToLogin();
+            }
+
             sessionStorage.setItem("tutorialList", null);
             //sessionStorage.setItem("itemList", null);
             getTutorialList();
