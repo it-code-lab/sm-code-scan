@@ -2874,6 +2874,15 @@ function checkURL() {
 		document.getElementById("HelpTopicsLinkId").style.display = "none";
 		
 	} else {
+
+        localStorage.setItem("userLoggedIn", "y");
+        document.getElementById("loginLinkId").style.display = "none";
+        document.getElementById("logoutLinkId").style.display = "block";
+        document.getElementById("profileLinkId").style.display = "block";
+        if (localStorage.getItem("userLvl") == "9"){
+            the.smusr = true;
+        }
+
         $.ajax({
             url: the.hosturl + '/php/process.php',
             data: {usrfunction: "checklogin"},
@@ -2887,14 +2896,6 @@ function checkURL() {
                     }
                     document.getElementById("logoutLinkId").style.display = "none";
                     document.getElementById("profileLinkId").style.display = "none";
-                }else {
-                    localStorage.setItem("userLoggedIn", "y");
-                    document.getElementById("loginLinkId").style.display = "none";
-                    document.getElementById("logoutLinkId").style.display = "block";
-                    document.getElementById("profileLinkId").style.display = "block";
-                    if (localStorage.getItem("userLvl") == "9"){
-                        the.smusr = true;
-                    }
                 }
             },
             error: function(xhr, status, error) {

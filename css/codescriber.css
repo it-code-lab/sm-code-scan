@@ -676,7 +676,7 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_collapsible
 /*END - LOGIN, REGISTER, FORGOT PASSWORD, ACTIVATE ACC********/
 /*************************************************************/
 #profileDivId{
-  display:none; width:100% ; height:90vh; margin:auto; padding: 0px 0px 20px 0px; background-color: #fff;
+  display:none; width:100% ; min-height:90vh; margin:auto; padding: 0px 0px 20px 0px; background-color: #fff;
 }
 
 .scorestablecls {
