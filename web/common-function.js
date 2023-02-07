@@ -3191,7 +3191,9 @@ function getTutorial(tutorialStr){
                         nextSubpath = nextSubpath.replaceAll(" " , "-");
                         nextTechnology = (rows[i+1].technology).toLowerCase();
                         nextTechnology = nextTechnology.replaceAll(" " , "-");
-                        nextTutorialTitleURL = myUrl + "tutorials/" + nextTechnology + "/" + nextSubpath.toLowerCase() + "/" + itemName.toLowerCase();
+                        //nextTutorialTitleURL = myUrl + "tutorials/" + nextTechnology + "/" + nextSubpath.toLowerCase() + "/" + itemName.toLowerCase();
+                        nextTutorialTitleURL = myUrl + "tutorials/" + nextTechnology + "/" + itemName.toLowerCase();
+
                         nextTutorialTitle = rows[i+1].title;
                     }
 
@@ -3241,8 +3243,10 @@ function getTutorial(tutorialStr){
 
             }
 
+            newHTML = newHTML + '<br><br><br><br><br><br><br><br><br><hr><b>Leave a Comment</b>' + document.getElementById("sndmsgdivid").innerHTML;
 
             document.getElementById("tutorialDivId").innerHTML = newHTML;
+            refreshCaptcha();
             showTechnology(technology);
             //START: Change the background color of the active tutorial link 
             var elemId = "tutorialDiv-" + itemid;
@@ -3256,7 +3260,8 @@ function getTutorial(tutorialStr){
             
             document.querySelector('meta[name="description"]').setAttribute("content", metaDesc);
             document.querySelector('meta[name="keywords"]').setAttribute("content", metaKey);
-            document.title = technology + " " + subpath + ". " + title ;
+            //document.title = technology + " " + subpath + ". " + title ;
+            document.title = technology + " - " + title ;
             
             sessionStorage.setItem("lastUrl", window.location.href);
             // if (localStorage.getItem("cookieAccepted") == "y"){
@@ -3344,11 +3349,11 @@ function editItem( btn ){
            "<input type='text' id='technologyseq-" + itemid + "' style='width:95%; margin:auto;' value='" + technologyseq + "'>";
            
    newHTML = newHTML +
-   "<br><br><div class = 'editFieldHead'>Path: </div><br>" +
+   "<br><br><div class = 'editFieldHead'>Path(not in use): </div><br>" +
    "<input type='text' id='subpath-" + itemid + "' style='width:95%; margin:auto;' value='" + subpath + "'>";
 
    newHTML = newHTML +
-           "<br><br><div class = 'editFieldHead'>Path Sort Sequence: </div><br>" +
+           "<br><br><div class = 'editFieldHead'>Path Sort Sequence(not in use): </div><br>" +
            "<input type='text' id='subpathseq-" + itemid + "' style='width:95%; margin:auto;' value='" + subpathseq + "'>";
 
 
@@ -4990,7 +4995,9 @@ function populateTutorialList(rows = "") {
         
         technology = technology.replaceAll(" " , "-");
 
-        tutorialTitleURL = myUrl + "tutorials/" + technology.toLowerCase() + "/" + subpath.toLowerCase() + "/" + itemName.toLowerCase();
+        //tutorialTitleURL = myUrl + "tutorials/" + technology.toLowerCase() + "/" + subpath.toLowerCase() + "/" + itemName.toLowerCase();
+        tutorialTitleURL = myUrl + "tutorials/" + technology.toLowerCase() + "/" + itemName.toLowerCase();
+
         technologyUrl = myUrl + "tutorials/" + technologyOrig;
 
         technologySqueezed = rows[i].technology;		 
@@ -6004,7 +6011,8 @@ function contactus(){
 	  document.getElementById("contactuserrormsg").innerHTML = "<font color = #cc0000>" + " " + "</font> ";
 	  var StrEmail = document.getElementById("contactusemailid").value
 	  var StrName = document.getElementById("contactusname").value
-	  var StrComment = document.getElementById("contactus_msg").value
+	  var StrComment = document.getElementById("contactus_msg").value ;
+      //console.log(window.location.pathname);
   
 	  var StrFunction = "contactus" ;
 	  
@@ -6049,7 +6057,8 @@ function contactus(){
 		 document.getElementById("contactuserrormsg").innerHTML = "<font color = #cc0000>" + error_message + "</font> ";
 		 return;
 	  }
-
+      StrComment = StrComment + "<br><br><br>" + window.location.pathname;
+      
 	  if (the.captcha != document.getElementById("enteredCaptchaText").value ){
 		 if ((localStorage.getItem("userLoggedIn") == "n") || (localStorage.getItem("userLvl") != "9")){
 			 error_message = "Entered code is incorrect";
@@ -6069,8 +6078,8 @@ function contactus(){
 					
 				}			,
 				error: function(xhr, status, error) {
-					  console.log(error);
-					  console.log(xhr);
+					  //console.log(error);
+					  //console.log(xhr);
 				}
 		  });
 }
