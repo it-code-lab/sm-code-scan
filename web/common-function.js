@@ -3311,7 +3311,7 @@ function editItem( btn ){
     discontinue = btn.dataset.discontinue;
 
     $.ajax({
-        url: '/readernook/php/process.php',
+        url: the.hosturl + '/php/process.php',
         data: {usrfunction: "checksession"},
         type: 'POST',
         dataType: 'json',
@@ -4056,7 +4056,7 @@ function updateInfo(data){
     }
 
     $.ajax({
-        url: '/readernook/php/process.php',
+        url: the.hosturl + '/php/process.php',
         data: {
             usremail: usremail,
             data: data,
@@ -6058,7 +6058,7 @@ function contactus(){
 		 return;
 	  }
       StrComment = StrComment + "<br><br><br>" + window.location.pathname;
-      
+
 	  if (the.captcha != document.getElementById("enteredCaptchaText").value ){
 		 if ((localStorage.getItem("userLoggedIn") == "n") || (localStorage.getItem("userLvl") != "9")){
 			 error_message = "Entered code is incorrect";

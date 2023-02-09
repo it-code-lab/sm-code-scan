@@ -2430,6 +2430,12 @@ footer {
   text-decoration: none;
 }
 
+.dynamicradio{
+  width: 1.4em;
+  height: 1.4em;
+  vertical-align:text-bottom;
+  margin-right: 5px;
+}
 #projectscannerLinkId{
   display: none;
 }
