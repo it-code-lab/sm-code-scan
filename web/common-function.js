@@ -3568,7 +3568,7 @@ function uploadFile(event) {
         var xhttp = new XMLHttpRequest();
 
         // Set POST method and ajax file path
-        xhttp.open("POST", "/itcodescanner/php/upload.php", true);
+        xhttp.open("POST", the.hosturl + "/php/upload.php", true);
 
         // call on request changes state
         xhttp.onreadystatechange = function() {
@@ -3780,7 +3780,7 @@ function submitQuiz(){
         var percent = rtans*100/(rtans + wans);
         percent = percent.toFixed(2);
         if (localStorage.getItem("userLoggedIn") == "n"){
-            document.getElementById("qzres").innerHTML = "You scored " + percent + "%. Click on the button below to retry.<br> Scores get saved for "+ '<a href="/itcodescanner/?target=login">logged in</a>' +" users.";
+            document.getElementById("qzres").innerHTML = "You scored " + percent + "%. Click on the button below to retry.<br> Scores get saved for "+ '<a href="' + the.hosturl + '/?target=login">logged in</a>' +" users.";
         }else {
             document.getElementById("qzres").innerHTML = "You scored " + percent + "%. Click on the button below to retry.<br> The score has been recorded on the profile.";
             var userdata = localStorage.getItem("userdata");
