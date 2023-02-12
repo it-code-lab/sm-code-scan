@@ -3611,14 +3611,16 @@ function toggleDescView(itemid){
 
     if (document.getElementById("descriptionTextId").style.display == "block"){
         newHTML = document.getElementById("descriptionTextId").value;
-        newHTML = removeNewLine(newHTML);
+        //**SM - May need to be reverted* */
+        //newHTML = removeNewLine(newHTML);
         document.getElementById(divId).innerHTML = newHTML;
 
         document.getElementById(divId).style.display = "block";
         document.getElementById("descriptionTextId").style.display = "none"
     }else {
         newHTML = document.getElementById(divId).innerHTML;
-        newHTML = addNewLineInText(newHTML);
+        //**SM - May need to be reverted* */
+        //newHTML = addNewLineInText(newHTML);
         document.getElementById("descriptionTextId").value = newHTML;
 
         document.getElementById(divId).style.display = "none";

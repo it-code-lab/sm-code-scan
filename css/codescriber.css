@@ -2447,3 +2447,4 @@ footer {
 #howtoLinkId{
   display: none;
 }
+div:has(> .hideParentDiv) {display: none; }
