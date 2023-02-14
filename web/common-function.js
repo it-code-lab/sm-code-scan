@@ -1486,8 +1486,9 @@ function autocomplete(inp, arr) {
                 var a, b, i, val = this.value;
                 var strPos;
                 /*close any already open lists of autocompleted values*/
-                closeAllLists();
+                //closeAllLists();
                 if (!val) {
+                    closeAllLists();
                     return false;
                 }
 
@@ -1495,100 +1496,112 @@ function autocomplete(inp, arr) {
 
                 //SM: DO NOT DELETE: options to 3 char
                 if (val.length < 2) {
+                    closeAllLists();
                 	return false;
                 }
 
-                currentFocus = -1;
-                /*create a DIV element that will contain the items (values):*/
-                a = document.createElement("DIV");
-                a.setAttribute("id", this.id + "autocomplete-list");
-                a.setAttribute("class", "autocomplete-items");
-                /*append the DIV element as a child of the autocomplete container:*/
-                this.parentNode.appendChild(a);
-                /*for each item in the array...*/
-                for (i = 0; i < arr.length; i++) {
-                    /*check if the item starts with the same letters as the text field value:*/
+                var elemnt = this;
+                //Start Async
+                setTimeout(function() {
+                        closeAllLists();
+                        currentFocus = -1;
+                        /*create a DIV element that will contain the items (values):*/
+                        a = document.createElement("DIV");
+                        a.setAttribute("id", elemnt.id + "autocomplete-list");
+                        a.setAttribute("class", "autocomplete-items");
+                        /*append the DIV element as a child of the autocomplete container:*/
+                        elemnt.parentNode.appendChild(a);
+                        /*for each item in the array...*/
+                        for (i = 0; i < arr.length; i++) {
+                            /*check if the item starts with the same letters as the text field value:*/
+                            if (val != elemnt.value){
+                                closeAllLists();
+                                break;
+                            }
+                            //if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                            strPos = arr[i].toUpperCase().indexOf(
+                                val.toUpperCase());
 
-                    //if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-                    strPos = arr[i].toUpperCase().indexOf(
-                        val.toUpperCase());
+                            //SM: DO NOT DELETE: options to 50
 
-                    //SM: DO NOT DELETE: options to 50
+                            if (a.childElementCount > 50) {
+                            	break;
+                            }
 
-                    //if (a.childElementCount > 50) {
-                    //	break;
-                    //}
+                            if (strPos > -1) {
 
-                    if (strPos > -1) {
+                                /*create a DIV element for each matching element:*/
+                                b = document.createElement("DIV");
+                                /*make the matching letters bold:*/
 
-                        /*create a DIV element for each matching element:*/
-                        b = document.createElement("DIV");
-                        /*make the matching letters bold:*/
+                                b.innerHTML = arr[i].substr(0, strPos);
+                                b.innerHTML += "<strong>" +
+                                    arr[i].substr(strPos, val.length) +
+                                    "</strong>";
+                                b.innerHTML += arr[i].substr(strPos +
+                                    val.length);
 
-                        b.innerHTML = arr[i].substr(0, strPos);
-                        b.innerHTML += "<strong>" +
-                            arr[i].substr(strPos, val.length) +
-                            "</strong>";
-                        b.innerHTML += arr[i].substr(strPos +
-                            val.length);
-
-                        /*insert a input field that will hold the current array item's value:*/
-                        b.innerHTML += "<input type='hidden' value='" +
-                            arr[i] + "'>";
-                        /*execute a function when someone clicks on the item value (DIV element):*/
-                        b
-                            .addEventListener(
-                                "click",
-                                function(e) {
-                                    /*insert the value for the autocomplete text field:*/
-                                    inp.value = this
-                                        .getElementsByTagName("input")[0].value;
-                                    /*close the list of autocompleted values,
-                                    (or any other open lists of autocompleted values:*/
-                                    closeAllLists();
-                                    if (inp.id == "tutorial-search-box"){
-                                        searchTutorial(); 
-                                    } else {
-                                        populateSubCategory();
-                                    }
-                                    
-                                });
-                        a.appendChild(b);
-                    }else {
-                        var searchText = val.toUpperCase()
-                        var rows = JSON.parse(tf);
-                        rows = rows.filter(function(entry) {
-                            return (entry.title.toUpperCase() === arr[i].toUpperCase() && entry.discontinue == "0") && (entry.title.toUpperCase().includes(searchText) 
-                                 || entry.technology.toUpperCase().includes(searchText) 
-                                 || entry.shortdescription.toUpperCase().includes(searchText) 
-                                 || entry.keywords.toUpperCase().includes(searchText)) ;
-                        });
-
-                        if (rows.length > 0){
-                            b = document.createElement("DIV");
-                            b.innerHTML = arr[i];
-                            b.innerHTML += "<input type='hidden' value='" +
-                            arr[i] + "'>";
-                            b.addEventListener(
-                                "click",
-                                function(e) {
-                                    /*insert the value for the autocomplete text field:*/
-                                    inp.value = this.getElementsByTagName("input")[0].value;
-                                    /*close the list of autocompleted values,
-                                    (or any other open lists of autocompleted values:*/
-                                    closeAllLists();
-                                    if (inp.id == "tutorial-search-box"){
-                                        searchTutorial(); 
-                                    } else {
-                                        populateSubCategory();
-                                    }
-                                    
-                                });
+                                /*insert a input field that will hold the current array item's value:*/
+                                b.innerHTML += "<input type='hidden' value='" +
+                                    arr[i] + "'>";
+                                /*execute a function when someone clicks on the item value (DIV element):*/
+                                b
+                                    .addEventListener(
+                                        "click",
+                                        function(e) {
+                                            /*insert the value for the autocomplete text field:*/
+                                            inp.value = this
+                                                .getElementsByTagName("input")[0].value;
+                                            /*close the list of autocompleted values,
+                                            (or any other open lists of autocompleted values:*/
+                                            closeAllLists();
+                                            if (inp.id == "tutorial-search-box"){
+                                                searchTutorial(); 
+                                            } else {
+                                                populateSubCategory();
+                                            }
+                                            
+                                        });
                                 a.appendChild(b);
+                            }else {
+                                var searchText = val.toUpperCase()
+                                var rows = JSON.parse(tf);
+                                rows = rows.filter(function(entry) {
+                                    return (entry.title.toUpperCase() === arr[i].toUpperCase() && entry.discontinue == "0") && (entry.title.toUpperCase().includes(searchText) 
+                                        || entry.technology.toUpperCase().includes(searchText) 
+                                        || entry.shortdescription.toUpperCase().includes(searchText) 
+                                        || entry.keywords.toUpperCase().includes(searchText)) ;
+                                });
+
+                                if (rows.length > 0){
+                                    b = document.createElement("DIV");
+                                    b.innerHTML = arr[i];
+                                    b.innerHTML += "<input type='hidden' value='" +
+                                    arr[i] + "'>";
+                                    b.addEventListener(
+                                        "click",
+                                        function(e) {
+                                            /*insert the value for the autocomplete text field:*/
+                                            inp.value = this.getElementsByTagName("input")[0].value;
+                                            /*close the list of autocompleted values,
+                                            (or any other open lists of autocompleted values:*/
+                                            closeAllLists();
+                                            if (inp.id == "tutorial-search-box"){
+                                                searchTutorial(); 
+                                            } else {
+                                                populateSubCategory();
+                                            }
+                                            
+                                        });
+                                        a.appendChild(b);
+                                }
+                                
+                            }
                         }
-                        
-                    }
-                }
+
+                }, 0);
+                // End Async
+
             });
     /*execute a function presses a key on the keyboard:*/
     inp.addEventListener("keydown", function(e) {
