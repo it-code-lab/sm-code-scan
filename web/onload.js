@@ -59,7 +59,7 @@ $(function() {
 
 
 });
-
+hljs.highlightAll();
 /*
 var coll = document.getElementsByClassName("collapsibleX");
 var i;
