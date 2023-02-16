@@ -59,7 +59,9 @@ $(function() {
 
 
 });
-hljs.highlightAll();
+setTimeout(function() {
+    hljs.highlightAll();
+}, 800);
 /*
 var coll = document.getElementsByClassName("collapsibleX");
 var i;
