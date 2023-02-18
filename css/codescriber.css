@@ -2040,7 +2040,9 @@ margin-top: 40px !important;
   padding: 30px;
   text-align: center;
   /* background: #00455B; */
-  background: #095484;
+  /* background: #095484; */
+  background: #7c838d;
+  text-shadow: 0 -2px rgba(0,0,0,0.6);
   color: white;
   font-size: 30px;
   /* font-family: 'Bitter', sans-serif !important; */
