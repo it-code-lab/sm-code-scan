@@ -1671,6 +1671,8 @@ button.btnNewWindow::before {
 	text-transform: uppercase;
   z-index: 50;
   margin-bottom: 5px;
+  display: block;
+  overflow: auto;
 }
 
 .technologyFooter{
