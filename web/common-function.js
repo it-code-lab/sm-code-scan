@@ -3994,6 +3994,7 @@ function updateItem(itemid, createNewItem) {
     title = title.replaceAll("'", "''");
 	technology = technology.replaceAll("'", "''");
 	subpath = subpath.replaceAll("'", "''");
+    shortdescription = shortdescription.replace(/"/g, '\'');
 	shortdescription = shortdescription.replaceAll("'", "''");
     description = description.replaceAll("'", "''");
     //let regex = /\\/g;
