@@ -53,6 +53,47 @@ function setLastFocusedDivId(id) {
     //console.log(id);
 }
 
+
+//https://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div
+function insertImageAtCaret(html) {
+    if (html == ""){
+        text = "<b>Dummy Text</b>";
+    }
+
+    var sel, range;
+    if (window.getSelection) {
+        // IE9 and non-IE
+        sel = window.getSelection();
+        if (sel.getRangeAt && sel.rangeCount) {
+            range = sel.getRangeAt(0);
+            range.deleteContents();
+
+            // Range.createContextualFragment() would be useful here but is
+            // only relatively recently standardized and is not supported in
+            // some browsers (IE9, for one)
+            var el = document.createElement("div");
+            el.innerHTML = html;
+            var frag = document.createDocumentFragment(), node, lastNode;
+            while ( (node = el.firstChild) ) {
+                lastNode = frag.appendChild(node);
+            }
+            range.insertNode(frag);
+
+            // Preserve the selection
+            if (lastNode) {
+                range = range.cloneRange();
+                range.setStartAfter(lastNode);
+                range.collapse(true);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        }
+    } else if (document.selection && document.selection.type != "Control") {
+        // IE < 9
+        document.selection.createRange().pasteHTML(html);
+    }
+}
+
 function set_editor_mode() {
     //logCommon("set_editor_mode called");
 
@@ -3405,6 +3446,7 @@ function editItem( btn ){
    "<button title='Image-Full-width' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image1') >I1</button>" +
    "<button title='Image-Smaller' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image2') >I2</button>" +
    "<button title='Image-Smallest' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image3') >I3</button>" +
+   "<button title='Image-Smallest' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image4') >I@Car</button>" +
    "<label class='toolBarlabel'>Messages</label>" +
    "<button title='Warning'' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','warning') >Warn</button>" +
    "<button title='Error' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','error') >Err</button>" +
@@ -3433,9 +3475,16 @@ function editItem( btn ){
 
    +
    "<br><label id='image-ererrormsg-" + itemid + "' style='color: #cc0000; font-size: 14px; min-height: 20px;'></label>"
-
    +
-   "<br><input type='button' value='Upload New Image' data-errormsgelementid='image-ererrormsg-' data-saveasnameelementid='image-' data-fileelementid='image-replace-' data-itemid = '" + itemid + "' onclick='uploadFile(event);'  ></div><br><br><br>";
+   "<input class='itmUpdBtnSmall' type='button' value='Upload And Insert At Carot' data-errormsgelementid='image-ererrormsg-' data-saveasnameelementid='image-' data-fileelementid='image-replace-' data-itemid = '" + itemid + "' onclick='uploadAndInsertFile(event);'  >"
+   +
+   "<input class='itmUpdBtnSmall' type='button' value='Upload New Image' data-errormsgelementid='image-ererrormsg-' data-saveasnameelementid='image-' data-fileelementid='image-replace-' data-itemid = '" + itemid + "' onclick='uploadFile(event);'  ><br>"
+   +"<input class = 'itmUpdBtnSmall' type='text' id='search-img' value=''> "
+   + "<button title='Image-Smallest' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=loadUNSPLImg('" + itemid + "')>Search Unsplash</button>"
+   + "<button title='Image-Smallest' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=loadPixabImg('" + itemid + "')>Search Pixabay</button>"
+   +"<button title='Image-Smallest' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=loadPexImg('" + itemid + "')>Search Pexel</button><br>"
+   + "<div class='srchimages'></div>"
+   +"</div><br><br><br>";
 
 
 
@@ -3497,10 +3546,121 @@ function toggleToolBarView(){
     if(document.getElementById("toolBarId").clientHeight > 50){
         document.getElementById("toolBarId").style.height = "50px";
     }else {
-        document.getElementById("toolBarId").style.height = "100%";
+        //document.getElementById("toolBarId").style.height = "100%";
+        document.getElementById("toolBarId").style.height = "600px";
     }
 }
 
+function popolatenewImageName(itemid){
+    document.getElementById("image-" + itemid).value = window.location.href.substring(window.location.href.lastIndexOf('/') + 1)+ "-" + (Math.floor(Math.random() * 10000) + 1) + ".png";
+}
+function loadUNSPLImg(itemid) {
+    popolatenewImageName(itemid);
+    var imageName = document.getElementById("search-img").value;
+    if (imageName == ""){
+        //imageName = "coffee";
+        return;
+    }
+    const url = "https://api.unsplash.com/search/photos?query=" + imageName + "&per_page=100&client_id=gK52De2Tm_dL5o1IXKa9FROBAJ-LIYqR41xBdlg3X2k";
+    const imageDiv = document.querySelector('.srchimages');
+    imageDiv.innerHTML = "";
+      fetch(url)
+          .then(response => {
+              return response.json();
+          })
+          .then(data => {
+                 
+                  for (let i = 0; i < data.results.length; i++) {
+                     
+                      /* Fetch only image that you want by using id. Example : https://unsplash.com/photos/6VhPY27jdps, id = '6VhPY27jdps'   */
+                      //if (data.results[i].id == "6VhPY27jdps") {
+                          let imageElement = document.createElement('img');
+                          imageElement.src = data.results[i].urls.regular;
+                          //imageElement.src = data.results[i].urls.thumb;
+                          imageElement.setAttribute('onclick', 'SaveImageAndInsertAtCarot(event)');
+                          imageElement.setAttribute('data-errormsgelementid', 'image-ererrormsg-');
+                          imageElement.setAttribute('data-saveasnameelementid', 'image-');
+                          imageElement.setAttribute('data-fileelementid', 'image-replace-');
+                          imageElement.setAttribute('data-itemid', itemid);
+                          imageElement.setAttribute('data-imageurl', data.results[i].urls.regular);
+
+                          imageDiv.append(imageElement);
+                      //}
+                  }
+              });
+}
+
+function loadPexImg(itemid) {
+    popolatenewImageName(itemid)
+    var imageName = document.getElementById("search-img").value;
+    if (imageName == ""){
+        //imageName = "coffee";
+        return;
+    }
+    const imageDiv = document.querySelector('.srchimages');
+    imageDiv.innerHTML = "";
+    fetch("https://api.pexels.com/v1/search?per_page=80&query=" + imageName ,{
+      headers: {
+        Authorization: "r133XPzHPTKK18x6bcaM5AInbsTp88RC4W4nemUhS4ktwBxMpnDpFT41"
+      }
+    })
+          .then(response => {
+              return response.json();
+          })
+          .then(data => {
+                  arr = data.photos;
+                  for (let i = 0; i < arr.length; i++) {                 
+                      let imageElement = document.createElement('img');
+                      //imageElement.src = arr[i].src.original;
+                      imageElement.src = arr[i].src.landscape;
+                      
+                      //imageElement.src = arr[i].src.small;
+                      imageElement.setAttribute('onclick', 'SaveImageAndInsertAtCarot(event)');
+                      imageElement.setAttribute('data-errormsgelementid', 'image-ererrormsg-');
+                      imageElement.setAttribute('data-saveasnameelementid', 'image-');
+                      imageElement.setAttribute('data-fileelementid', 'image-replace-');
+                      imageElement.setAttribute('data-itemid', itemid);
+                      imageElement.setAttribute('data-imageurl',arr[i].src.landscape);                      
+                      imageDiv.append(imageElement);
+                  }
+              });
+  }
+
+  function loadPixabImg(itemid) {
+    popolatenewImageName(itemid)
+    var imageName = document.getElementById("search-img").value;
+    if (imageName == ""){
+        //imageName = "coffee";
+        return;
+    }
+    const imageDiv = document.querySelector('.srchimages');
+    var key = "33936925-b94dd0e302df74f271d1b84c5";
+    const url = "https://pixabay.com/api/?key=" + key + "&per_page=100&q=" + imageName + "&image_type=photo";
+    //const url = "https://pixabay.com/api/?key=33936925-b94dd0e302df74f271d1b84c5&q=yellow+flowers&image_type=photo&pretty=true&per_page=20";
+    imageDiv.innerHTML = "";
+    fetch(url)
+          .then(response => {
+              return response.json();
+          })
+          .then(data => {
+                  arr = data.hits;
+                  //console.log(arr);
+                  for (let i = 0; i < arr.length; i++) {                 
+                      let imageElement = document.createElement('img');
+                      imageElement.src = arr[i].largeImageURL;
+                      //imageElement.src = arr[i].previewURL;
+
+                      imageElement.setAttribute('onclick', 'SaveImageAndInsertAtCarot(event)');
+                      imageElement.setAttribute('data-errormsgelementid', 'image-ererrormsg-');
+                      imageElement.setAttribute('data-saveasnameelementid', 'image-');
+                      imageElement.setAttribute('data-fileelementid', 'image-replace-');
+                      imageElement.setAttribute('data-itemid', itemid);
+                      imageElement.setAttribute('data-imageurl', arr[i].largeImageURL);
+
+                      imageDiv.append(imageElement);
+                  }
+              });
+  }
 function deleteCurrentComponent(btn){
     
     //console.log("document.activeElement.tagName = " + document.activeElement.tagName);
@@ -3525,6 +3685,8 @@ function showImage(event) {
     var elem = event.target;
     var itemid = elem.dataset.itemid;
     var imageelementid = elem.dataset.imageelementid;
+
+    popolatenewImageName(itemid);
 
     var output = document.getElementById(imageelementid + itemid);
     output.src = URL.createObjectURL(event.target.files[0]);
@@ -3610,6 +3772,129 @@ function uploadFile(event) {
 
 }
 
+function uploadAndInsertFile(event){
+    if (localStorage.getItem("userLoggedIn") == "n") {
+
+        error_message = "Not authorized";
+        return;
+
+    } else if (localStorage.getItem("userLvl") != "9") {
+        error_message = "Not authorized";
+        return;
+    }
+    var elem = event.target;
+    var fileelementid = elem.dataset.fileelementid;
+    var saveasnameelementid = elem.dataset.saveasnameelementid;
+    var itemid = elem.dataset.itemid;
+
+    var saveasname = document.getElementById(saveasnameelementid + itemid).value;
+    saveasname = saveasname.trim();
+    saveasname = saveasname.toLowerCase();
+
+    var errormsgelementid = elem.dataset.errormsgelementid;
+
+    if (!saveasname.includes(".png")) {
+        saveasname = saveasname + ".png";
+    }
+
+    var files = document.getElementById(fileelementid + itemid).files;
+
+    if (files.length > 0) {
+
+        var formData = new FormData();
+        formData.append("file", files[0]);
+        formData.append("saveasname", saveasname);
+        formData.append("dir", "img");
+
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.open("POST", the.hosturl + "/php/upload.php", true);
+
+        // call on request changes state
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+
+                var response = this.responseText;
+                //console.log(response);
+
+                document.getElementById(errormsgelementid + itemid).innerHTML = "<font color = #0000>" + response + "</font> ";
+                var imagename = document.getElementById("image-" + itemid).value;
+                var randomId = "div-" +  Math.floor(Math.random() * 1000000);
+                var Str =  "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  class = 'image1-desc'> " + "<img class='movieImageCls' alt ='' src= '" + the.hosturl + "/img/"+ imagename +"'> "+ " <button class='deleteDivInnImg' onclick=deleteCurrentComponent(this) ></button></div>";
+                insertImageAtCaret(Str);
+            }
+        };
+
+        xhttp.send(formData);
+
+    } else {
+        alert("Please select a file");
+    }
+
+}
+
+function SaveImageAndInsertAtCarot(event){
+    if (localStorage.getItem("userLoggedIn") == "n") {
+
+        error_message = "Not authorized";
+        return;
+
+    } else if (localStorage.getItem("userLvl") != "9") {
+        error_message = "Not authorized";
+        return;
+    }
+    var elem = event.target;
+    var fileelementid = elem.dataset.fileelementid;
+    var saveasnameelementid = elem.dataset.saveasnameelementid;
+    var itemid = elem.dataset.itemid;
+    popolatenewImageName(itemid);
+    var saveasname = document.getElementById(saveasnameelementid + itemid).value;
+    saveasname = saveasname.trim();
+    saveasname = saveasname.toLowerCase();
+
+    var errormsgelementid = elem.dataset.errormsgelementid;
+
+    if (!saveasname.includes(".png")) {
+        saveasname = saveasname + ".png";
+    }
+
+    const url = elem.dataset.imageurl;
+    const fileName = 'tempName.png';
+
+    fetch(url)
+     .then(async response => {
+      const contentType = response.headers.get('content-type')
+      const blob = await response.blob()
+      const filefromUrl = new File([blob], fileName, { contentType })
+      var formData = new FormData();
+      formData.append("file", filefromUrl);
+      formData.append("saveasname", saveasname);
+      formData.append("dir", "img");
+  
+      var xhttp = new XMLHttpRequest();
+  
+      xhttp.open("POST", the.hosturl + "/php/upload.php", true);
+  
+      // call on request changes state
+      xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+  
+              var response = this.responseText;
+              //console.log(response);
+  
+              document.getElementById(errormsgelementid + itemid).innerHTML = "<font color = #0000>" + response + "</font> ";
+              var imagename = document.getElementById("image-" + itemid).value;
+              var randomId = "div-" +  Math.floor(Math.random() * 1000000);
+              var Str =  "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  class = 'image1-desc'> " + "<img class='movieImageCls' alt ='' src= '" + the.hosturl + "/img/"+ imagename +"'> "+ " <button class='deleteDivInnImg' onclick=deleteCurrentComponent(this) ></button></div>";
+              insertImageAtCaret(Str);
+          }
+      };
+  
+      xhttp.send(formData);
+    })
+
+
+}
 
 function toggleDescView(itemid){
     var divId = 'description-' + itemid ;
@@ -3704,6 +3989,10 @@ function addComponent(itemid, type){
     }else if (type == "image3") {
         var imagename = document.getElementById("image-" + itemid).value;
         document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  class = 'image3-desc'> " + "<img class='movieImageCls' alt ='' src= '" + the.hosturl + "/img/"+ imagename +"'> "+ " <button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>"+ partTwoHTML;
+    }else if (type == "image4") {
+        var imagename = document.getElementById("image-" + itemid).value;
+        var Str =  "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  class = 'image1-desc'> " + "<img class='movieImageCls' alt ='' src= '" + the.hosturl + "/img/"+ imagename +"'> "+ " <button class='deleteDivInnImg' onclick=deleteCurrentComponent(this) ></button></div>";
+        insertImageAtCaret(Str);
 
     }else if (type == "warning") {
         document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  class = 'warning-desc'> TODO Edit - warning <button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>"+ partTwoHTML;
