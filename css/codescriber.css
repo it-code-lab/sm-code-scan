@@ -2,8 +2,13 @@
 	display: flex;
 	flex-direction: row;
 	background-color: rgb(250, 250, 250);
-
+  position: relative;
 }
+
+.bgSVG{
+  position: absolute; bottom:0%; height:70%; z-index: 1;
+}
+
 
 #coffeeBtnXX:hover{
 	background-color: orange;
@@ -971,7 +976,7 @@ animation-delay: 0.4s;
 	}
 	
     .un {
-    width: 76%;
+    width: 100%;
     color: rgb(38, 50, 56);
     font-weight: 700;
     font-size: 14px;
@@ -998,7 +1003,7 @@ animation-delay: 0.4s;
 
     
     .pass {
-     width: 76%;
+     width: 100%;
     color: rgb(38, 50, 56);
     font-weight: 700;
     font-size: 14px;
@@ -1024,8 +1029,18 @@ animation-delay: 0.4s;
         border: 1px solid rgba(0, 0, 0, 0.18) !important;
         
     }
-    
+  .btnCenterAlign{
+    margin:0 auto;
+    display:block;
+  }  
 
+  .panel-hide-left{
+    right: -250px !important;
+    -webkit-transition: 0.5s ease !important;
+    -moz-transition: 0.5s ease !important;
+    -o-transition: 0.5s ease !important;
+    transition: 0.5s ease !important;
+  }
 	/*
 	a.helper {
          width: 150px;
@@ -1157,6 +1172,8 @@ animation-delay: 0.4s;
 	width: 90%;
 	max-width: 500px;
     min-width: 250px;
+    position: relative;
+    z-index: 10;
 }
 #contactusSecDivId{
 	/*
@@ -1616,6 +1633,8 @@ button.btnNewWindow::before {
   background-color: #095984;
   color: white;
   padding: 2px;
+  z-index: 10;
+  position: relative;
 }
 
 
@@ -1722,12 +1741,12 @@ button.btnNewWindow::before {
 .cardsContainerDivClassPadd {
 	display: block;
 	/* margin: auto; */
-  margin: 10px;
+  margin: 20px;
 
-	margin-top: 20px;
+	/* margin-top: 20px; */
 	padding: 0px;
 	padding-top: 0px;
-  float: left;
+   float: left; 
 	/* display: table; */
 	 /* width: 90%;   */
    /*Jun-30-22: Removed as was going outside of outer div. Added back as category header toggle width issue*/
@@ -1739,6 +1758,7 @@ button.btnNewWindow::before {
 	position: relative;
   /* height: 200px; */
   overflow: auto;
+  z-index: 10;
 }
 
 .cardsContainerDivClassPadd::-webkit-scrollbar {
@@ -2286,6 +2306,7 @@ ul.unordered-list-arrow li:before{
   /* box-shadowXX: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
   border-right:  1px solid #c8c8c8;
   border-left:   1px solid  #c8c8c8;
+  z-index: 10;
 }
 
 #tutorialDivId > div:not(.header3-desc){
@@ -2360,6 +2381,7 @@ text-align: end;
   text-decoration: none;
   color: white;
   list-style-type: none;
+  z-index: 20;
 }
 
 .footerDiv * {

@@ -27,12 +27,14 @@
 		font-size: 20px ; 
 	}
 	#mainContainer{
-		width: 70%;
+		width: 100%;
     background-color: #fff; padding: 0px; margin: auto;
 	}
 
 	#helpDisplayDivId{
 		width: 30%;
+		z-index: 10;
+
 	}	
 
 	.panel-container {
@@ -55,8 +57,10 @@
 	.menucard {
 		/* width: 300px;  */
 		width: 46%;
+		max-width: 400px;
 	  }	
 	  .cardsContainerDivClassPadd {
 		width: 46%;
+		max-width: 400px;
 	  }
 }

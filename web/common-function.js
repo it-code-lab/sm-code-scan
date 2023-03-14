@@ -2670,7 +2670,7 @@ function Show(pageName) {
     //document.getElementById("mainContainer").style.width = "70%";
 	
     if (pageName == "filescanner") {
-
+        document.getElementById("bgSVGId").style.display = "none";
 		
 		document.getElementById("btnCloseFileScanner").style.display = "none";
 		document.getElementById("HelpTopicsDivId").style.display = "none";
@@ -2721,7 +2721,7 @@ function Show(pageName) {
 
 		
     } else if (pageName == "projectscanner") {
-
+        document.getElementById("bgSVGId").style.display = "none";
 		if ((localStorage.getItem("userLoggedIn") == "y") && (localStorage.getItem("userLvl") == "9") ){
 			document.getElementById("addNewProjBtnId").style.display = "block";
 		}else {
@@ -2741,6 +2741,7 @@ function Show(pageName) {
 		showHelpDivMessage("Upload project files and click on the file to scan the code");
 		
     } else if (pageName == "HelpTopics") {
+        document.getElementById("bgSVGId").style.display = "none";
 		document.getElementById("filescannerDivId").style.display = "none";
 		document.getElementById("projectscannerDivId").style.display = "none"
 		
@@ -2787,7 +2788,7 @@ function Show(pageName) {
 
 		showHelpDivMessage("Login to add or make updates to the help scan codes");
     }else if (pageName == "profile"){
-
+        document.getElementById("bgSVGId").style.display = "none";
         showProfile();
 		
 
@@ -2809,6 +2810,7 @@ function Show(pageName) {
 		//showHelpDivMessage("Contact us if you have any questions, feedback or are interested in purchasing the software. Some features have been disabled on the web version for security reasons. Full feature software can be used for software training/development, creating references, documentation for the software application and adding own customizations. <br><br> If you found the site helpful, you can support our work by buying me a coffee using the coffee button at the top.");
 		
 	}	else if (pageName == "howto"){
+            document.getElementById("bgSVGId").style.display = "none";
 			document.getElementById("filescannerDivId").style.display = "none";
 			document.getElementById("HelpTopicsDivId").style.display = "none";
 			document.getElementById("projectscannerDivId").style.display = "none";	
@@ -3117,6 +3119,7 @@ function checkURL() {
 		document.getElementById("HelpTopicsDivId").style.width = "100%";
 
     } else if (pageName == "projectscanner") {
+        document.getElementById("bgSVGId").style.display = "none";
         populateStoredProjectList();
 		if ((localStorage.getItem("userLoggedIn") == "y") && (localStorage.getItem("userLvl") == "9") ){
 			document.getElementById("addNewProjBtnId").style.display = "block";
@@ -3143,8 +3146,10 @@ function checkURL() {
 		//showHelpDivMessage("Contact us if you have any questions, feedback or are interested in purchasing the software. Some features have been disabled on the web version for security reasons. Full feature software can be used for software training/development, creating references and documentation for the software application. <br><br> If you found the site helpful, you can support our work by buying me a coffee by clicking on the coffee button at the top.");
 	
     } else if (pageName == "profile"){
+        document.getElementById("bgSVGId").style.display = "none";
 		showProfile();	
 	} else if (pageName == "howto"){
+            document.getElementById("bgSVGId").style.display = "none";
 			document.getElementById("filescannerDivId").style.display = "none";
 			document.getElementById("HelpTopicsDivId").style.display = "none";
 			document.getElementById("projectscannerDivId").style.display = "none";	
@@ -3155,6 +3160,7 @@ function checkURL() {
 			//document.getElementById("mainContainer").style.width = "100%";
 			listVideos();
 	} else if (pageName == "filescanner"){
+        document.getElementById("bgSVGId").style.display = "none";
 		document.getElementById("btnCloseFileScanner").style.display = "none";
 		if (localStorage.getItem("newWindowFileName") != null){
 			loadFile();
@@ -5208,6 +5214,10 @@ function showTechnology(tech){
     populateTutorialList(rows);
     
     document.getElementById(elementId).style.width = "95%";
+    document.getElementById(elementId).style.maxWidth = "1200px";
+    document.getElementById(elementId).style.float = "none";
+    document.getElementById(elementId).style.top = "20px";
+    document.getElementById(elementId).style.margin = "auto";
     // document.getElementById(elementId).style.overflow = "expand";
 }
 
@@ -6389,6 +6399,10 @@ function contactus(){
 		  });
 }
 
+function toggleHideLeftParent(elem){
+    //elem.parentElement.classList.toggleClass("panel-hide-left");
+    $("#tutorialListDivId").toggle( "slide" )
+}
 function onMobileBrowser(){
 	
 	if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){

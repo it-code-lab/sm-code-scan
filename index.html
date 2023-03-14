@@ -85,7 +85,7 @@
          -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"
       integrity="sha256-oE03O+I6Pzff4fiMqwEGHbdfcW7a3GRRxlL+U49L5sA=" crossorigin="anonymous"></script>
-   <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script> 
    <!--
          <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
          <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha256-1fEPhSsRKlFKGfK3eO710tEweHh1fwokU5wFGDHO+vg=" crossorigin="anonymous"></script>
@@ -158,7 +158,9 @@
                <i class="loaderDot"></i>
             </div>
          </div>
-         <div id="containerNHelpDivId">
+         <div id="containerNHelpDivId" >
+            <svg id="bgSVGId" class="bgSVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#7559DA" fill-opacity="1" d="M0,224L30,197.3C60,171,120,117,180,117.3C240,117,300,171,360,197.3C420,224,480,224,540,208C600,192,660,160,720,165.3C780,171,840,213,900,245.3C960,277,1020,299,1080,272C1140,245,1200,171,1260,165.3C1320,160,1380,224,1410,256L1440,288L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path></svg>
+
             <div id="mainContainer" class="panel-container panel-left">
 
                <!--*************************************************************--->
@@ -186,28 +188,35 @@
                            <div class="cardMsg">Tutorials and sample programs.</div>
                            <!-- <p><button onclick="Show('tutorial')">Go</button></p> -->
                         </div>
-                        <div class="menucard" onclick="Show('projectscanner')">
+                        <!-- <div class="menucard" onclick="Show('projectscanner')">
                            <img src="/itcodescanner/images/prjscan.png" alt="Project Scan" class="homeCardImg">
                            <div class="homeCardText">Project Scanner</div>
                            <hr>
                            <div class="cardMsg">Scan all the files in the project folder and see the help content for
                               easy interpretation.</div>
-                           <!-- <p><button onclick="Show('projectscanner')">Go</button></p> -->
                         </div>
                         <div class="menucard" onclick="Show('filescanner')">
                            <img src="/itcodescanner/images/filescan.png" alt="File Scan" class="homeCardImg">
                            <div class="homeCardText">File Scanner</div>
                            <hr>
                            <div class="cardMsg">Scan single file or program and see the help content</div>
-                           <!-- <p><button onclick="Show('filescanner')">Go</button></p> -->
                         </div>
                         <div class="menucard" onclick="Show('howto')">
                            <img src="/itcodescanner/images/howto.png" alt="File Scan" class="homeCardImg">
                            <div class="homeCardText">How to use</div>
                            <hr>
                            <div class="cardMsg">Video guides</div>
+                        </div> -->
+
+
+                        <div class="menucard" onclick="Show('contactus')">
+                           <img src="/itcodescanner/images/howto.png" alt="File Scan" class="homeCardImg">
+                           <div class="homeCardText">Question or Comments</div>
+                           <hr>
+                           <div class="cardMsg">Contact Us</div>
                            <!-- <p><button onclick="Show('howto')">Go</button></p> -->
                         </div>
+
                      </div>
                      <div  style="display:none; background-color: rgba(9, 84, 132); width: 100%; margin: 0px; padding: 20px; ">
                         <label style="color: white"> Lots of programming languages supported. Some of them are listed
@@ -495,7 +504,7 @@
                      <label id="loginerrormsg" style="color: #cc0000; font-size: 14px;"></label>
                      <br>
                      <br>
-                     <button class="helper" style="width: 60%" onclick="login();">Log in</button>
+                     <button class="helper btnCenterAlign" style="width: 60%" onclick="login();">Log in</button>
                      <br>
                      <br>
                      <a href="#!" style="color: #888;  " onMouseOver="this.style.color='#000'"
@@ -518,7 +527,7 @@
                      <label id="registererrormsg" style="color: #cc0000; font-size: 14px"></label>
                      <br>
                      <br>
-                     <button class="helper" style="width: 300px" onclick="register();">Register</button>
+                     <button class="helper btnCenterAlign" style="width: 300px" onclick="register();">Register</button>
                      <!---->
                      <br>
                      <br>
@@ -536,7 +545,7 @@
                      <label id="forgotpwerrormsg" style="color: #cc0000; font-size: 14px"></label>
                      <br>
                      <br>
-                     <button class="helper" style="width: 300px" align="center" onclick="forgotpw();">Send</button>
+                     <button class="helper btnCenterAlign" style="width: 300px" align="center" onclick="forgotpw();">Send</button>
                      <!---->
                      <br>
                      <br>
@@ -566,7 +575,7 @@
                      <label id="newpwerrormsg" style="color: #cc0000; font-size: 14px"></label>
                      <br>
                      <div id="setPwDivId">
-                        <button class="helper" style="width: 300px" align="center" onclick="setPassword();">Set
+                        <button class="helper btnCenterAlign" style="width: 300px" align="center" onclick="setPassword();">Set
                            Password</button>
                      </div>
                      <div id="setPwSuccessDivId" style="display: none">
@@ -615,7 +624,7 @@
                      </div>
                      <label id="contactuserrormsg" style="color: #cc0000; font-size: 14px"></label>
                      <br> <br>
-                     <button class="helper" align="center" onclick="contactus();">Submit</button>
+                     <button class="helper btnCenterAlign" align="center" onclick="contactus();">Submit</button>
                      </div>
                   </div>
                </div>
@@ -988,8 +997,8 @@
           <div class="footer-languages">
             <a href="/itcodescanner/?target=home">Home</a>
             <a href="/itcodescanner/?target=tutorial">Tutorials</a>
-            <a href="/itcodescanner/?target=projectscanner">Project Scanner</a>
-            <a href="/itcodescanner/?target=filescanner">File Scanner</a>
+            <!-- <a href="/itcodescanner/?target=projectscanner">Project Scanner</a>
+            <a href="/itcodescanner/?target=filescanner">File Scanner</a> -->
             <a href="/itcodescanner/?target=contactus">Contact Us</a>
           </div>
         </div>
