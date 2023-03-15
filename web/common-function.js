@@ -30,18 +30,18 @@ var the = {
 
 var last_focused_div_id;
 
-requirejs.config({
-    //By default load any module IDs from js/lib
-    baseUrl: 'js/lib',
-    paths: {
-        'beautifier': the.beautifier_file
-    }
-});
+// requirejs.config({
+//     //By default load any module IDs from js/lib
+//     baseUrl: 'js/lib',
+//     paths: {
+//         'beautifier': the.beautifier_file
+//     }
+// });
 
-requirejs(['beautifier'],
-    function(beautifier) {
-        the.beautifier = beautifier;
-    });
+// requirejs(['beautifier'],
+//     function(beautifier) {
+//         the.beautifier = beautifier;
+//     });
 
 
 function any(a, b) {

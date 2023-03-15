@@ -1954,7 +1954,7 @@ input:checked + .slider:after
   /* width: 180px; */
   width: 480px;
   background-color: white;
-
+  z-index: 15;
 }
 .paragraph1-desc{
   /* color: #4d5b7c; */
