@@ -5243,6 +5243,7 @@ function searchTutorial(){
     }    
     document.getElementById("tutorialDivId").style.display = "none";
     document.getElementById("tutorialListDivId").style.width = "100%";
+    document.getElementById("homeDivId").style.display = "none";
 
     populateTutorialList(rows);
     $( ".cardsContainerDivClassPadd" ).css( "width", "95%" );
