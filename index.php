@@ -18,7 +18,7 @@ $path = substr($path, 1);
 if (strpos($path, 'tutorials/') !== false) {
     $itemstr = substr($path, strpos($path, "tutorials/") + 10);
     if (strpos($itemstr, '/') !== false) {
-      if (isset($_SESSION['datafetched'])) {
+      if (isset($_SESSION['datafetched_XX'])) {
          $title = $_SESSION['webTitle'];
          $description = $_SESSION['webDesc'] ;
          //$image_url = "https://itcodescanner.com/getimage/".$_SESSION['image_nm'];
@@ -142,7 +142,7 @@ if (strpos($path, 'tutorials/') !== false) {
    <script src="/itcodescanner/js/lib/unpackers/myobfuscate_unpacker.js"></script>
    <!---->
    <!-- <script src="/itcodescanner/web/common-editor-function.js"></script> -->
-   <script src="/itcodescanner/web/common-function-v0.6.js"></script>
+   <script src="/itcodescanner/web/common-function-v0.7.js"></script>
    <!-----
          <script src="/itcodescanner/web/common-function-mini.js"></script>
          -->
@@ -1125,6 +1125,9 @@ if (strpos($path, 'tutorials/') !== false) {
 
    </script>
    <script>
+      // setTimeout(() => {
+      //    setInfo();
+      // }, 0);
       getConditionsToIdentifyCodeLanguage();
       getDistinctCommentsCombination();
       getLanguageHelpCodeAndIds();

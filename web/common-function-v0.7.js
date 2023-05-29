@@ -6452,6 +6452,26 @@ function onMobileBrowser(){
 	}
 
 }
+
+function getInfo() {
+    let tags = sessionStorage.getItem("locset")
+    if (tags != "y") {
+        $.ajax({
+            url: the.hosturl + '/php/process.php',
+            type: 'POST',
+            data: jQuery.param({
+                usrfunction: "setinfo"
+            }),
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (response) {
+                sessionStorage.setItem("locset", "y");
+            },
+            error: function (xhr, status, error) {
+                //console.log("error");
+            }
+        });
+    }
+}
 function getCookie(c_name)
 {
 	var c_value = document.cookie;
