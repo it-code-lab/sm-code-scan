@@ -1,0 +1,1094 @@
+/******************PAGE THEME********************/
+/**********https://bootswatch.com/flatly/********************/
+/******************https://treact.owaiskhan.me/components/landingPages/RestaurantLandingPage***********************/
+
+
+
+/**************Common Basic Styles******************/
+/*margin, padding, font size, alignment */
+/****************************************************/
+.clear_both{
+    clear: both;
+}
+
+.text_align_center {
+    text-align: center !important;
+}
+
+.margin_auto {
+    margin: auto !important;
+}
+
+.margin_5px{
+    margin: 5px;
+}
+
+.margin_10px{
+    margin: 10px;
+}
+
+.margin_20px{
+    margin: 20px;
+}
+
+.margin_40px{
+    margin: 40px;
+}
+
+.marginbottom_50px{
+    margin-bottom: 50px;
+}
+
+.marginbottom_12px{
+    margin-bottom: 12px;
+}
+
+.margintop_10px{
+    margin-top: 10px;
+}
+
+.marginleft_5px{
+    margin-left: 5px;
+}
+
+.margintop_15px{
+    margin-top: 15px;
+}
+
+.font_size_12px {
+    font-size: 12px !important;
+}
+
+.font_size_18px {
+    font-size: 18px !important;
+}
+
+.font_size_20px {
+    font-size: 20px !important;
+}
+
+.font_size_24px {
+    font-size: 24px !important;
+}
+
+.padding_10px {
+    padding: 10px !important;
+}
+
+.padding_20px {
+    padding: 20px !important;
+}
+
+.padding_50px {
+    padding: 50px !important;
+}
+
+.padding_1vw {
+    padding: 1vw !important;
+}
+
+.display_block{
+    display: block;
+}
+
+.displayNone {
+    display: none;
+}
+  
+
+.line_height2{
+    line-height: 2.2;
+}
+/***************Overflow**********************/
+/****************************************** */
+.overflow_auto{
+    overflow: auto;
+}
+/***************Label**********************/
+/****************************************** */
+.form_header_label1{
+    font-size: 14px;
+    font-weight: 900;
+    color: #333;
+}
+
+.header_1{
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    padding: 30px;
+}
+/***************Zindex**********************/
+/****************************************** */
+
+.z_index5{
+    z-index: 5 !important;
+
+}
+
+.z_index10{
+    z-index: 10 !important;
+
+}
+
+/***************WIDTH**********************/
+/*max min width height*/
+/****************************************** */
+.width_60px {
+    width: 60px !important;
+}
+
+
+.width_100px {
+    width: 100px !important;
+}
+
+.width_100pc {
+    width: 100%;
+}
+
+.width_150px {
+    width: 150px !important;
+}
+
+.width_200px {
+    width: 200px !important;
+}
+
+.width_250px {
+    width: 250px !important;
+}
+
+.maxwidth_200px {
+    max-width: 200px !important;
+}
+
+.maxwidth_300px {
+    max-width: 300px !important;
+}
+
+.maxwidth_400px {
+    max-width: 400px !important;
+}
+
+.height_50px {
+    height: 50px !important;
+}
+
+.height_100px {
+    height: 100px !important;
+}
+
+.height_200px {
+    height: 200px !important;
+}
+
+.height_300px {
+    height: 300px !important;
+}
+
+.minheight_100px {
+    min-height: 100px !important;
+}
+
+.minheight_200px {
+    min-height: 200px !important;
+}
+
+.minheight_300px {
+    min-height: 300px !important;
+}
+
+/***************FONT SIZE**********************/
+/****************************************** */
+.fontsize_14px {
+    font-size: 14px;
+}
+
+
+.fontsize_18px {
+    font-size: 18px;
+}
+
+.fullwidthdummydiv {
+    width: 100%;
+}
+
+/**************MESSAGE BOXES******************/
+/*Colors, message color, div color,*/
+/*********************************************/
+.greenMsg {
+    padding: 10px;
+    margin: 10px auto;
+    background-color: #18BC9C;
+    color: #fff;
+}
+
+.redMsg {
+    padding: 10px;
+    margin: 10px auto;
+    background-color: #E74C3C;
+    color: #fff;
+}
+
+.blueMsg {
+    padding: 10px;
+    margin: 10px auto;
+    background-color: #3498DB;
+    color: #fff;
+}
+
+.informationBox {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    /* font-size: 17px; */
+    width: 100%;
+    background-color: #3498DB;
+    color: #fff;
+    text-align: center;
+
+}
+
+.warningMsg1{
+    background-color: #f39c12;
+    color: #fff;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #666;
+}
+
+
+.warningMsg{
+    background-color: #E74C3C;
+    color: #fff;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #666;
+}
+
+
+.red_bg {
+    background-color: #E74C3C !important;
+}
+
+.yellow_bg{
+    background-color: yellow;
+}
+
+.bgcolor_1{
+    background-color: #eee;
+}
+
+.bgcolor_2{
+    background-color: rgb(117, 89, 218);
+}
+
+.bgcolor_3{
+    background-color: rgb(34, 148, 112) !important;
+}
+
+.bgcolor_4{
+    background-color: #debf63;
+}
+
+.bgcolor_5{
+    background-color: orange !important;
+}
+
+.bgcolor_6 {
+    background-color: rgb(156 155 159);
+}
+
+.bgcolor_7 {
+    background-color:indianred
+}
+
+.bgcolor_8 {
+    background-color:#3498DB
+}
+
+.bgcolor_9{
+    background-color: #c69d21;
+}
+
+.bgcolor_10{
+    background-color: #2c3e50;
+}
+
+.white_bg {
+    background-color: #fff !important;
+}
+
+
+.red_font {
+    color: #E74C3C !important;
+}
+
+.color_1{
+    color: #ccc;
+}
+
+.color_white{
+    color: #fff;
+}
+
+.color_red{
+    color: red;
+}
+
+.color_red_heart{
+    color: #DC143C;
+}
+
+.color_light_pink{
+    color: #f0a4a4;
+}
+
+.color_yellow{
+    color: yellow;
+}
+
+.color_yellow_star{
+    color: #daa508;
+}
+
+.color_blue{
+    color: blue !important;
+}
+
+.color_green{
+    color: green;
+}
+
+.color_brown{
+    color: brown;
+}
+
+.color_chocolate{
+    color: #d2691e;
+}
+/**************CURSOR******************/
+/*********************************************/
+
+.cursor_pointer {
+    cursor: pointer !important;
+}
+/**************FLOAT******************/
+/*********************************************/
+.float_left{
+    float: left;
+}
+
+.float_right{
+    float: right;
+}
+/**************TEXT ALIGNMENT******************/
+/*********************************************/
+
+.container-textalign-center {
+    text-align: center;
+}
+
+/**************RESPONSIVE BOX ARRANGEMENTS******************/
+/***********************************************************/
+
+/* https://www.freecodecamp.org/news/how-to-make-your-html-responsive-by-adding-a-single-line-of-css-2a62de81e431/ */
+/* justify inner div center align distribute */
+
+.max_4box_responsive {
+    /* margin-top: 1rem; */
+    width: 100% !important;
+    float: left !important;
+    margin: 0px !important;
+}
+
+@media (min-width: 640px) {
+    .max_4box_responsive {
+        width: 50% !important;
+        /* padding-right: 2.5rem; */
+    }
+}
+
+@media (min-width: 768px) {
+    .max_4box_responsive {
+        width: 33.3333% !important;
+        /* padding-right: 1.5rem; */
+    }
+}
+
+/* @media (min-width: 1024px) {
+    .max_4box_responsive {
+        width: 25% !important;
+    }
+} */
+
+
+
+.max_4box_responsive_withmargin {
+    /* margin-top: 1rem; */
+    width: 94% ;
+    float: left ;
+    margin: 2vw ;
+}
+
+@media (min-width: 640px) {
+    .max_4box_responsive_withmargin {
+        width: 45% ;
+        /* padding-right: 2.5rem; */
+    }
+}
+
+@media (min-width: 768px) {
+    .max_4box_responsive_withmargin {
+        width: 28.4% ;
+        /* padding-right: 1.5rem; */
+    }
+}
+
+@media (min-width: 1024px) {
+    .max_4box_responsive_withmargin {
+        width: 20.5% ;
+        /* padding-right: 3rem; */
+    }
+}
+
+
+
+.max_3box_responsive {
+    /* margin-top: 1rem; */
+    width: 100%;
+    float: left;
+    margin: 0px !important;
+}
+
+@media (min-width: 640px) {
+    .max_3box_responsive {
+        width: 50% !important;
+        /* padding-right: 2.5rem; */
+    }
+}
+
+@media (min-width: 768px) {
+    .max_3box_responsive {
+        width: 33.3333% !important;
+        /* padding-right: 1.5rem; */
+    }
+}
+
+.flex_container_align_center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (min-width: 640px) {
+    .flex_container_align_center {
+        flex-direction: row;
+    }
+}
+
+.max_2box_responsive {
+    /* margin-top: 1rem; */
+    width: 100% !important;
+    float: left !important;
+    margin: 0px !important;
+}
+
+@media (min-width: 640px) {
+    .max_2box_responsive {
+        width: 50% !important;
+        /* padding-right: 2.5rem; */
+    }
+}
+
+.max_2box_responsive_withsidenav {
+    /* margin-top: 1rem; */
+    width: 100% !important;
+    float: left !important;
+}
+
+@media (min-width: 1024px) {
+    .max_2box_responsive_withsidenav {
+        width: 50% !important;
+        /* padding-right: 2.5rem; */
+    }
+}
+
+
+
+
+.container-justify-grid-400x400 {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-rows: repeat(100, 400px);
+}
+
+.container-justify-grid-300x300 {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-rows: repeat(2, 300px);
+}
+
+.container-justify-grid-200x200 {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-rows: repeat(100, 200px);
+}
+
+.centerAlignBorderBox {
+    box-shadow: 1px 1px 3px #222222;
+    background-color: #f9f9fb;
+    padding: 5px;
+    margin: auto;
+    text-align: center;
+}
+
+
+/* *************************SHAPES***************************/
+/****REF: https://sharkcoder.com/visual/shapes**************/
+
+.angledEdge {
+    padding: 5px;
+    text-align: center;
+    position: relative;
+    color: #fff;
+}
+
+.angledEdge::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+    transform: skewX(-30deg);
+    background-color: rgb(12, 105, 148);
+
+    bottom: 0;
+    content: "";
+    height: 100%;
+    width: 100%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+}
+
+/***************POSITION**********************/
+/****************************************** */
+.position_relative{
+    position: relative;
+}
+
+.position_absolute{
+    position: absolute;
+}
+
+.position_absolute_center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+/***************FONT SIZE**********************/
+/****************************************** */
+.font_family_style1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+
+
+/**************************BUTTONS***************************/
+/*Buttons*/
+/****REF: https://sharkcoder.com/visual/shapes************* */
+
+.button_type1 {
+    padding: 4px;
+    border: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #095484;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.button_type1:hover {
+    background-color: #04AA6D;
+}
+
+.button_type2 {
+    padding: 4px;
+    border: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #a3a3a3;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+}
+
+.button_type2:hover {
+    background-color: #5a5c5b;
+}
+
+.button_type3 {
+    padding: 4px;
+    border: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+
+.anchor_tag_btn1{
+    padding: 5px;
+    /* background-color: #a7a5a5; */
+    /* background-color: rgb(117, 89, 218);; */
+    color: #fff;
+    text-align: center;
+    margin: auto;
+    font-weight: normal;
+    /* border-radius: 5px; */
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.anchor_tag_btn1:hover{
+    background-color: #626161;
+    color: #fff;
+}
+
+.anchor_tag_btn2{
+    padding: 5px;
+    background-color: #a7a5a5;
+    color: #fff;
+    width: 150px;
+    text-align: center;
+    margin: auto;
+    font-weight: normal;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    text-decoration: none !important;
+    white-space: unset;
+}
+.anchor_tag_btn2:hover{
+    background-color: #555353;
+    color: #fff;
+}
+
+
+/***************SHADOWS*********************************/
+/*hover, shadows, borders*/
+/**********https://getcssscan.com/css-box-shadow-examples?ref=beautifulbuttons-bottom************/
+.hover_shadow1:hover {
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px !important;
+}
+
+.hover_shadow2:hover{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+}
+
+.hover_pointer:hover{
+    cursor: pointer;
+}
+
+.bottom_shadow {
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px !important;
+}
+
+.shadow_1{
+    box-shadow: rgb(34, 34, 34) 1px 1px 2px !important;
+}
+
+.shadow_2{
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.shadow_3{
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.shadow_4{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.box_shadow5{
+    box-shadow: 1px 1px 3px #222222;
+}
+.box_shadow6{
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+}
+/*****************TOAST***************************************/
+/**https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_snackbar***/
+/*************************************************************/
+#toastsnackbar_center {
+    /* visibility: hidden; */
+    display: none;
+    min-width: 250px;
+    
+    background-color: rgb(247, 199, 122);
+    color: #000;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    font-size: 17px;
+
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);  
+
+    z-index: 500;
+    
+  }
+  
+  #toastsnackbar_center.show {
+    visibility: visible;
+    -webkit-animation: toastfadein_center 0.5s, toastfadeout_center 0.5s 2.5s;
+    animation: toastfadein_center 0.5s, toastfadeout_center 0.5s 2.5s;
+  }
+  
+  @-webkit-keyframes toastfadein_center {
+    from { opacity: 0;} 
+    to { opacity: 1;}
+  }
+  
+  @keyframes toastfadein_center {
+    from { opacity: 0;}
+    to { opacity: 1;}
+  }
+  
+  @-webkit-keyframes toastfadeout_center {
+    from { opacity: 1;} 
+    to { opacity: 0;}
+  }
+  
+  @keyframes toastfadeout_center {
+    from { opacity: 1;}
+    to { opacity: 0;}
+  }
+
+
+
+
+
+
+
+
+  #toastsnackbar {
+    visibility: hidden;
+    min-width: 300px;
+    
+    background-color: rgb(247, 199, 122);
+    color: #000;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    font-size: 17px;    
+    position: fixed;
+    z-index: 500;
+    left: 50%;
+    bottom: 30px;
+    margin-left: -125px; 
+    
+  }
+  
+  #toastsnackbar.show {
+    visibility: visible;
+    -webkit-animation: toastfadein 0.5s, toastfadeout 0.5s 2.5s;
+    animation: toastfadein 0.5s, toastfadeout 0.5s 2.5s;
+  }
+  
+  @-webkit-keyframes toastfadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes toastfadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes toastfadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes toastfadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+
+/*********** TITLE TIPS *****************/
+/* https://codepen.io/zmmbreeze/pen/kxWgvQ */
+
+    .title-tip[title]{
+    outline: rgb(179, 177, 177) dotted 1px; /*optional styling*/
+    }
+  .title-tip[title]:hover {
+    position: relative;
+  }
+  .title-tip[title]:hover:before {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 99999;
+    content: attr(title);
+    margin-top: 0.5em;
+    padding: 0.5em;
+    width: 200px;    /* change it */
+    overflow: hidden;
+    word-wrap: break-word;
+    font-size: inherit;
+    color: #FFF;
+    text-align: center;
+    background-color: #222;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  }
+  .title-tip[title]:hover:after {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    z-index: 99999;
+    content: '';
+    margin-left: -0.125em;
+    width: 0;
+    height: 0;
+    border: 0.25em dashed transparent;
+    border-bottom: 0.25em solid #222;
+    font-size: inherit;
+  }
+  
+  /* title-tip-up */
+  .title-tip-up[title]:hover:before {
+    top: auto;
+    bottom: 100%;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+  }
+  .title-tip-up[title]:hover:after {
+    top: auto;
+    bottom: 100%;
+    border: 0.25em dashed transparent;
+    border-top: 0.25em solid #222;
+  }
+  
+  /* title-tip-right */
+  .title-tip-right[title]:hover:before {
+    top: auto;
+    left: 100%;
+    margin-top: 0;
+    margin-left: 0.5em;
+  }
+  .title-tip-right[title]:hover:after {
+    top: 50%;
+    left: 100%;
+    margin-left: 0;
+    margin-top: -0.125em;
+    border: 0.25em dashed transparent;
+    border-right: 0.25em solid #222;
+  }
+  
+  /* title-tip-left */
+  .title-tip-left[title]:hover:before {
+    top: auto;
+    left: auto;
+    right: 100%;
+    margin-top: 0;
+    margin-right: 0.5em;
+  }
+  .title-tip-left[title]:hover:after {
+    top: 50%;
+    left: auto;
+    right: 100%;
+    margin-left: 0;
+    margin-top: -0.125em;
+    border: 0.25em dashed transparent;
+    border-left: 0.25em solid #222;
+  }
+
+/*********** TITLE TIPS *****************/
+  /* https://codepen.io/shimdim/pen/NjyNNb */
+
+  [data-title] {
+    outline: rgb(179, 177, 177) dotted 1px; /*optional styling*/
+   
+    position: relative;
+    /* cursor: help; */
+  }
+  
+  [data-title]:hover::before {
+    content: attr(data-title);
+    position: absolute;
+    bottom: -26px;
+    display: inline-block;
+    padding: 3px 6px;
+    border-radius: 2px;
+    background: #000;
+    color: #fff;
+    font-size: 12px;
+    font-family: sans-serif;
+    white-space: nowrap;
+    z-index: 99999999;
+  }
+  [data-title]:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 8px;
+    display: inline-block;
+    color: #fff;
+    border: 8px solid transparent;	
+    border-bottom: 8px solid #000;
+  }
+
+/* ******TABLE STYLES*********************************/
+/* https://www.w3schools.com/css/tryit.asp?filename=trycss_table_striped */
+/* ***************************************************/
+
+  table.table1 {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  table.table1 >* th, td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  table.table1 >* tr:nth-child(even) {background-color: #f2f2f2;}
+
+
+/* ******MODAL*********************************/
+/* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal */
+
+
+.modaldiv {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 300; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modaldiv-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 700px;
+    overflow: auto;
+  }
+  
+  /* The Close Button */
+  .modaldivclose {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .modaldivclose:hover,
+  .modaldivclose:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+
+/*******************LOADER***************/
+
+  .loader2{
+    margin: 100px auto;
+    width: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    animation: rotateLoader2 3s linear infinite;
+  }
+  
+  @keyframes rotateLoader2{
+    to{
+      transform: rotate(360deg);
+    }
+  }
+  
+  .loader2 span{
+    width: 32px;
+    height: 32px;
+    background-color: red;
+    margin: 3px;
+    animation: scale 1.5s linear infinite;
+  }
+  
+  @keyframes scale{
+    50%{
+      transform: scale(1.2);
+    }
+  }
+  
+  .loader2 span:nth-child(1){
+    border-radius: 50% 50% 0 50%;
+    background-color: #ffbe0b;
+    transform-origin: bottom right;
+  }
+  
+  .loader2 span:nth-child(2){
+    border-radius: 50% 50% 50% 0;
+    background-color: #ff006e;
+    transform-origin: bottom left;
+    animation-delay: .5s;
+  }
+  
+  .loader2 span:nth-child(3){
+    border-radius: 50% 0 50% 50%;
+    background-color: #fb5607;
+    transform-origin: top right;
+    animation-delay: 1.5s;
+  }
+  
+  .loader2 span:nth-child(4){
+    border-radius: 0 50% 50% 50%;
+    background-color: #8338ec;
+    transform-origin: top left;
+    animation-delay: 1s;
+  }
+  
+  
+/* ******ANIMATIONS*********************************/
+/* SM-REF:https://animista.net/play/attention/bounce/bounce-bottom */
+
+
+
+/*****************CLIP PATh GENERATOR*********************************/
+/**********https://bennettfeely.com/clippy/ ****************/
+/* https://unused-css.com/tools/clip-path-generator */
+
+/*****************BORDER RADIUS GENERATOR*********************************/
+/**https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Backgrounds_and_Borders/Border-radius_generator***
+

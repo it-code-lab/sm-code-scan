@@ -840,7 +840,8 @@ Refer: https://codepen.io/frippa/pen/JEjzD
 */
 
 #loaderDivId{
-  display: none; height: 100vh; width: 100vw;  position: absolute; left: 0;  z-index: 100; text-align: center; background-color: #fff;
+  /* display: none;  */
+  height: 100vh; width: 100vw;  position: absolute; left: 0;  z-index: 100; text-align: center; background-color: #fff;
 }
 
 .loader {
@@ -1162,7 +1163,7 @@ animation-delay: 0.4s;
 }
 
 #contactusDivId, #loginSecDivId , #registerSecDivId, #forgotPasswordSecDivId, #accActivatedDivId, #forgotPWDivId{
-	display: block;
+	/* display: block; */
     margin: 20px auto auto;
 	margin-bottom: 20px;
     padding: 25px;
@@ -2344,15 +2345,48 @@ margin-right: 20px;
 text-align: end;
 }
 
-#tutorial-search-box{
+.searchWrapper {
+  float: none !important;
+  overflow: hidden !important;
+  padding: 8px 8px !important;
+}
+
+form.dummyForm {
+  width: 100%;
+  padding: 2px;
+  background: transparent;
+}
+#itemsearchDivId {
+  float: left;
+  min-width: 200px;
+  max-width: 500px;
+  width: 90%;
+}
+
+/* #tutorial-search-box{
  width: calc(100% - 120px);
  max-width: 500px;
+} */
+
+#tutorial-search-box {
+  min-width: 200px;
+  max-width: 500px;
+  width: 90%;
+  border-radius: 10px;
+  padding: 5px;
 }
 
 #tutorialSearchBtnId{
   width:60px;
 }
 
+#itemsearchBtnId {
+  /* width: 60px; */
+  background: transparent;
+  border: none;
+  color: #b39265;
+  cursor: pointer;
+}
 .searchButtonCls {
 	border: none; 
 	background-color: #095484;
@@ -2543,3 +2577,9 @@ footer {
   display: none;
 }
 div:has(> .hideParentDiv) {display: none; }
+
+.searchWrapper{
+  float: none !important; 
+  overflow: hidden !important;
+  padding: 8px 8px !important;
+}

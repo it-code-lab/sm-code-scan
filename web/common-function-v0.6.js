@@ -25,6 +25,7 @@ var the = {
 	filelvlhelp: null,
     smusr:false,
     hosturl: '/itcodescanner',
+    hostnm: 'itcodescanner',
     
 };
 
@@ -2965,9 +2966,9 @@ function checkURL() {
         //var songtitle = path.replaceAll("/antaksharee/lyrics/","");
 
         if (sessionStorage.getItem("LanguageHelpCodeAndIds") == null) {
-            document.getElementById("loaderDivId").style.display = "block";
+            //document.getElementById("loaderDivId").style.display = "block";
             setTimeout(function() {
-                document.getElementById("loaderDivId").style.display = "none";
+                //document.getElementById("loaderDivId").style.display = "none";
                 checkURL();
             }, 500);
             return;
@@ -3006,6 +3007,7 @@ function checkURL() {
             document.getElementById("tutorialEditDivId").style.width = "20%";	
             document.getElementById("tutorialEditDivId").innerHTML = "";
             getTutorial(tutorialStr);
+            document.getElementById("loaderDivId").style.display = "none";
         }else {
             tutorialStr = decodeURI(tutorialStr);
             document.getElementById("tutorialDivId").style.display = "none";
@@ -3014,6 +3016,7 @@ function checkURL() {
             document.getElementById("tutorialListDivId").style.width = "100%";
             //populateTutorialList();
             showTechnology(tutorialStr)
+            document.getElementById("loaderDivId").style.display = "none";
         }
         
         
@@ -3051,7 +3054,8 @@ function checkURL() {
 		showHelpDivMessage("Login to add or make updates to the help scan codes");					
 		
 		document.getElementById("loginSecDivId").style.display = "none";
-		document.getElementById("forgotPWDivId").style.display = "block";		
+		document.getElementById("forgotPWDivId").style.display = "block";	
+        document.getElementById("loaderDivId").style.display = "none";	
 		return;
     }
 	
@@ -3070,15 +3074,16 @@ function checkURL() {
 	}
 
 	 if (sessionStorage.getItem("LanguageHelpCodeAndIds") == null) {
-        document.getElementById("loaderDivId").style.display = "block";
+        //document.getElementById("loaderDivId").style.display = "block";
         setTimeout(function() {
             //console.log("LanguageHelpCodeAndIds is null. Will retry after 1 seconds");
-            document.getElementById("loaderDivId").style.display = "none";
+            //document.getElementById("loaderDivId").style.display = "none";
             checkURL();
         }, 1000);
         return;
     } else {
         the.LanguageHelpCodeAndIds_LclJson = JSON.parse(sessionStorage.getItem("LanguageHelpCodeAndIds"));
+        document.getElementById("loaderDivId").style.display = "none";
     }
 	
     document.getElementById("filescannerDivId").style.display = "none";
@@ -3090,14 +3095,9 @@ function checkURL() {
 	document.getElementById("homeDivId").style.display = "none";
 	document.getElementById("tutorialDivId").style.display = "none";
     document.getElementById("tutorialListDivId").style.display = "none";
-    document.getElementById("tutorialEditDivId").style.display = "none";
-    
+    document.getElementById("tutorialEditDivId").style.display = "none";   
 
     document.getElementById(pageName + "DivId").style.display = "block";
-
-
-
-	
 
 
     populateLanguages("helpTopics-lang-box");
@@ -3117,6 +3117,7 @@ function checkURL() {
 	
 		populateHelpTopics();
 		document.getElementById("HelpTopicsDivId").style.width = "100%";
+        document.getElementById("loaderDivId").style.display = "none";
 
     } else if (pageName == "projectscanner") {
         document.getElementById("bgSVGId").style.display = "none";
@@ -3126,13 +3127,14 @@ function checkURL() {
 		}
 		document.getElementById("projectscannerDivId").style.width = "100%";
         document.getElementById("helpDivMessage").innerHTML = '<i class="fa fa-info-circle" style="display:none; float: left;  position: absolute; top:35px; left: 10px; color:orange;" ></i>' + "Upload project files and click on the file to scan the code"
+        document.getElementById("loaderDivId").style.display = "none";
     } else if (pageName == "login"){
 		document.getElementById("filescannerDivId").style.display = "none";
 		document.getElementById("HelpTopicsDivId").style.display = "none";
 		document.getElementById("projectscannerDivId").style.display = "none";	
 		document.getElementById("loginDivId").style.display = "block";	
         document.getElementById("helpDisplayDivId").style.display = "none";
-		
+		document.getElementById("loaderDivId").style.display = "none";
 		//showHelpDivMessage("Login to add or make updates to the help scan codes");
 	}else if (pageName == "contactus"){
 		document.getElementById("filescannerDivId").style.display = "none";
@@ -3144,10 +3146,12 @@ function checkURL() {
 		refreshCaptcha();
 		document.getElementById("helpDisplayDivId").style.display = "none";
 		//showHelpDivMessage("Contact us if you have any questions, feedback or are interested in purchasing the software. Some features have been disabled on the web version for security reasons. Full feature software can be used for software training/development, creating references and documentation for the software application. <br><br> If you found the site helpful, you can support our work by buying me a coffee by clicking on the coffee button at the top.");
-	
+        document.getElementById("loaderDivId").style.display = "none";
     } else if (pageName == "profile"){
         document.getElementById("bgSVGId").style.display = "none";
+
 		showProfile();	
+        document.getElementById("loaderDivId").style.display = "none";
 	} else if (pageName == "howto"){
             document.getElementById("bgSVGId").style.display = "none";
 			document.getElementById("filescannerDivId").style.display = "none";
@@ -3159,6 +3163,7 @@ function checkURL() {
 			document.getElementById("howtoDivId").style.width = "95%";
 			//document.getElementById("mainContainer").style.width = "100%";
 			listVideos();
+            document.getElementById("loaderDivId").style.display = "none";
 	} else if (pageName == "filescanner"){
         document.getElementById("bgSVGId").style.display = "none";
 		document.getElementById("btnCloseFileScanner").style.display = "none";
@@ -3169,6 +3174,7 @@ function checkURL() {
 			localStorage.setItem("newWindowFileObj", null);
 		}
 		document.getElementById("filescannerDivId").style.width = "100%";
+        document.getElementById("loaderDivId").style.display = "none";
 	} else if (pageName == "tutorial"){
         document.getElementById("filescannerDivId").style.display = "none";
         document.getElementById("HelpTopicsDivId").style.display = "none";
@@ -3184,6 +3190,7 @@ function checkURL() {
         populateTutorialList();
         //document.getElementById("mainContainer").style.width = "100%";
         $( ".cardsContainerDivClassPadd" ).css( "height", "200px" );	
+        document.getElementById("loaderDivId").style.display = "none";
     }
     else if (pageName == "home"){
 			document.getElementById("filescannerDivId").style.display = "none";
@@ -3193,7 +3200,8 @@ function checkURL() {
 			document.getElementById("contactusDivId").style.display = "none";
 			document.getElementById("howtoDivId").style.display = "none";	
 			document.getElementById("homeDivId").style.width = "100%";	
-			//document.getElementById("mainContainer").style.width = "100%";			
+			//document.getElementById("mainContainer").style.width = "100%";	
+            document.getElementById("loaderDivId").style.display = "none";		
 	}
 }
 
@@ -3343,7 +3351,7 @@ function getTutorial(tutorialStr){
 
               
               $('html, body').animate({
-                    scrollTop: $("#tutorialDivId").offset().top - 40
+                    scrollTop: $("#tutorialDivId").offset().top - 80
                 }, 100);	
             
         },
@@ -3426,42 +3434,42 @@ function editItem( btn ){
    //toolbarHTML =  "<button  type='button' class='itmToggledBtn btn btn-primary' onclick=toggleDescView('" + itemid + "') >Toggle View</button>" + "<br>" ;
 
    toolbarHTML = toolbarHTML  + "<div id='toolBarId' class = 'toolBar'><div>" +
-   "<button  title='toggle desc view' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=toggleDescView('" + itemid + "') >TglDesc</button>" + 
-   "<button  title='toggle hide' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=toggleToolBarView() >TglHide</button>" + 
+   "<button  data-title='Toggle desciption view' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=toggleDescView('" + itemid + "') >TglDesc</button>" + 
+   "<button  data-title='Toggle hide toolbar' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=toggleToolBarView() >TglHide</button>" + 
 
    "<label class='toolBarlabel'>Paragraphs</label>" +
-   "<button title='paragraph1' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','paragraph1') >P1</button>" +
-   "<button title='paragraph2 white BG' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','paragraph2') >P2</button>" +
+   "<button data-title='Paragraph type-1' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','paragraph1') >P1</button>" +
+   "<button data-title='Paragraph type-2 with white Background' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','paragraph2') >P2</button>" +
    "<label class='toolBarlabel'>Ordered Lists</label>" +
-   "<button title='ordered-list' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','orderedlist') >OL1</button>" +
-   "<button title='sub-ordered-list' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','suborderedlist') >OL2</button>" +
+   "<button data-title='Ordered list' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','orderedlist') >OL1</button>" +
+   "<button data-title='Sub-ordered-list' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','suborderedlist') >OL2</button>" +
    "<label class='toolBarlabel'>Unordered Lists</label>" +
-   "<button title='un-ordered-list' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','unorderedlist') >UL1</button>" +
-   "<button title='sub-un-ordered-list' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','subunorderedlist') >UL2</button>" +
-   "<button title='sub2-un-ordered-list' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','sub2unorderedlist') >UL3</button>" +
+   "<button data-title='Un-ordered list' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','unorderedlist') >UL1</button>" +
+   "<button data-title='Sub-un-ordered list' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','subunorderedlist') >UL2</button>" +
+   "<button data-title='Sub-un-ordered list type2' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','sub2unorderedlist') >UL3</button>" +
    "<label class='toolBarlabel'>Code Snippets</label>" +
-   "<button title='Code-Dark Intellij' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','codescript1') >Dark</button>" +
-   "<button title='Code-Light-VSCode' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','codescript2') >Light</button>" +
-   "<button title='Code-CommandLine'' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','codescript3') >Cmd</button>" +
+   "<button data-title='Code-Dark Intellij' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','codescript1') >Dark</button>" +
+   "<button data-title='Code-Light-VSCode' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','codescript2') >Light</button>" +
+   "<button data-title='Code-CommandLine'' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','codescript3') >Cmd</button>" +
    "<label class='toolBarlabel'>Headers</label>" +
-   "<button title='header1' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header1') >H1</button>" +
-   "<button title='header2' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header2') >H2</button>" +
-   "<button title='header3-padding' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header3') >H3</button>" +
-   "<button title='header3' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header4') >H4</button>" +
+   "<button data-title='header1' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header1') >H1</button>" +
+   "<button data-title='header2' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header2') >H2</button>" +
+   "<button data-title='header3-padding' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header3') >H3</button>" +
+   "<button data-title='header3' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header4') >H4</button>" +
    "<label class='toolBarlabel'>Images</label>" +
-   "<button title='Image-Full-width' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image1') >I1</button>" +
-   "<button title='Image-Smaller' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image2') >I2</button>" +
-   "<button title='Image-Smallest' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image3') >I3</button>" +
-   "<button title='Image-Smallest' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image4') >I@Car</button>" +
+   "<button data-title='Image-Full-width' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image1') >I1</button>" +
+   "<button data-title='Image-Smaller' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image2') >I2</button>" +
+   "<button data-title='Image-Smallest' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image3') >I3</button>" +
+   "<button data-title='Image-Smallest' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image4') >I@Car</button>" +
    "<label class='toolBarlabel'>Messages</label>" +
-   "<button title='Warning'' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','warning') >Warn</button>" +
-   "<button title='Error' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','error') >Err</button>" +
-   "<button title='Green-Success' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','greenmsg') >Succ</button>" + 
+   "<button data-title='Warning'' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','warning') >Warn</button>" +
+   "<button data-title='Error' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','error') >Err</button>" +
+   "<button data-title='Green-Success' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','greenmsg') >Succ</button>" + 
 
    "<label class='toolBarlabel'>Quiz</label>" +
-   "<button title='Quiz1'' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','qz1') >Q1</button>" +
-   "<button title='Quiz2' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','qz2') >Q2</button>" +
-   "<button title='Submit Quiz Button' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','sbmtqz') >SbmtQz</button>" +
+   "<button data-title='Quiz1'' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','qz1') >Q1</button>" +
+   "<button data-title='Quiz2' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','qz2') >Q2</button>" +
+   "<button data-title='Submit Quiz Button' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','sbmtqz') >SbmtQz</button>" +
 
    "<label for='insertInner'>Insert component before active Div:</label>" +
    "<input type='checkbox' id='insertInner' >" +
@@ -3486,9 +3494,9 @@ function editItem( btn ){
    +
    "<input class='itmUpdBtnSmall' type='button' value='Upload New Image' data-errormsgelementid='image-ererrormsg-' data-saveasnameelementid='image-' data-fileelementid='image-replace-' data-itemid = '" + itemid + "' onclick='uploadFile(event);'  ><br>"
    +"<input class = 'itmUpdBtnSmall' type='text' id='search-img' value=''> "
-   + "<button title='Image-Smallest' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=loadUNSPLImg('" + itemid + "')>Search Unsplash</button>"
-   + "<button title='Image-Smallest' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=loadPixabImg('" + itemid + "')>Search Pixabay</button>"
-   +"<button title='Image-Smallest' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=loadPexImg('" + itemid + "')>Search Pexel</button><br>"
+   + "<button  type='button' class='itmUpdBtnSmall btn btn-primary' onclick=loadUNSPLImg('" + itemid + "')>Search Unsplash</button>"
+   + "<button  type='button' class='itmUpdBtnSmall btn btn-primary' onclick=loadPixabImg('" + itemid + "')>Search Pixabay</button>"
+   +"<button  type='button' class='itmUpdBtnSmall btn btn-primary' onclick=loadPexImg('" + itemid + "')>Search Pexel</button><br>"
    + "<div class='srchimages'></div>"
    +"</div><br><br><br>";
 
@@ -5233,6 +5241,8 @@ function searchTutorial(){
             return entry.title.toUpperCase().includes(searchText) || entry.technology.toUpperCase().includes(searchText) || entry.shortdescription.toUpperCase().includes(searchText) || entry.keywords.toUpperCase().includes(searchText) ;
         });
     }    
+    document.getElementById("tutorialDivId").style.display = "none";
+    document.getElementById("tutorialListDivId").style.width = "100%";
 
     populateTutorialList(rows);
     $( ".cardsContainerDivClassPadd" ).css( "width", "95%" );
@@ -5313,6 +5323,8 @@ function populateTutorialList(rows = "") {
         //tutorialTitleURL = myUrl + "tutorials/" + technology.toLowerCase() + "/" + subpath.toLowerCase() + "/" + itemName.toLowerCase();
         tutorialTitleURL = myUrl + "tutorials/" + technology.toLowerCase() + "/" + itemName.toLowerCase();
 
+        let itemStr = technology.toLowerCase() + "/" + itemName.toLowerCase();
+
         technologyUrl = myUrl + "tutorials/" + technologyOrig;
 
         technologySqueezed = rows[i].technology;		 
@@ -5321,7 +5333,9 @@ function populateTutorialList(rows = "") {
         technologyMaxCount = sessionStorage.getItem("max-count-" + technologySqueezed);
 
         if (i == 0) {
+            //innerHTML = innerHTML + '<div id="menucardparent-' + technologySqueezed + '" class="cardsContainerDivClassPadd_XX max_4box_responsive padding_1vw height_200px overflow_auto box_shadow6"  > <div class="technologyHeader" >' ;
             innerHTML = innerHTML + '<div id="menucardparent-' + technologySqueezed + '" class="cardsContainerDivClassPadd"  > <div class="technologyHeader" >' ;
+
             if (the.smusr){
                 innerHTML = innerHTML + rows[i].technologyseq + '. ';
             }   
@@ -5347,6 +5361,7 @@ function populateTutorialList(rows = "") {
 
            currDisplayCount = 0;
 
+            //innerHTML = innerHTML + '</div><div id="menucardparent-' + technologySqueezed + '" class="cardsContainerDivClassPadd_XX max_4box_responsive padding_1vw height_200px overflow_auto box_shadow6"  ><div class="technologyHeader">' ;
             innerHTML = innerHTML + '</div><div id="menucardparent-' + technologySqueezed + '" class="cardsContainerDivClassPadd"  ><div class="technologyHeader">' ;
         
             if (the.smusr){
@@ -5391,7 +5406,7 @@ function populateTutorialList(rows = "") {
         if (previousSubpath == currentSubpath){
             //It is a child tutorial same as previous
             innerHTML = innerHTML + '<div id="tutorialDiv-' + rows[i].itemid + '" class="tutorialDiv tutorialChild '+ discontinuedFlgCls + technologySqueezed +'" >';
-            innerHTML = innerHTML +  '<a class="tutorialLink" href ="'+ tutorialTitleURL +'"> <span class="tutorialTitleSpan"  > <h2 class="tutorialTitleH2" >' ;
+            innerHTML = innerHTML +  '<a class="tutorialLink" onclick="getItemAfterURLHistUpd(' + "'" + itemStr + "'" + '); return false;" href ="'+ tutorialTitleURL +'"> <span class="tutorialTitleSpan"  > <h2 class="tutorialTitleH2" >' ;
             
             if (the.smusr){
                 innerHTML = innerHTML + rows[i].titleseq + '. ';
@@ -5407,7 +5422,7 @@ function populateTutorialList(rows = "") {
             innerHTML = innerHTML + '</div>';
 
             innerHTML = innerHTML + '<div id="tutorialDiv-' + rows[i].itemid + '" class="tutorialDiv tutorialChild '+ discontinuedFlgCls + technologySqueezed +'" >';
-            innerHTML = innerHTML +  '<a class="tutorialLink" href ="'+ tutorialTitleURL +'"> <span class="tutorialTitleSpan"  > <h2 class="tutorialTitleH2" >' ;
+            innerHTML = innerHTML +  '<a class="tutorialLink" onclick="getItemAfterURLHistUpd(' + "'" + itemStr + "'" + '); return false;" href ="'+ tutorialTitleURL +'"> <span class="tutorialTitleSpan"  > <h2 class="tutorialTitleH2" >' ;
             
             if (the.smusr){
                 innerHTML = innerHTML + rows[i].titleseq + '. ';
@@ -5418,7 +5433,7 @@ function populateTutorialList(rows = "") {
         } else {
             //It is not a new child tutorial 
             innerHTML = innerHTML + '<div id="tutorialDiv-' + rows[i].itemid + '" class="tutorialDiv '+ discontinuedFlgCls + technologySqueezed +'" >';
-            innerHTML = innerHTML +  '<a class="tutorialLink" href ="'+ tutorialTitleURL +'"> <span class="tutorialTitleSpan"  > <h2 class="tutorialTitleH2" >' ;
+            innerHTML = innerHTML +  '<a class="tutorialLink" onclick="getItemAfterURLHistUpd(' + "'" + itemStr + "'" + '); return false;" href ="'+ tutorialTitleURL +'"> <span class="tutorialTitleSpan"  > <h2 class="tutorialTitleH2" >' ;
             
             if (the.smusr){
                 innerHTML = innerHTML + rows[i].titleseq + '. ';
@@ -5449,6 +5464,29 @@ function populateTutorialList(rows = "") {
     document.getElementById("tutorialListInnerDivId").innerHTML = innerHTML + "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
     populateTutorialDropDown();
 
+}
+
+function getItemAfterURLHistUpd(itemStr) {
+    let path = window.location.pathname;
+    let myUrl = path.substring(0, path.indexOf('/', path.indexOf(the.hostnm)) + 1) + "tutorials/" + itemStr;
+
+
+    const nextURL = myUrl;
+    const nextTitle = 'Code Helper';
+    const nextState = {
+        lasturl: window.location.href
+    };
+
+    // This will create a new entry in the browser's history, without reloading
+    window.history.pushState(nextState, nextTitle, nextURL);
+    document.getElementById("tutorialDivId").style.display = "block";
+    document.getElementById("tutorialEditDivId").style.display = "block"; 
+    document.getElementById("mainContainer").style.width = "100%"; 
+    document.getElementById("tutorialEditDivId").style.width = "20%";	
+    document.getElementById("tutorialListDivId").style.width = "";
+    document.getElementById("tutorialEditDivId").innerHTML = "";
+
+    getTutorial(itemStr);
 }
 
 function handleShowToggle (checkbox){
