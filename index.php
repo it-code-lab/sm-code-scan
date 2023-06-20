@@ -16,7 +16,7 @@ $path = urldecode($_SERVER["REQUEST_URI"]);
 $path = substr($path, 1);
 
 $isCrawler = isset($_SERVER['HTTP_USER_AGENT'])
-&& preg_match('/bot|crawl|slurp|spider|mediapartners|InspectionTool/i', $_SERVER['HTTP_USER_AGENT']);
+&& preg_match('/bot|crawl|slurp|spider|mediapartners|InspectionTool|GoogleOther/i', $_SERVER['HTTP_USER_AGENT']);
 
 if (strpos($path, 'tutorials/') !== false) {
     $itemstr = substr($path, strpos($path, "tutorials/") + 10);
@@ -121,7 +121,7 @@ if (strpos($path, 'tutorials/') !== false) {
    <?= $_SESSION['webFullDesc'] ?>
    </div>
 <?php endif; ?>
-<?= $_SERVER['HTTP_USER_AGENT'] ?>
+
 </body>
 
 </html>
