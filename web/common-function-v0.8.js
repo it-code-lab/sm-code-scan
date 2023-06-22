@@ -3552,6 +3552,8 @@ function editItem( btn ){
    document.getElementById("mainContainer").style.width = "100%"; 
    document.getElementById("tutorialEditDivId").style.width = "20%";
 
+   document.getElementById("tutorialListDivId").style.display = "none";
+   document.getElementById("tutorialDivId").style.width = "80%";
 }
 
 function toggleToolBarView(){

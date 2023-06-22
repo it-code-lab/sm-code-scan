@@ -1953,7 +1953,7 @@ input:checked + .slider:after
   top: 0;
   right: 20px;
   /* width: 180px; */
-  width: 480px;
+  width: 240px;
   background-color: white;
   z-index: 15;
 }
