@@ -3,8 +3,7 @@ include_once("php/session.php");
 
 $title = "IT Tutorials";
 $description = "Easy to understand tutorials with lots of sample codes in programming languages Java,
- Python, JavaScript, PHP, HTML, CSS, C++, C#. Also providing
- feature to scan and help understand the programming code";
+ Python, JavaScript, PHP, HTML, CSS, C++, C# etc.";
 //$image_url = "Your Image URL";
 $keywords = "Software, IT, Tutorials, Code Samples";
 
