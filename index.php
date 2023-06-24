@@ -79,7 +79,7 @@ if (strpos($path, 'tutorials/') !== false) {
    <link href="/itcodescanner/css/codemirror.css" rel="stylesheet" />
    <link href="/itcodescanner/css/slidestyles.css" rel="stylesheet" />
    <link href="/itcodescanner/css/smstylegtlimit.css" rel="stylesheet" />
-   <link href="/itcodescanner/css/smstyleltlimit.css" rel="stylesheet" /> 
+   <link href="/itcodescanner/css/smstyleltlimit.css" rel="stylesheet" />
    <link rel="stylesheet" href="/itcodescanner/web/common-style.css">
 
    <script src="/itcodescanner/web/common-function-v0.9.js"></script>
