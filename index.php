@@ -70,7 +70,7 @@ if (strpos($path, 'tutorials/') !== false) {
    <link rel="icon" type="image/x-icon" href="/itcodescanner/assets/favicon.ico" />
    <!-- Core theme CSS (includes Bootstrap)-->
    <link href="/itcodescanner/css/styles.css" rel="stylesheet" />
-   <link href="/itcodescanner/css/smtheme-v1.02.css" rel="stylesheet" />
+   <link href="/itcodescanner/css/smtheme-v1.03.css" rel="stylesheet" />
    <!--  
          <link href="/itcodescanner/css/bootstrap.min.css" rel="stylesheet" />
          -->
@@ -82,7 +82,7 @@ if (strpos($path, 'tutorials/') !== false) {
    <link href="/itcodescanner/css/smstyleltlimit.css" rel="stylesheet" /> 
    <link rel="stylesheet" href="/itcodescanner/web/common-style.css">
 
-   <script src="/itcodescanner/web/common-function-v0.8.js"></script>
+   <script src="/itcodescanner/web/common-function-v0.9.js"></script>
    <!-----
          <script src="/itcodescanner/web/common-function-mini.js"></script>
          -->

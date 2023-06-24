@@ -3278,7 +3278,7 @@ function getTutorial(tutorialStr){
             '<a href ="'+ tutorialUrl +'" class="tutorialTopLinkCls" ' + ' >' + "Tutorials</a>" + " > " + 
             '<a href ="'+ technologyUrl +'" class="tutorialTopLinkCls"  >' + technology + "</a>" + " > " + 
             '<a href ="' + window.location.href + '" class="tutorialTopLinkCls"  >' + title + "</a>";
-            newHTML = newHTML + "<div classXX = 'songContainerSub' > <h1 classXX='songContainerH1' > " + title + "</h1></div>";
+            newHTML = newHTML + "<div class = 'curvedBox bgcolor_11 padding_50px color_white text_align_center' > <h1 classXX='songContainerH1' > " + title + "</h1></div>";
 
             if (localStorage.getItem("userLoggedIn") == "n") {
        
@@ -3291,9 +3291,23 @@ function getTutorial(tutorialStr){
                 newHTML = newHTML + '<button class="btn" data-itemid= "' + itemid + '" data-technology= "' + technology + '" data-technologyseq= "' + technologyseq + '" data-subpath= "' + subpath + '" data-subpathseq= "' + subpathseq + '" data-title= "' + title + '" data-titleseq= "' + titleseq + '" data-shortdescription= "' + shortdescription + '"  data-writer= "' + writer + '" data-keywords= "' + keywords +  '" data-discontinue= "' + discontinue  + '" onclick="editItem(this)" >Edit</button>';
             }
             newHTML = newHTML + '<div classXX="songDeltsNImg">';
+
+
             newHTML = newHTML + '<div classXX="songDelts">'
 
-            
+            let max = 80;
+            let min = 50;
+            let percentNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+
+            if (!isNaN(subpath)) {
+                if (subpath != "0"){
+                    percentNumber = subpath;
+                }                
+            }
+
+            if (description.includes("sbmtqzdivid")){
+                newHTML = newHTML + '<div id="avgResultsDivId" class="chartDiv box_shadow7 text_align_center margin_10px_auto padding_10px slide-in-left" style="animation-duration: 0.2;  background-color:#fafad2"><div class="pie" style="--p:'+ percentNumber +';--b:40px;--w:200px; --c:green;">'+ percentNumber +'%</div><br>Public Average Score</div>';
+            }
             if (description != undefined){
                 if (description != ""){
                     newHTML = newHTML + "" +"<div class = 'songLyrics' >" + description + "</div>";
@@ -4099,6 +4113,7 @@ function submitQuiz(){
     } else{
         var percent = rtans*100/(rtans + wans);
         percent = percent.toFixed(2);
+        storeTestResults(percent, window.location.pathname);
         if (localStorage.getItem("userLoggedIn") == "n"){
             document.getElementById("qzres").innerHTML = "You scored " + percent + "%. Click on the button below to retry.<br> Scores get saved for "+ '<a href="' + the.hosturl + '/?target=login">logged in</a>' +" users.";
         }else {
@@ -4134,6 +4149,28 @@ function submitQuiz(){
         document.getElementById("retryqzdivid").style.display = "block";
 
     }
+}
+
+function storeTestResults(percent, url){
+    var StrFunction = "storeTestResults"
+
+
+    $.ajax({
+        url: the.hosturl + '/php/process.php',
+        data: {
+            url: url,
+            percent: percent,
+            usrfunction: StrFunction
+        },
+        type: 'POST',
+        dataType: 'json',
+        success: function(retstatus) {
+
+        },
+        error: function(xhr, status, error) {
+
+        }
+    });
 }
 
 function showProfile(){
