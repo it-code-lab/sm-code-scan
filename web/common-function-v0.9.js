@@ -3444,7 +3444,7 @@ function editItem( btn ){
    "<br><br><div class = 'editFieldHead'>Short Description: </div><br>" +
    "<textarea id='shortdescription-" + itemid + "' style='width:95%; margin:auto;' >" + shortdescription + "</textarea>";
 
-   toolbarHTML = "";
+   let toolbarHTML = "";
    //toolbarHTML =  "<button  type='button' class='itmToggledBtn btn btn-primary' onclick=toggleDescView('" + itemid + "') >Toggle View</button>" + "<br>" ;
 
    toolbarHTML = toolbarHTML  + "<div id='toolBarId' class = 'toolBar'><div>" +
