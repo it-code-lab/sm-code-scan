@@ -2194,6 +2194,11 @@ margin-top: 40px !important;
   border-radius: 5px;
 }
 
+.qz1-ans:hover{
+  background-color: rgb(215, 213, 213);;
+}
+
+
 .qzerr-div{
   color: #CC0000;
   min-height: 24px;
@@ -2564,6 +2569,7 @@ footer {
   height: 1.4em;
   vertical-align:text-bottom;
   margin-right: 5px;
+  cursor: pointer;
 }
 #projectscannerLinkId{
   display: none;

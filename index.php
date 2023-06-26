@@ -74,7 +74,7 @@ if (strpos($path, 'tutorials/') !== false) {
    <!--  
          <link href="/itcodescanner/css/bootstrap.min.css" rel="stylesheet" />
          -->
-   <link href="/itcodescanner/css/codescriber-v0.3.css" rel="stylesheet" />
+   <link href="/itcodescanner/css/codescriber-v0.4.css" rel="stylesheet" />
 
    <link href="/itcodescanner/css/codemirror.css" rel="stylesheet" />
    <link href="/itcodescanner/css/slidestyles.css" rel="stylesheet" />
