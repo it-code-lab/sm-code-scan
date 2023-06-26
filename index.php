@@ -56,9 +56,9 @@ if (strpos($path, 'tutorials/') !== false) {
 
    <meta charset="utf-8" />
    <title><?php echo $title; ?></title>
-   <meta name="description" content="<?php echo $description; ?>">
-   <meta property="og:title" content="<?php echo $title; ?>">
-   <meta property="og:description" content="<?php echo $description; ?>">
+   <meta name="description" content="<?php echo htmlspecialchars($description, ENT_QUOTES, 'UTF-8'); ?>">
+   <meta property="og:title" content="<?php echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?>">
+   <meta property="og:description" content="<?php echo htmlspecialchars($description, ENT_QUOTES, 'UTF-8'); ?>">
 
    <meta property="og:url" content="<?php echo $page_url; ?>">
    <meta name="keywords" content="<?php echo $keywords; ?>">
