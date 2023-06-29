@@ -14,12 +14,17 @@ $page_url = $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
 $path = urldecode($_SERVER["REQUEST_URI"]);
 $path = substr($path, 1);
 
+$isPHPUrl = false;
+
 $isCrawler = isset($_SERVER['HTTP_USER_AGENT'])
 && preg_match('/bot|crawl|slurp|spider|mediapartners|InspectionTool|GoogleOther/i', $_SERVER['HTTP_USER_AGENT']);
+
+
 
 if (strpos($path, 'tutorials/') !== false) {
     $itemstr = substr($path, strpos($path, "tutorials/") + 10);
     if (strpos($itemstr, '/') !== false) {
+      $isPHPUrl = true;
       if (isset($_SESSION['datafetched_XX'])) {
          $title = $_SESSION['webTitle'];
          $description = $_SESSION['webDesc'] ;
@@ -68,6 +73,7 @@ if (strpos($path, 'tutorials/') !== false) {
    <title>IT Tutorials</title>
    <!-- Favicon-->
    <link rel="icon" type="image/x-icon" href="/itcodescanner/assets/favicon.ico" />
+   <link rel="canonical" href="https://itcodescanner.com" />
    <!-- Core theme CSS (includes Bootstrap)-->
    <link href="/itcodescanner/css/styles.css" rel="stylesheet" />
    <link href="/itcodescanner/css/smtheme-v1.03.css" rel="stylesheet" />
@@ -93,7 +99,7 @@ if (strpos($path, 'tutorials/') !== false) {
    <!--REF: https://highlightjs.org/usage/ -->
    <script src="/itcodescanner/js/highlight.min.js"></script>
 
-   <?php if (!$isCrawler):  ?>
+   <?php if (!$isCrawler || !$isPHPUrl):  ?>
       <?php include 'head-add.html'; ?>
    <?php endif; ?>
 
@@ -110,7 +116,7 @@ if (strpos($path, 'tutorials/') !== false) {
 </head>
 
 <body>
-<?php if (!$isCrawler):  ?>
+<?php if (!$isCrawler || !$isPHPUrl):  ?>
    <?php include 'body-main.html'; ?>
 <?php else: ?>
    <h1> <?=$_SESSION['webTitle']?> </h1><br>
