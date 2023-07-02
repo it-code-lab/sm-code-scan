@@ -76,11 +76,11 @@ if (strpos($path, 'tutorials/') !== false) {
    <link rel="canonical" href="https://itcodescanner.com" />
    <!-- Core theme CSS (includes Bootstrap)-->
    <link href="/itcodescanner/css/styles.css" rel="stylesheet" />
-   <link href="/itcodescanner/css/smtheme-v1.03.css" rel="stylesheet" />
+   <link href="/itcodescanner/css/smtheme-v1.04.css" rel="stylesheet" />
    <!--  
          <link href="/itcodescanner/css/bootstrap.min.css" rel="stylesheet" />
          -->
-   <link href="/itcodescanner/css/codescriber-v0.4.css" rel="stylesheet" />
+   <link href="/itcodescanner/css/codescriber-v0.5.css" rel="stylesheet" />
 
    <link href="/itcodescanner/css/codemirror.css" rel="stylesheet" />
    <link href="/itcodescanner/css/slidestyles.css" rel="stylesheet" />
@@ -88,7 +88,7 @@ if (strpos($path, 'tutorials/') !== false) {
    <link href="/itcodescanner/css/smstyleltlimit.css" rel="stylesheet" />
    <link rel="stylesheet" href="/itcodescanner/web/common-style.css">
 
-   <script src="/itcodescanner/web/common-function-v0.9.js"></script>
+   <script src="/itcodescanner/web/common-function-v0.11.js"></script>
    <!-----
          <script src="/itcodescanner/web/common-function-mini.js"></script>
          -->

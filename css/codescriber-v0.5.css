@@ -1591,7 +1591,8 @@ button.btnNewWindow::before {
    background-color: #e2e8f0;
 }
 .tutorialDiv:hover{
-  background-color: orange;
+   background-color: orange;
+  /* background-color: #58bed5; */
 }
 
 .tutorialParent {
@@ -1693,6 +1694,14 @@ button.btnNewWindow::before {
   margin-bottom: 5px;
   display: block;
   overflow: auto;
+  text-decoration: none !important;
+  cursor: pointer;
+
+}
+
+.technologyHeader:hover {
+  background-color: #1675a8;
+  color:#fff;
 }
 
 .technologyFooter{
@@ -2192,6 +2201,7 @@ margin-top: 40px !important;
   margin: 5px;
   border: 2px solid rgb(215, 213, 213);
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .qz1-ans:hover{
@@ -2328,6 +2338,7 @@ width: 100%;
   display: none;
   min-width: 350px; 
   background-color: rgb(250, 250, 250);
+  transition: ease 0.5s;
 }
 #tutorialEditDivId{
   /* height: 100vh; */
@@ -2588,4 +2599,27 @@ div:has(> .hideParentDiv) {display: none; }
   float: none !important; 
   overflow: hidden !important;
   padding: 8px 8px !important;
+}
+
+.tutorialTopLinkCls{
+  display: inline-block;
+  padding: 3px 5px;
+  border-radius: 3px;
+  transition: ease 0.5s;
+  text-decoration: none;
+  margin: 2px;
+}
+
+.tutorialTopLinkCls:hover{
+  background: #58bed5;
+  color: #fff;
+}
+
+#slideInDivId{
+  color: #a29e9e; 
+  font-size: 32px; 
+  margin-left: 20px;
+}
+#slideInDivId:hover{
+  color: #000;
 }

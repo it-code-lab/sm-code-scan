@@ -62,6 +62,12 @@ $(function() {
 setTimeout(function() {
     hljs.highlightAll();
 }, 800);
+
+setTimeout(function() {
+$(".qz1-ans").on("click", function() {
+    $(this).find(".dynamicradio").prop("checked", true);
+  });
+}, 800);
 /*
 var coll = document.getElementsByClassName("collapsibleX");
 var i;

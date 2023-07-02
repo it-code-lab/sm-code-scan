@@ -1106,6 +1106,7 @@
     font-family: sans-serif;
     background: white;
     border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
   .pie:before {
     content: "";
