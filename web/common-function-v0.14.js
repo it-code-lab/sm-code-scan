@@ -3370,7 +3370,7 @@ function getTutorial(tutorialStr){
               }
               
               $('html, body').animate({
-                    scrollTop: $("#tutorialDivId").offset().top - 80
+                    scrollTop: $("#tutorialListDivId").offset().top 
                 }, 100);	
 
                 setTimeout(function() {
