@@ -17,17 +17,17 @@ $path = substr($path, 1);
 $isPHPUrl = false;
 
 $isCrawler = isset($_SERVER['HTTP_USER_AGENT'])
-&& preg_match('/bot|crawl|slurp|spider|mediapartners|InspectionTool|GoogleOther/i', $_SERVER['HTTP_USER_AGENT']);
+   && preg_match('/bot|crawl|slurp|spider|mediapartners|InspectionTool|GoogleOther/i', $_SERVER['HTTP_USER_AGENT']);
 
 
 
 if (strpos($path, 'tutorials/') !== false) {
-    $itemstr = substr($path, strpos($path, "tutorials/") + 10);
-    if (strpos($itemstr, '/') !== false) {
+   $itemstr = substr($path, strpos($path, "tutorials/") + 10);
+   if (strpos($itemstr, '/') !== false) {
       $isPHPUrl = true;
       if (isset($_SESSION['datafetched_XX'])) {
          $title = $_SESSION['webTitle'];
-         $description = $_SESSION['webDesc'] ;
+         $description = $_SESSION['webDesc'];
          //$image_url = "https://itcodescanner.com/getimage/".$_SESSION['image_nm'];
          $keywords = $_SESSION['webKeywords'];
          $webFullDesc = $_SESSION['webFullDesc'];
@@ -35,13 +35,13 @@ if (strpos($path, 'tutorials/') !== false) {
          $dummy = $database->getTutorial($itemstr);
          if ($dummy != "Err in DB call") {
             $title = $_SESSION['webTitle'];
-            $description = $_SESSION['webDesc'] ;
+            $description = $_SESSION['webDesc'];
             //$image_url = "https://itcodescanner.com/getimage/".$_SESSION['image_nm'];
             $keywords = $_SESSION['webKeywords'];
             $webFullDesc = $_SESSION['webFullDesc'];
          }
       }
-    }
+   }
 }
 
 ?>
@@ -88,7 +88,7 @@ if (strpos($path, 'tutorials/') !== false) {
    <link href="/itcodescanner/css/smstyleltlimit.css" rel="stylesheet" />
    <link rel="stylesheet" href="/itcodescanner/web/common-style.css">
 
-   <script src="/itcodescanner/web/common-function-v0.14.js"></script>
+   <script src="/itcodescanner/web/common-function-v0.16.js"></script>
    <!-----
          <script src="/itcodescanner/web/common-function-mini.js"></script>
          -->
@@ -99,32 +99,32 @@ if (strpos($path, 'tutorials/') !== false) {
    <!--REF: https://highlightjs.org/usage/ -->
    <script src="/itcodescanner/js/highlight.min.js"></script>
 
-   <?php if (!$isCrawler || !$isPHPUrl):  ?>
-      <?php include 'head-add.html'; ?>
+   <?php if (!$isCrawler || !$isPHPUrl): ?>
+         <?php include 'head-add.html'; ?>
    <?php endif; ?>
 
    <script type="application/ld+json">{
-			"@context": "https://schema.org/",
-			"@type":"WebSite","url":"https://itcodescanner.com/",
-			"name": "IT Code Scanner - Tutorials and Code Samples",
-			"datePublished": "2022-07-10",
-			"description": "IT Code Scanner - Tutorials and Code Samples.",
-			"thumbnailUrl": "https://itcodescanner.com/images/banner.png"         
-		 }
-		 </script>
+         "@context": "https://schema.org/",
+         "@type":"WebSite","url":"https://itcodescanner.com/",
+         "name": "IT Code Scanner - Tutorials and Code Samples",
+         "datePublished": "2022-07-10",
+         "description": "IT Code Scanner - Tutorials and Code Samples.",
+         "thumbnailUrl": "https://itcodescanner.com/images/banner.png"         
+       }
+       </script>
 
 </head>
 
 <body>
-<?php if (!$isCrawler || !$isPHPUrl):  ?>
-   <?php include 'body-main.html'; ?>
+<?php if (!$isCrawler || !$isPHPUrl): ?>
+      <?php include 'body-main.html'; ?>
 <?php else: ?>
-   <h1> <?=$_SESSION['webTitle']?> </h1><br>
+      <h1> <?= $_SESSION['webTitle'] ?> </h1><br>
    
    
-   <div style="margin: auto; padding:10px">
-   <?= $_SESSION['webFullDesc'] ?>
-   </div>
+      <div style="margin: auto; padding:10px">
+      <?= $_SESSION['webFullDesc'] ?>
+      </div>
 <?php endif; ?>
 
 </body>
