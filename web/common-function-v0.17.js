@@ -44,6 +44,70 @@ var last_focused_div_id;
 //         the.beautifier = beautifier;
 //     });
 
+document.onpaste = function (event) {
+
+    if (localStorage.getItem("userLoggedIn") == "n") {
+        return;
+
+    } else if (localStorage.getItem("userLvl") != "9") {
+        return;
+    }
+
+    let items = (event.clipboardData || event.originalEvent.clipboardData).items;
+    console.log(JSON.stringify(items)); // might give you mime types
+    for (let index in items) {
+        let item = items[index];
+        if (item.kind === 'file') {
+            event.preventDefault();
+            let blob = item.getAsFile();
+            let saveAsName = window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "-" + (Math.floor(Math.random() * 1000000) + 1) + ".png";
+            let maximumSize = 500;
+
+            let inputElements = document.getElementsByClassName('imageszCls');
+            if (inputElements.length > 0) {
+                maximumSize = inputElements[0].value;
+            }
+
+            resizeImage({
+                file: blob,
+                maxSize: maximumSize
+            }).then(function (resizedImage) {
+
+                let formData = new FormData();
+                formData.append("file", resizedImage);
+                formData.append("saveasname", saveAsName);
+                formData.append("dir", "img");
+
+                let xhttp = new XMLHttpRequest();
+
+                xhttp.open("POST", the.hosturl + "/php/upload.php", true);
+
+                // call on request changes state
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+
+                        //let response = this.responseText;
+                        //console.log(response);
+
+                         let imagename = saveAsName;
+                        let randomId = "div-" + Math.floor(Math.random() * 1000000);
+                        let Str = "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  class = 'image1-desc'> " + "<img class='movieImageCls' alt ='' src= '" + the.hosturl + "/img/" + imagename + "'> " + " <button class='deleteDivInnImg' onclick=deleteCurrentComponent(this) ></button></div>";
+                        insertImageAtCaret(Str);
+                    }
+                };
+
+                xhttp.send(formData);
+            }).catch(function (err) {
+                //console.error(err);
+            });            
+            // let reader = new FileReader();
+            // reader.onload = function (event) {
+            //     console.log(event.target.result); // data url!
+            // }; 
+            // reader.readAsDataURL(blob);
+        }
+    }
+};
 
 function any(a, b) {
     return a || b;
@@ -3505,7 +3569,7 @@ function editItem(btn) {
 
     toolbarHTML = toolbarHTML +
         "Max image height/width (px):" +
-        "<input type='text' id='imagesz-" + itemid + "' style='width:95%; margin:auto;'  value='500'>" +
+        "<input type='text' class='imageszCls' id='imagesz-" + itemid + "' style='width:95%; margin:auto;'  value='500'>" +
         "Upload Image:(e.g. myimage.png)" +
         "<input type='text' id='image-" + itemid + "' style='width:95%; margin:auto;'  value=''>"
 
@@ -3519,7 +3583,7 @@ function editItem(btn) {
         "<br><label id='image-ererrormsg-" + itemid + "' style='color: #cc0000; font-size: 14px; min-height: 20px;'></label>"
         +
         "<button data-title='Upload And Insert At Carot' class='itmUpdBtnSmall btn btn-primary' type='button' value='Upload And Insert At Carot' data-errormsgelementid='image-ererrormsg-' data-saveasnameelementid='image-' data-fileelementid='image-replace-' data-itemid = '" + itemid + "' onclick='uploadAndInsertFile(event);'  >UploadNInsert</button>"
-        + "<button data-title='Upload New Image' class='itmUpdBtnSmall btn btn-primary' type='button' value='Upload New Image' data-errormsgelementid='image-ererrormsg-' data-saveasnameelementid='image-' data-fileelementid='image-replace-' data-itemid = '" + itemid + "' onclick='uploadFile(event);'  >Upload</button><br>"
+        + "<button data-title='Upload New Image. Insert using the buttons above' class='itmUpdBtnSmall btn btn-primary' type='button' value='Upload New Image' data-errormsgelementid='image-ererrormsg-' data-saveasnameelementid='image-' data-fileelementid='image-replace-' data-itemid = '" + itemid + "' onclick='uploadFile(event);'  >Upload</button><br>"
         + "<input class = 'itmUpdBtnSmall' type='text' id='search-img' value='' placeholder = 'image to search'> "
         + "<button  type='button' class='itmUpdBtnSmall btn btn-primary' onclick=loadUNSPLImg('" + itemid + "')>Search Unsplash</button>"
         + "<button  type='button' class='itmUpdBtnSmall btn btn-primary' onclick=loadPixabImg('" + itemid + "')>Search Pixabay</button>"
@@ -3624,7 +3688,7 @@ function toggleLeftSideMenu(hideFlag = "") {
 }
 
 function popolatenewImageName(itemid) {
-    document.getElementById("image-" + itemid).value = window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "-" + (Math.floor(Math.random() * 10000) + 1) + ".png";
+    document.getElementById("image-" + itemid).value = window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "-" + (Math.floor(Math.random() * 10000000) + 1) + ".png";
 }
 function loadUNSPLImg(itemid) {
     popolatenewImageName(itemid);
