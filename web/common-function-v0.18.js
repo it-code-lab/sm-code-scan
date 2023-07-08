@@ -3339,7 +3339,7 @@ function getTutorial(tutorialStr) {
                 '<a href ="' + tutorialUrl + '" class="tutorialTopLinkCls" ' + ' >' + "Tutorials</a>" + " > " +
                 '<a href ="' + technologyUrl + '" class="tutorialTopLinkCls"  >' + technology + "</a>" + " > " +
                 '<a href ="' + window.location.href + '" class="tutorialTopLinkCls"  >' + title + "</a>";
-            newHTML = newHTML + "<div class = 'curvedBox bgcolor_11 padding_50px color_white text_align_center' > <h1 classXX='songContainerH1' > " + title + "</h1></div>";
+            newHTML = newHTML + "<div class = 'curvedBox bgcolor_11 padding_50px color_white text_align_center' > <h1 classXX='songContainerH1' > " + subpath + "</h1></div>";
 
             if (localStorage.getItem("userLoggedIn") == "n") {
 
@@ -3360,9 +3360,9 @@ function getTutorial(tutorialStr) {
             let min = 50;
             let percentNumber = Math.floor(Math.random() * (max - min + 1)) + min;
 
-            if (!isNaN(subpath)) {
-                if (subpath != "0") {
-                    percentNumber = subpath;
+            if (!isNaN(subpathseq)) {
+                if (subpathseq != "0") {
+                    percentNumber = subpathseq;
                 }
             }
 
@@ -3401,13 +3401,13 @@ function getTutorial(tutorialStr) {
 
             var metaDesc = shortdescription;
 
-            var metaKey = technology + "," + subpath + "," + title + "," + keywords;
+            var metaKey = technology + "," + subpath + "," + keywords;
 
 
             document.querySelector('meta[name="description"]').setAttribute("content", metaDesc);
             document.querySelector('meta[name="keywords"]').setAttribute("content", metaKey);
             //document.title = technology + " " + subpath + ". " + title ;
-            document.title = technology + " - " + title;
+            document.title = subpath + "| ITCodeScanner";
 
             sessionStorage.setItem("lastUrl", window.location.href);
             // if (localStorage.getItem("cookieAccepted") == "y"){
@@ -3490,10 +3490,14 @@ function editItem(btn) {
 
 
     newHTML = newHTML +
-        "<div class = 'editFieldHead'>Title: </div><br>"
+        "<div class = 'editFieldHead'>Title(URL-Path): </div><br>"
         +
         "<input type='text'  id='title-" + itemid + "' style='width:95%; margin:auto;' value='" + title + "'>"
         + "";
+
+    newHTML = newHTML +
+        "<br><br><div class = 'editFieldHead'>SubPath(Page-Heading): </div><br>" +
+        "<input type='text' id='subpath-" + itemid + "' style='width:95%; margin:auto;' value='" + subpath + "'>";
 
     newHTML = newHTML +
         "<br><br><div class = 'editFieldHead'>Title Sort Sequence: </div><br>" +
@@ -3506,18 +3510,16 @@ function editItem(btn) {
         "<br><br><div class = 'editFieldHead'>Technology Sort Sequence: </div><br>" +
         "<input type='text' id='technologyseq-" + itemid + "' style='width:95%; margin:auto;' value='" + technologyseq + "'>";
 
-    newHTML = newHTML +
-        "<br><br><div class = 'editFieldHead'>Path(not in use): </div><br>" +
-        "<input type='text' id='subpath-" + itemid + "' style='width:95%; margin:auto;' value='" + subpath + "'>";
+
 
     newHTML = newHTML +
-        "<br><br><div class = 'editFieldHead'>Path Sort Sequence(not in use): </div><br>" +
+        "<br><br><div class = 'editFieldHead'>Path Sort Sequence(Used for Quiz%): </div><br>" +
         "<input type='text' id='subpathseq-" + itemid + "' style='width:95%; margin:auto;' value='" + subpathseq + "'>";
 
 
 
     newHTML = newHTML +
-        "<br><br><div class = 'editFieldHead'>Short Description: </div><br>" +
+        "<br><br><div class = 'editFieldHead'>Short Description (meta-desc): </div><br>" +
         "<textarea id='shortdescription-" + itemid + "' style='width:95%; margin:auto;' >" + shortdescription + "</textarea>";
 
     let toolbarHTML = "";
@@ -3542,10 +3544,10 @@ function editItem(btn) {
         "<button data-title='Code-Light-VSCode' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','codescript2') >Light</button>" +
         "<button data-title='Code-CommandLine'' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','codescript3') >Cmd</button>" +
         "<label class='toolBarlabel'>Headers</label>" +
-        "<button data-title='header1' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header1') >H1</button>" +
-        "<button data-title='header2' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header2') >H2</button>" +
-        "<button data-title='header3-padding' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header3') >H3</button>" +
-        "<button data-title='header3' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header4') >H4</button>" +
+        "<button data-title='header1-padding' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header3') >H1-Style1</button>" +
+        "<button data-title='header1' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header1') >H1-Style2</button>" +
+        "<button data-title='header2' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header2') >H2-Style1</button>" +
+        "<button data-title='header3' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header4') >H3-Style1</button>" +
         "<label class='toolBarlabel'>Images</label>" +
         "<button data-title='Image-Full-width' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image1') >I1</button>" +
         "<button data-title='Image-Smaller' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image2') >I2</button>" +
@@ -4201,9 +4203,9 @@ function addComponent(itemid, type) {
         document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  ><h2 class = 'header2-desc'> TODO Edit - Header2 </h2><button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>" + partTwoHTML;
 
     } else if (type == "header3") {
-        document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  ><h3 class = 'header3-desc'> TODO Edit - Header3 </h3><button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>" + partTwoHTML;
+        document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  ><h1 class = 'header3-desc'> TODO Edit - Header1 </h1><button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>" + partTwoHTML;
     } else if (type == "header4") {
-        document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  ><h3 class = 'header4-desc'> TODO Edit - Header4 </h4><button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>" + partTwoHTML;
+        document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  ><h3 class = 'header4-desc'> TODO Edit - Header3 </h3><button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>" + partTwoHTML;
 
     } else if (type == "image1") {
         var imagename = document.getElementById("image-" + itemid).value;
@@ -5545,7 +5547,7 @@ function populateTutorialList(rows = "") {
         itemName = itemName.replaceAll(" ", "-");
 
         subpath = rows[i].subpath;
-        subpath = subpath.replaceAll(" ", "-");
+        //subpath = subpath.replaceAll(" ", "-");
 
         technologyOrig = rows[i].technology;
         technology = rows[i].technology;
@@ -5644,7 +5646,7 @@ function populateTutorialList(rows = "") {
                 innerHTML = innerHTML + rows[i].titleseq + '. ';
             }
 
-            innerHTML = innerHTML + rows[i].title + ' </h2> </span> </a>';
+            innerHTML = innerHTML + rows[i].subpath + ' </h2> </span> </a>';
             innerHTML = innerHTML + '</div>';
         } else if (nextSubPath == currentSubpath) {
             //It is a new child tutorial 
@@ -5660,7 +5662,7 @@ function populateTutorialList(rows = "") {
                 innerHTML = innerHTML + rows[i].titleseq + '. ';
             }
 
-            innerHTML = innerHTML + rows[i].title + ' </h2> </span> </a>';
+            innerHTML = innerHTML + rows[i].subpath + ' </h2> </span> </a>';
             innerHTML = innerHTML + '</div>';
         } else {
             //It is not a new child tutorial 
@@ -5671,7 +5673,7 @@ function populateTutorialList(rows = "") {
                 innerHTML = innerHTML + rows[i].titleseq + '. ';
             }
 
-            innerHTML = innerHTML + rows[i].title + ' </h2> </span> </a>';
+            innerHTML = innerHTML + rows[i].subpath + ' </h2> </span> </a>';
             innerHTML = innerHTML + '</div>';
         }
 
