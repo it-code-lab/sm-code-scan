@@ -2635,3 +2635,10 @@ div:has(> .hideParentDiv) {display: none; }
     border-radius: 10px;
     font-size: 16px;
 }
+
+.quizTxt{
+  background-color: #b8bfd0;
+  border-radius: 5px;
+  padding: 1px;
+  border: 1px solid grey;
+}
