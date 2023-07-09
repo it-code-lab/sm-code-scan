@@ -2315,7 +2315,7 @@ ul.unordered-list-arrow li:before{
   resize: horizontal; 
   overflow: hidden; 
   background-color: #fff;  
-  display: none; 
+  display: block; 
   /* height: 100vh;  */
   /* max-height: 90vh; 
   min-height: 88vh;  */
@@ -2338,7 +2338,7 @@ width: 100%;
 
 
 #tutorialListDivId{
-  display: none;
+  display: block;
   min-width: 350px; 
   background-color: rgb(250, 250, 250);
   transition: ease 0.5s;

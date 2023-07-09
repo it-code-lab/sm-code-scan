@@ -19,7 +19,7 @@ $isPHPUrl = false;
 $isCrawler = isset($_SERVER['HTTP_USER_AGENT'])
    && preg_match('/bot|crawl|slurp|spider|mediapartners|InspectionTool|GoogleOther/i', $_SERVER['HTTP_USER_AGENT']);
 
-
+//$isCrawler = true;
 
 if (strpos($path, 'tutorials/') !== false) {
    $itemstr = substr($path, strpos($path, "tutorials/") + 10);
@@ -80,7 +80,7 @@ if (strpos($path, 'tutorials/') !== false) {
    <!--  
          <link href="/itcodescanner/css/bootstrap.min.css" rel="stylesheet" />
          -->
-   <link href="/itcodescanner/css/codescriber-v0.8.css" rel="stylesheet" />
+   <link href="/itcodescanner/css/codescriber-v0.9.css" rel="stylesheet" />
 
    <link href="/itcodescanner/css/codemirror.css" rel="stylesheet" />
    <link href="/itcodescanner/css/slidestyles.css" rel="stylesheet" />
@@ -88,7 +88,7 @@ if (strpos($path, 'tutorials/') !== false) {
    <link href="/itcodescanner/css/smstyleltlimit.css" rel="stylesheet" />
    <link rel="stylesheet" href="/itcodescanner/web/common-style.css">
 
-   <script src="/itcodescanner/web/common-function-v0.20.js"></script>
+   <script src="/itcodescanner/web/common-function-v0.21.js"></script>
    <!-----
          <script src="/itcodescanner/web/common-function-mini.js"></script>
          -->
@@ -98,11 +98,7 @@ if (strpos($path, 'tutorials/') !== false) {
    <link rel="stylesheet" href="/itcodescanner/css/default.min.css">
    <!--REF: https://highlightjs.org/usage/ -->
    <script src="/itcodescanner/js/highlight.min.js"></script>
-
-   <?php if (!$isCrawler || !$isPHPUrl): ?>
-         <?php include 'head-add.html'; ?>
-   <?php endif; ?>
-
+   <?php include 'head-add.html'; ?>
    <script type="application/ld+json">{
          "@context": "https://schema.org/",
          "@type":"WebSite","url":"https://itcodescanner.com/",
@@ -116,17 +112,7 @@ if (strpos($path, 'tutorials/') !== false) {
 </head>
 
 <body>
-<?php if (!$isCrawler || !$isPHPUrl): ?>
-      <?php include 'body-main.html'; ?>
-<?php else: ?>
-      <h1> <?= $_SESSION['webTitle'] ?> </h1><br>
-   
-   
-      <div style="margin: auto; padding:10px">
-      <?= $_SESSION['webFullDesc'] ?>
-      </div>
-<?php endif; ?>
-
+<?php include 'body-main.html'; ?>
 </body>
 
 </html>
