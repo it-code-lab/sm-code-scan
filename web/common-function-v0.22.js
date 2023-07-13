@@ -3346,10 +3346,10 @@ function getTutorial(tutorialStr) {
             var tutorialUrl = path.substring(0, path.indexOf('/', path.indexOf('itcodescanner')) + 1) + "?target=tutorial";
             var technologyUrl = path.substring(0, path.indexOf('/', path.indexOf('itcodescanner')) + 1) + "tutorials/" + technology;
 
-            var newHTML = "<div classXX = 'songContainer' >" +
+            var newHTML = "<div classXX = 'songContainer' ><div class='topNavDivCls'>" +
                 '<a href ="' + tutorialUrl + '" class="tutorialTopLinkCls" ' + ' >' + "Tutorials</a>" + " > " +
                 '<a href ="' + technologyUrl + '" class="tutorialTopLinkCls"  >' + technology + "</a>" + " > " +
-                '<a href ="' + window.location.href + '" class="tutorialTopLinkCls"  >' + title + "</a>";
+                '<a href ="' + window.location.href + '" class="tutorialTopLinkCls"  >' + title + "</a></div>";
             newHTML = newHTML + "<div class = 'curvedBox bgcolor_11 padding_50px color_white text_align_center' > <h1 classXX='songContainerH1' > " + subpath + "</h1></div>";
 
             if (localStorage.getItem("userLoggedIn") == "n") {
@@ -3362,6 +3362,7 @@ function getTutorial(tutorialStr) {
 
                 newHTML = newHTML + '<button class="btn" data-itemid= "' + itemid + '" data-technology= "' + technology + '" data-technologyseq= "' + technologyseq + '" data-subpath= "' + subpath + '" data-subpathseq= "' + subpathseq + '" data-title= "' + title + '" data-titleseq= "' + titleseq + '" data-shortdescription= "' + shortdescription + '"  data-writer= "' + writer + '" data-keywords= "' + keywords + '" data-discontinue= "' + discontinue + '" onclick="editItem(this)" >Edit</button>';
             }
+            newHTML = newHTML + '<div class="printBtnDivCls"><button class="printBtn" onclick="window.print()">Printable</button></div>'
             newHTML = newHTML + '<div classXX="songDeltsNImg">';
 
 
@@ -3393,11 +3394,11 @@ function getTutorial(tutorialStr) {
             }
 
             if (nextTutorialTitle != "") {
-                newHTML = newHTML + '<br><br>' + 'Next: <a href ="' + nextTutorialTitleURL + '" class="tutorialTopLinkCls"  >' + nextTutorialTitle + "</a> <br> <br>";
+                newHTML = newHTML + '<div class="bottomNavDivCls"><br><br>' + 'Next: <a href ="' + nextTutorialTitleURL + '" class="tutorialTopLinkCls"  >' + nextTutorialTitle + "</a> <br> <br></div>";
 
             }
 
-            newHTML = newHTML + '<br><br><br><br><br><br><br><br><br><hr><b>Leave a Comment</b>' + document.getElementById("sndmsgdivid").innerHTML;
+            newHTML = newHTML + '<div class="bottomCommentDivCls"><br><br><br><br><br><br><br><br><br><hr><b>Leave a Comment</b>' + document.getElementById("sndmsgdivid").innerHTML + '</div>';
 
             document.getElementById("tutorialDivId").innerHTML = newHTML;
             refreshCaptcha();
@@ -3418,7 +3419,7 @@ function getTutorial(tutorialStr) {
             document.querySelector('meta[name="description"]').setAttribute("content", metaDesc);
             document.querySelector('meta[name="keywords"]').setAttribute("content", metaKey);
             //document.title = technology + " " + subpath + ". " + title ;
-            document.title = subpath + "| ITCodeScanner";
+            document.title = subpath + " | ITCodeScanner";
 
             sessionStorage.setItem("lastUrl", window.location.href);
             // if (localStorage.getItem("cookieAccepted") == "y"){
@@ -3559,6 +3560,11 @@ function editItem(btn) {
         "<button data-title='header1' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header1') >H1-Style2</button>" +
         "<button data-title='header2' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header2') >H2-Style1</button>" +
         "<button data-title='header3' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','header4') >H3-Style1</button>" +
+
+        "<button data-title='Convert selected text to h2 inline' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','convert-to-h2-inline') >Convert text to h2</button>" +
+        "<button data-title='Convert selected text to h3 inline' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','convert-to-h3-inline') >Convert text to h3</button>" +
+
+
         "<label class='toolBarlabel'>Images</label>" +
         "<button data-title='Image-Full-width' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image1') >I1</button>" +
         "<button data-title='Image-Smaller' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image2') >I2</button>" +
@@ -4219,6 +4225,38 @@ function addComponent(itemid, type) {
         document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  ><h1 class = 'header3-desc'> TODO Edit - Header1 </h1><button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>" + partTwoHTML;
     } else if (type == "header4") {
         document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  ><h3 class = 'header4-desc'> TODO Edit - Header3 </h3><button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>" + partTwoHTML;
+
+    } else if (type == "convert-to-h2-inline") {
+        let selectedText = window.getSelection().toString();
+      
+        if (selectedText !== '') {
+          // Create an h2 element
+          let h2Element = document.createElement('h2');
+          
+          // Set the text content of the h2 element to the selected text
+          h2Element.textContent = selectedText;
+          h2Element.classList.add('convert-to-h2-inline-cls');
+          // Replace the selected text with the h2 element
+          let range = window.getSelection().getRangeAt(0);
+          range.deleteContents();
+          range.insertNode(h2Element);
+        }
+
+    } else if (type == "convert-to-h3-inline") {
+        let selectedText = window.getSelection().toString();
+      
+        if (selectedText !== '') {
+          // Create an h2 element
+          let h3Element = document.createElement('h3');
+          
+          // Set the text content of the h2 element to the selected text
+          h3Element.textContent = selectedText;
+          h3Element.classList.add('convert-to-h3-inline-cls');
+          // Replace the selected text with the h2 element
+          let range = window.getSelection().getRangeAt(0);
+          range.deleteContents();
+          range.insertNode(h3Element);
+        }
 
     } else if (type == "image1") {
         var imagename = document.getElementById("image-" + itemid).value;

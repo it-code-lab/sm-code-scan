@@ -2642,3 +2642,46 @@ div:has(> .hideParentDiv) {display: none; }
   padding: 1px;
   border: 1px solid grey;
 }
+
+.convert-to-h2-inline-cls{
+  display: inline;
+  margin-left: 0px !important;
+  font-weight: 500 !important;
+  font-size: 24px;
+}
+
+.convert-to-h3-inline-cls{
+  display: inline;
+  margin-left: 0px !important;
+  font-weight: 500 !important;
+  font-size: 20px;
+}
+
+.printBtn{
+  width: 100px;
+  padding: 5px;
+  border: none;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #94c5e4;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  float: right;
+  margin: 5px;
+}
+.printBtn:hover{
+  background-color: #2d424e;
+}
+
+.printBtnDivCls{
+  display: flow-root;
+}
+
+@media print {
+  .printBtnDivCls, .pageinfo-desc, .chartDiv, .topnav, .sbmtqz-div, .topNavDivCls, .bottomNavDivCls, .bottomCommentDivCls, .footerDiv, #tutorialListDivId, #tutorialEditDivId {
+    display: none !important;
+  }
+}
+
