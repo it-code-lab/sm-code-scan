@@ -687,7 +687,7 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_collapsible
 .scorestablecls {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  margin: auto;
+  margin: 10px auto;
 }
 
 .scorestablecls td, .scorestablecls th {
@@ -702,16 +702,17 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_collapsible
 
 .scorestablecls th {
   text-align: left;
-  background-color: #3b403e;
+  background-color: #708090;
   color: white;
 }
 
 .scoresheader{
-  background-color: #9A9999;
+  background-color: #5f9ea0;
   color: #fff;
   text-align: center;
   margin: 5px;
   padding: 10px;
+  display: none;
 }
 /*************************************************************/
 /*END -  ********/
@@ -2213,17 +2214,37 @@ margin-top: 40px !important;
 
 
 .qzerr-div{
-  color: #CC0000;
-  min-height: 24px;
-  margin: 5px;
+  color: #fff;
+  margin: 10px;
+  min-height: 35px;
 }
+
+#qzerr{
+  display: none;
+  width: 0%;
+  background-color: #f39c12;
+  transition: ease 0.5s;
+  padding: 5px;  
+  border-radius: 5px;
+}
+
+#qzres{
+  display: none;
+  width: 0%;
+  background-color: #d6eaf8;
+  color: #153d58;
+  transition: ease 0.5s;
+  padding: 5px;  
+  border-radius: 5px;
+}
+
 .sbmtqz-div{
   margin: auto;
   text-align: center;
   width: 200px;
   border: 2px solid rgb(215, 213, 213);
   border-radius: 5px;
-  padding: 5px;
+  padding: 10px;
 
 }
 #retryqzdivid{
@@ -2685,3 +2706,15 @@ div:has(> .hideParentDiv) {display: none; }
   }
 }
 
+.scoresPie{
+  display: flex;
+}
+
+.scoreText{
+  color: #7a7978;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #f5f6f9;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  font-size: small;
+}

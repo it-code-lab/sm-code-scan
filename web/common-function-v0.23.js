@@ -2999,9 +2999,10 @@ function checkURL() {
 
     if (myCookie == null) {
         localStorage.setItem("userLoggedIn", "n");
-        if (!onMobileBrowser()) {
-            document.getElementById("loginLinkId").style.display = "block";
-        }
+        //if (!onMobileBrowser()) {
+        //    document.getElementById("loginLinkId").style.display = "block";
+        //}
+        document.getElementById("loginLinkId").style.display = "block";
         document.getElementById("logoutLinkId").style.display = "none";
         document.getElementById("profileLinkId").style.display = "none";
         document.getElementById("HelpTopicsLinkId").style.display = "none";
@@ -3024,9 +3025,10 @@ function checkURL() {
             success: function (retstatus) {
                 if (retstatus == "err") {
                     localStorage.setItem("userLoggedIn", "n");
-                    if (!onMobileBrowser()) {
-                        document.getElementById("loginLinkId").style.display = "block";
-                    }
+                    //if (!onMobileBrowser()) {
+                    //    document.getElementById("loginLinkId").style.display = "block";
+                    //}
+                    document.getElementById("loginLinkId").style.display = "block";
                     document.getElementById("logoutLinkId").style.display = "none";
                     document.getElementById("profileLinkId").style.display = "none";
                 }
@@ -3350,7 +3352,7 @@ function getTutorial(tutorialStr) {
                 '<a href ="' + tutorialUrl + '" class="tutorialTopLinkCls" ' + ' >' + "Tutorials</a>" + " > " +
                 '<a href ="' + technologyUrl + '" class="tutorialTopLinkCls"  >' + technology + "</a>" + " > " +
                 '<a href ="' + window.location.href + '" class="tutorialTopLinkCls"  >' + title + "</a></div>";
-            newHTML = newHTML + "<div class = 'curvedBox bgcolor_11 padding_50px color_white text_align_center' > <h1 classXX='songContainerH1' > " + subpath + "</h1></div>";
+            newHTML = newHTML + "<div class = 'curvedBox bgcolor_11 padding_50px color_white text_align_center' > <h1 id='docHeader' > " + subpath + "</h1></div>";
 
             if (localStorage.getItem("userLoggedIn") == "n") {
 
@@ -3377,9 +3379,41 @@ function getTutorial(tutorialStr) {
                     percentNumber = subpathseq;
                 }
             }
+            let userdata = sessionStorage.getItem("userdata");
+            let pageHdr = subpath;
+            let lastResult = "";
+
+            try{
+                if ((userdata != null) && (userdata != "")) {
+                    let userObjs = JSON.parse(userdata);
+                    let quizScores = userObjs.scores;
+                    
+                    let thisQuizResults = quizScores.filter(quizDet => quizDet.quiz === document.URL);
+                    //let thisQuizResults = quizScores.filter(quiz => quiz.title === pageHdr);
+    
+                    // Sort the John students by grade in ascending order
+                    thisQuizResults.sort((a, b) => b.time.localeCompare(a.time));
+    
+                    // Get the first element (with the least grade) from the sorted John students
+                    lastResult = thisQuizResults[0].percent;
+                }
+            }catch{
+
+            }
+
 
             if (description.includes("sbmtqzdivid")) {
-                newHTML = newHTML + '<div id="avgResultsDivId" class="chartDiv text_align_center margin_10px_auto padding_10px slide-in-left" style="animation-duration: 0.2;  background:none; border: none"><div class="pie" style="--p:' + percentNumber + ';--b:40px;--w:200px; --c:green;">' + percentNumber + '%</div><br>Public Average Score</div>';
+                newHTML = newHTML + '<div class="scoresPie"><div id="avgResultsDivId" class="resultsPie chartDiv text_align_center margin_10px_auto padding_10px slide-in-left" style="animation-duration: 0.2;  background:none; border: none">'
+                + '<div class="pie" style="--p:' + percentNumber + ';--b:20px;--w:130px; --c:green;">' + percentNumber + '%</div><br><span class="scoreText">Public Average Score</span>'
+                + '</div>';
+                
+                if (lastResult != ""){
+                    newHTML = newHTML + '<div id="lastResultsDivId" class="resultsPie chartDiv text_align_center margin_10px_auto padding_10px slide-in-left" style="animation-duration: 0.2;  background:none; border: none">'
+                    + '<div class="pie" style="--p:' + lastResult + ';--b:20px;--w:130px; --c:green;">' + lastResult + '%</div><br><span class="scoreText">My Previous Score</span>'
+                    + '</div>';
+                }
+
+                newHTML = newHTML + '</div>';
             }
             if (description != undefined) {
                 if (description != "") {
@@ -3439,7 +3473,7 @@ function getTutorial(tutorialStr) {
             let jsonLdScript = document.querySelector('script[type="application/ld+json"]');
             jsonLdScript.innerHTML = JSON.stringify(structuredData);
 
-            if ((sessionStorage.getItem("hideLeftMenuBar") == "Y") || (onMobileBrowser)) {
+            if ((sessionStorage.getItem("hideLeftMenuBar") == "Y") || (onMobileBrowser())) {
                 setTimeout(() => {
                     toggleLeftSideMenu("hide");
                 }, 50);
@@ -4340,6 +4374,8 @@ function submitQuiz() {
     var rtans = 0;
     var wans = 0;
     document.getElementById("qzerr").innerHTML = "";
+    document.getElementById("qzerr").style.display = "none";
+    document.getElementById("qzerr").style.width = "0%";
 
     for (i = 0; i < elems.length; i++) {
         if (elems[i].checked) {
@@ -4363,15 +4399,21 @@ function submitQuiz() {
         }
 
         document.getElementById("qzerr").innerHTML = "Please provide a response to all the questions";
+        document.getElementById("qzerr").style.display = "block";
+        document.getElementById("qzerr").style.width = "100%";
     } else {
         var percent = rtans * 100 / (rtans + wans);
         percent = percent.toFixed(2);
         storeTestResults(percent, window.location.pathname);
         if (localStorage.getItem("userLoggedIn") == "n") {
             document.getElementById("qzres").innerHTML = "You scored " + percent + "%. Click on the button below to retry.<br> Scores get saved for " + '<a href="' + the.hosturl + '/?target=login">logged in</a>' + " users.";
+            document.getElementById("qzres").style.display = "block";
+            document.getElementById("qzres").style.width = "100%";
         } else {
             document.getElementById("qzres").innerHTML = "You scored " + percent + "%. Click on the button below to retry.<br> The score has been recorded on the profile.";
-            var userdata = localStorage.getItem("userdata");
+            document.getElementById("qzres").style.display = "block";
+            document.getElementById("qzres").style.width = "100%";
+            var userdata = sessionStorage.getItem("userdata");
             var userObjs;
             var newscores = [];
             var date = new Date();
@@ -4380,7 +4422,9 @@ function submitQuiz() {
                 day: "numeric", hour: "2-digit", minute: "2-digit"
             };
 
-            var newscore = { "quiz": document.URL, "percent": percent, "time": date.toLocaleTimeString("en-us", options) };
+            let pageHdr = document.getElementById("docHeader").innerHTML;
+            pageHdr = pageHdr.trim();
+            var newscore = { "quiz": document.URL, "percent": percent, "time": date.toLocaleTimeString("en-us", options), "title": pageHdr};
 
             if (userdata != "") {
                 userObjs = JSON.parse(userdata);
@@ -4395,7 +4439,7 @@ function submitQuiz() {
 
             var newdata = JSON.stringify(userObjs);
 
-            localStorage.setItem("userdata", newdata);
+            sessionStorage.setItem("userdata", newdata);
             updateInfo(newdata);
         }
         document.getElementById("sbmtqzdivid").style.display = "none";
@@ -4406,13 +4450,14 @@ function submitQuiz() {
 
 function storeTestResults(percent, url) {
     var StrFunction = "storeTestResults"
-
+    let title = document.getElementById("docHeader").innerHTML;
 
     $.ajax({
         url: the.hosturl + '/php/process.php',
         data: {
             url: url,
             percent: percent,
+            addinfo:title,
             usrfunction: StrFunction
         },
         type: 'POST',
@@ -4427,22 +4472,51 @@ function storeTestResults(percent, url) {
 }
 
 function showProfile() {
-    var userdata = localStorage.getItem("userdata");
+    var userdata = sessionStorage.getItem("userdata");
     var userObjs;
     var scoresList;
     var newHTML = "";
     if ((userdata != null) && (userdata != "")) {
         userObjs = JSON.parse(userdata);
         scoresList = userObjs.scores;
+
+        // Sort the array based on multiple fields: 'grade' in ascending order and 'age' in descending order
+        scoresList.sort((a, b) => {
+            if (a.quiz !== b.quiz) {
+            // Sort by 'grade' field in ascending order
+            return a.quiz.localeCompare(b.quiz);
+            } else {
+            // Sort by 'age' field in descending order
+            return b.time - a.time;
+            }
+        });
+
         newHTML = newHTML + "<div class='scoresheader'>Quiz Scores</div>";
-        newHTML = newHTML + "<table class ='scorestablecls' ><tr><th>Quiz</th><th>Score</th><th>Datetime</th></tr>";
+        newHTML = newHTML + "<table class ='scorestablecls' ><tr><th>Quiz</th><th>Score</th><th>Time</th></tr>";
+        let lastSubject = "";
         for (var key in scoresList) {
             var obj = scoresList[key];
+
             var qzURL = (obj.quiz).split("/tutorials/");
             var link = qzURL[1];
 
-            newHTML = newHTML + "<tr><td> <a class= 'tutorialLink' href='" + obj.quiz + "'> " + link + " </a></td><td>" + obj.percent + "% </td><td>" + obj.time + "</td></tr>"
+            let title = obj.title;
+            if (title == undefined){
+                title = qzURL[1];
+            }
 
+            let dummy1 = link.split("/");
+            let subject = dummy1[0];
+
+            if (lastSubject != ""){
+                if (lastSubject != subject){
+                    newHTML = newHTML + "<tr style='background-color:#ddebf7;'><td colspan='3'>" + subject + "</td></tr>";
+                }
+            }else{
+                newHTML = newHTML + "<tr style='background-color:#ddebf7;'><td colspan='3'>" + subject + "</td></tr>"; 
+            }
+            newHTML = newHTML + "<tr><td> <a class= 'tutorialLink' href='" + obj.quiz + "'> " + title + " </a></td><td>" + obj.percent + "% </td><td>" + obj.time + "</td></tr>"
+            lastSubject = subject;
         }
         newHTML = newHTML + "</table>";
     } else {
@@ -6202,7 +6276,7 @@ function login() {
 
                 localStorage.setItem("userLoggedIn", "y");
                 localStorage.setItem("userLvl", retstatus.substring(2, 3));
-                localStorage.setItem("userdata", retstatus.substring(3));
+                sessionStorage.setItem("userdata", retstatus.substring(3));
                 localStorage.setItem("userEmail", StrEmail);
                 getStoredProjectList();
                 var myUrl = window.location.protocol + "//" + window.location.host +
@@ -6334,13 +6408,15 @@ function Logout() {
 
             if (retstatus == "S") {
                 loggedIn = "N";
-                if (!onMobileBrowser()) {
-                    document.getElementById("loginLinkId").style.display = "block";
-                }
+                //if (!onMobileBrowser()) {
+                //    document.getElementById("loginLinkId").style.display = "block";
+                //}
+                document.getElementById("loginLinkId").style.display = "block";
                 document.getElementById("logoutLinkId").style.display = "none";
                 document.getElementById("profileLinkId").style.display = "none";
                 localStorage.setItem("userLoggedIn", "n");
                 sessionStorage.setItem("SavedProjectsList", null);
+                sessionStorage.setItem("userdata", null);
                 //Show("projectscanner");
 
                 //var myUrl = window.location.protocol + "//" + window.location.host +	window.location.pathname ;
