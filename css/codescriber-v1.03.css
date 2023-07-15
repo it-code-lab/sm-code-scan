@@ -2701,7 +2701,7 @@ div:has(> .hideParentDiv) {display: none; }
 }
 
 @media print {
-  .printBtnDivCls, .pageinfo-desc, .chartDiv, .topnav, .sbmtqz-div, .topNavDivCls, .bottomNavDivCls, .bottomCommentDivCls, .footerDiv, #tutorialListDivId, #tutorialEditDivId {
+  .videoIframeDiv, .printBtnDivCls, .pageinfo-desc, .chartDiv, .topnav, .sbmtqz-div, .topNavDivCls, .bottomNavDivCls, .bottomCommentDivCls, .footerDiv, #tutorialListDivId, #tutorialEditDivId {
     display: none !important;
   }
 }
@@ -2717,4 +2717,9 @@ div:has(> .hideParentDiv) {display: none; }
   background-color: #f5f6f9;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
   font-size: small;
+}
+
+.alignment-span{
+  display: block;
+  width: 100%;
 }

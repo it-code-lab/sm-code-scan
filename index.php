@@ -80,7 +80,7 @@ if (strpos($path, 'tutorials/') !== false) {
    <!--  
          <link href="/itcodescanner/css/bootstrap.min.css" rel="stylesheet" />
          -->
-   <link href="/itcodescanner/css/codescriber-v1.02.css" rel="stylesheet" />
+   <link href="/itcodescanner/css/codescriber-v1.03.css" rel="stylesheet" />
 
    <link href="/itcodescanner/css/codemirror.css" rel="stylesheet" />
    <link href="/itcodescanner/css/slidestyles.css" rel="stylesheet" />
@@ -88,7 +88,7 @@ if (strpos($path, 'tutorials/') !== false) {
    <link href="/itcodescanner/css/smstyleltlimit.css" rel="stylesheet" />
    <link rel="stylesheet" href="/itcodescanner/web/common-style.css">
 
-   <script src="/itcodescanner/web/common-function-v0.23.js"></script>
+   <script src="/itcodescanner/web/common-function-v0.24.js"></script>
    <!-----
          <script src="/itcodescanner/web/common-function-mini.js"></script>
          -->

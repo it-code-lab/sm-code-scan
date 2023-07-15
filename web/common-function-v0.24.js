@@ -3401,20 +3401,24 @@ function getTutorial(tutorialStr) {
 
             }
 
-
-            if (description.includes("sbmtqzdivid")) {
-                newHTML = newHTML + '<div class="scoresPie"><div id="avgResultsDivId" class="resultsPie chartDiv text_align_center margin_10px_auto padding_10px slide-in-left" style="animation-duration: 0.2;  background:none; border: none">'
-                + '<div class="pie" style="--p:' + percentNumber + ';--b:20px;--w:130px; --c:green;">' + percentNumber + '%</div><br><span class="scoreText">Public Average Score</span>'
-                + '</div>';
-                
-                if (lastResult != ""){
-                    newHTML = newHTML + '<div id="lastResultsDivId" class="resultsPie chartDiv text_align_center margin_10px_auto padding_10px slide-in-left" style="animation-duration: 0.2;  background:none; border: none">'
-                    + '<div class="pie" style="--p:' + lastResult + ';--b:20px;--w:130px; --c:green;">' + lastResult + '%</div><br><span class="scoreText">My Previous Score</span>'
+            try{
+                if (description.includes("sbmtqzdivid")) {
+                    newHTML = newHTML + '<div class="scoresPie"><div id="avgResultsDivId" class="resultsPie chartDiv text_align_center margin_10px_auto padding_10px slide-in-left" style="animation-duration: 0.2;  background:none; border: none">'
+                    + '<div class="pie" style="--p:' + percentNumber + ';--b:20px;--w:130px; --c:green;">' + percentNumber + '%</div><br><span class="scoreText">Public Average Score</span>'
                     + '</div>';
+                    
+                    if (lastResult != ""){
+                        newHTML = newHTML + '<div id="lastResultsDivId" class="resultsPie chartDiv text_align_center margin_10px_auto padding_10px slide-in-left" style="animation-duration: 0.2;  background:none; border: none">'
+                        + '<div class="pie" style="--p:' + lastResult + ';--b:20px;--w:130px; --c:green;">' + lastResult + '%</div><br><span class="scoreText">My Previous Score</span>'
+                        + '</div>';
+                    }
+    
+                    newHTML = newHTML + '</div>';
                 }
+            }catch{
 
-                newHTML = newHTML + '</div>';
             }
+
             if (description != undefined) {
                 if (description != "") {
                     newHTML = newHTML + "" + "<div class = 'songLyrics' >" + description + "</div>";
@@ -3598,6 +3602,11 @@ function editItem(btn) {
         "<button data-title='Convert selected text to h2 inline' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','convert-to-h2-inline') >Convert text to h2</button>" +
         "<button data-title='Convert selected text to h3 inline' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','convert-to-h3-inline') >Convert text to h3</button>" +
 
+        "<label class='toolBarlabel'>Alignment</label>" +
+        "<button data-title='Left Align selected text' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','left-align') >Left</button>" +
+        "<button data-title='Center Align selected text' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','center-align') >Center</button>" +
+        "<button data-title='Right Align selected text' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','right-align') >Right</button>" +
+        "<button data-title='Align Justify selected text' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','justify-align') >Justify</button>" +
 
         "<label class='toolBarlabel'>Images</label>" +
         "<button data-title='Image-Full-width' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','image1') >I1</button>" +
@@ -4291,7 +4300,100 @@ function addComponent(itemid, type) {
           range.deleteContents();
           range.insertNode(h3Element);
         }
+    } else if (type == "left-align") {
+        // let selectedRange = window.getSelection().getRangeAt(0);
 
+        // // Create a span element
+        // let spanElement = document.createElement('span');
+        // spanElement.style.textAlign = 'left';
+  
+        // // Wrap the selected range with the span element
+        // selectedRange.surroundContents(spanElement);
+
+
+        let selectedText = window.getSelection().toString();
+      
+        if (selectedText !== '') {
+          // Create an h2 element
+          let spanElement = document.createElement('span');
+          spanElement.classList.add('alignment-span');
+          spanElement.style.textAlign = 'left';
+          // Set the text content of the h2 element to the selected text
+          spanElement.textContent = selectedText;
+
+          // Replace the selected text with the h2 element
+          let range = window.getSelection().getRangeAt(0);
+          range.deleteContents();
+          range.insertNode(spanElement);
+        }
+
+
+    } else if (type == "center-align") {
+        // let selectedRange = window.getSelection().getRangeAt(0);
+
+        // // Create a span element
+        // let spanElement = document.createElement('span');
+        // spanElement.style.textAlign = 'center';
+  
+        // // Wrap the selected range with the span element
+        // selectedRange.surroundContents(spanElement);
+
+        let selectedText = window.getSelection().toString();
+      
+        if (selectedText !== '') {
+          // Create an h2 element
+          let spanElement = document.createElement('span');
+          spanElement.style.textAlign = 'center';
+          spanElement.classList.add('alignment-span');
+          // Set the text content of the h2 element to the selected text
+          spanElement.textContent = selectedText;
+
+          // Replace the selected text with the h2 element
+          let range = window.getSelection().getRangeAt(0);
+          range.deleteContents();
+          range.insertNode(spanElement);
+        }
+
+    } else if (type == "right-align") {
+        // let selectedRange = window.getSelection().getRangeAt(0);
+
+        // // Create a span element
+        // let spanElement = document.createElement('span');
+        // spanElement.style.textAlign = 'right';
+  
+        // // Wrap the selected range with the span element
+        // selectedRange.surroundContents(spanElement);
+        let selectedText = window.getSelection().toString();
+      
+        if (selectedText !== '') {
+          // Create an h2 element
+          let spanElement = document.createElement('span');
+          spanElement.style.textAlign = 'right';
+          spanElement.classList.add('alignment-span');
+          // Set the text content of the h2 element to the selected text
+          spanElement.textContent = selectedText;
+
+          // Replace the selected text with the h2 element
+          let range = window.getSelection().getRangeAt(0);
+          range.deleteContents();
+          range.insertNode(spanElement);
+        }
+    } else if (type == "justify-align") {
+        let selectedText = window.getSelection().toString();
+      
+        if (selectedText !== '') {
+          // Create an h2 element
+          let spanElement = document.createElement('span');
+          spanElement.style.textAlign = 'justify';
+          spanElement.classList.add('alignment-span');
+          // Set the text content of the h2 element to the selected text
+          spanElement.textContent = selectedText;
+
+          // Replace the selected text with the h2 element
+          let range = window.getSelection().getRangeAt(0);
+          range.deleteContents();
+          range.insertNode(spanElement);
+        }
     } else if (type == "image1") {
         var imagename = document.getElementById("image-" + itemid).value;
         document.getElementById(componentid).innerHTML = partOneHTML + "<div id= '" + randomId + "' onmousedown=setLastFocusedDivId(this.id)  class = 'image1-desc'> " + "<img class='movieImageCls' alt ='' src= '" + the.hosturl + "/img/" + imagename + "'> " + " <button class='deleteDiv' onclick=deleteCurrentComponent(this) ></button></div>" + partTwoHTML;
