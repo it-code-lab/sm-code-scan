@@ -88,7 +88,7 @@ if (strpos($path, 'tutorials/') !== false) {
    <link href="/itcodescanner/css/smstyleltlimit.css" rel="stylesheet" />
    <link rel="stylesheet" href="/itcodescanner/web/common-style.css">
 
-   <script src="/itcodescanner/web/common-function-v0.24.js"></script>
+   <script src="/itcodescanner/web/common-function-v0.25.js"></script>
    <!-----
          <script src="/itcodescanner/web/common-function-mini.js"></script>
          -->

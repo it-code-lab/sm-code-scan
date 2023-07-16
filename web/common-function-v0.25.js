@@ -3336,7 +3336,7 @@ function getTutorial(tutorialStr) {
                         //nextTutorialTitleURL = myUrl + "tutorials/" + nextTechnology + "/" + nextSubpath.toLowerCase() + "/" + itemName.toLowerCase();
                         nextTutorialTitleURL = myUrl + "tutorials/" + nextTechnology + "/" + itemName.toLowerCase();
 
-                        nextTutorialTitle = rows[i + 1].title;
+                        nextTutorialTitle = rows[i + 1].subpath;
                     }
 
                     break;
@@ -3392,8 +3392,14 @@ function getTutorial(tutorialStr) {
                     //let thisQuizResults = quizScores.filter(quiz => quiz.title === pageHdr);
     
                     // Sort the John students by grade in ascending order
-                    thisQuizResults.sort((a, b) => b.time.localeCompare(a.time));
+                    //thisQuizResults.sort((a, b) => b.time.localeCompare(a.time));
     
+                    thisQuizResults.sort((a, b)=> {
+                        const dateA = new Date(a.time);
+                        const dateB = new Date(b.time);
+                        return dateB - dateA;
+                    });
+
                     // Get the first element (with the least grade) from the sorted John students
                     lastResult = thisQuizResults[0].percent;
                 }
