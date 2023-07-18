@@ -401,7 +401,23 @@
              <!--***********************END - HELP TOPICS ********************--->
              <!--*************************************************************--->
              <div id="profileDivId" class="profile" >
-
+               <div id="tabContentParent">
+                  <div class="tabContainer">
+                    <ul class="tabs">
+                      <li><a src="latestScoresTab" href="javascript:void(0);" class="active">Latest Scores</a></li>
+                      <li><a src="allScoresTab" href="javascript:void(0);">All Scores</a></li>
+                    </ul>
+                    <div class="tabContent">
+                      <div id="latestScoresTab">
+                      </div>
+                      <div id="allScoresTab">
+                      </div>
+                    </div>
+                    <!-- /tabContent -->
+                  </div>
+                  <!-- /tabContainer -->
+                </div>
+                <!-- /content -->
              </div>
              <!--*************************************************************--->
              <!--**START - LOGIN, REGISTER, FORGOT PASSWORD, ACTIVATE ACC*****--->
@@ -995,6 +1011,6 @@
     getSpecialFiles();
     checkURL();
  </script>
- <script src="/itcodescanner/web/onload-v0.01.js"></script>
+ <script src="/itcodescanner/web/onload-v0.02.js"></script>
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-63324d242f787b67"></script>

@@ -1,11 +1,11 @@
 /*jshint node:false, jquery:true, strict:false */
-$(function() {
+$(function () {
 
     //dragElement( document.getElementById("separator"), "H" );
 
     read_settings_from_cookie();
 
-    $.getJSON("./package.json", function(data) {
+    $.getJSON("./package.json", function (data) {
         $('#version-number').text('(v' + data.version + ')');
     });
 
@@ -23,18 +23,18 @@ $(function() {
         set_editor_mode();
         the.editor.focus();
 
-        $('.CodeMirror').click(function() {
+        $('.CodeMirror').click(function () {
             //console.log("Area clicked 1");
             if (the.editor.getValue() === default_text) {
                 the.editor.setValue('');
             }
         });
     } else {
-        $('#source').bind('click focus', function() {
+        $('#source').bind('click focus', function () {
             if ($(this).val() === default_text) {
                 $(this).val('');
             }
-        }).bind('blur', function() {
+        }).bind('blur', function () {
             if (!$(this).val()) {
                 console.log("bind blur 1");
                 $(this).val(default_text);
@@ -43,7 +43,7 @@ $(function() {
     }
 
 
-    $(window).bind('keydown', function(e) {
+    $(window).bind('keydown', function (e) {
         if (e.ctrlKey && e.keyCode === 13) {
 
             beautify();
@@ -59,14 +59,32 @@ $(function() {
 
 
 });
-setTimeout(function() {
+setTimeout(function () {
     hljs.highlightAll();
 }, 800);
 
-setTimeout(function() {
-$(".qz1-ans").on("click", function() {
-    $(this).find(".dynamicradio").prop("checked", true);
-  });
+setTimeout(function () {
+    $(".qz1-ans").on("click", function () {
+        $(this).find(".dynamicradio").prop("checked", true);
+    });
+}, 800);
+
+setTimeout(function () {
+    $("#tabContentParent").on("click", ".tabContainer .tabs a", function (e) {
+        e.preventDefault(),
+            $(this)
+                .parents(".tabContainer")
+                .find(".tabContent > div")
+                .each(function () {
+                    $(this).hide();
+                });
+
+        $(this)
+            .parents(".tabs")
+            .find("a")
+            .removeClass("active"),
+            $(this).toggleClass("active"), $("#" + $(this).attr("src")).show();
+    });
 }, 800);
 /*
 var coll = document.getElementsByClassName("collapsibleX");

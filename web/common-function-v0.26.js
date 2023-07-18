@@ -4514,11 +4514,11 @@ function submitQuiz() {
         percent = percent.toFixed(2);
         storeTestResults(percent, window.location.pathname);
         if (localStorage.getItem("userLoggedIn") == "n") {
-            document.getElementById("qzres").innerHTML = "You scored " + percent + "%. Click on the button below to retry.<br> Scores get saved for " + '<a href="' + the.hosturl + '/?target=login">logged in</a>' + " users.";
+            document.getElementById("qzres").innerHTML = "You scored " + percent + "%. Click on the button below to retry.<br> You can " + '<a href="' + the.hosturl + '/?target=login">login</a>' + " to store your scores and track progress.";
             document.getElementById("qzres").style.display = "block";
             document.getElementById("qzres").style.width = "100%";
         } else {
-            document.getElementById("qzres").innerHTML = "You scored " + percent + "%. Click on the button below to retry.<br> The score has been recorded on the profile.";
+            document.getElementById("qzres").innerHTML = "You scored " + percent + "%. Click on the button below to retry.<br> The score has been recorded on the profile. You can view the progress by clicking on the Profile button at the top.";
             document.getElementById("qzres").style.display = "block";
             document.getElementById("qzres").style.width = "100%";
             var userdata = sessionStorage.getItem("userdata");
@@ -4580,56 +4580,6 @@ function storeTestResults(percent, url) {
 }
 
 function showProfile() {
-    var userdata = sessionStorage.getItem("userdata");
-    var userObjs;
-    var scoresList;
-    var newHTML = "";
-    if ((userdata != null) && (userdata != "")) {
-        userObjs = JSON.parse(userdata);
-        scoresList = userObjs.scores;
-
-        // Sort the array based on multiple fields: 'grade' in ascending order and 'age' in descending order
-        scoresList.sort((a, b) => {
-            if (a.quiz !== b.quiz) {
-            // Sort by 'grade' field in ascending order
-            return a.quiz.localeCompare(b.quiz);
-            } else {
-            // Sort by 'age' field in descending order
-            return b.time - a.time;
-            }
-        });
-
-        newHTML = newHTML + "<div class='scoresheader'>Quiz Scores</div>";
-        newHTML = newHTML + "<table class ='scorestablecls' ><tr><th>Quiz</th><th>Score</th><th>Time</th></tr>";
-        let lastSubject = "";
-        for (var key in scoresList) {
-            var obj = scoresList[key];
-
-            var qzURL = (obj.quiz).split("/tutorials/");
-            var link = qzURL[1];
-
-            let title = obj.title;
-            if (title == undefined){
-                title = qzURL[1];
-            }
-
-            let dummy1 = link.split("/");
-            let subject = dummy1[0];
-
-            if (lastSubject != ""){
-                if (lastSubject != subject){
-                    newHTML = newHTML + "<tr style='background-color:#ddebf7;'><td colspan='3'>" + subject + "</td></tr>";
-                }
-            }else{
-                newHTML = newHTML + "<tr style='background-color:#ddebf7;'><td colspan='3'>" + subject + "</td></tr>"; 
-            }
-            newHTML = newHTML + "<tr><td> <a class= 'tutorialLink' href='" + obj.quiz + "'> " + title + " </a></td><td>" + obj.percent + "% </td><td>" + obj.time + "</td></tr>"
-            lastSubject = subject;
-        }
-        newHTML = newHTML + "</table>";
-    } else {
-        newHTML = newHTML + "<div class='scoresheader'>Quiz Scores</div> No scores found";
-    }
 
     document.getElementById("HelpTopicsDivId").style.display = "none";
     document.getElementById("accActivatedDivId").style.display = "none";
@@ -4653,7 +4603,168 @@ function showProfile() {
 
 
     document.getElementById("profileDivId").style.display = "block";
-    document.getElementById("profileDivId").innerHTML = newHTML;
+
+    document.getElementById("allScoresTab").innerHTML = getAllScoresHTML();
+    document.getElementById("latestScoresTab").innerHTML = getLatestScoresHTML();
+
+}
+
+function getLatestScoresHTML(){
+    let userdata = sessionStorage.getItem("userdata");
+    let userObjs;
+    let scoresList;
+    let latestScores = {};
+
+    let newHTML = "";
+    let tf = JSON.parse(sessionStorage.getItem("tutorialList"));
+    let quizRows = JSON.parse(tf);
+    quizRows = quizRows.filter(function (entry) {
+        return entry.title.toUpperCase().includes("QUIZ");
+    });
+
+    if (the.smusr) {
+    } else {
+        quizRows = quizRows.filter(function (entry) {
+            return entry.discontinue == "0";
+        });
+    }
+
+    let itemNameOrig = "";
+    let itemName = "";
+    let subpath = "";
+    let technologyOrig = "";
+    let technology = "";
+    let path = window.location.pathname;
+    let myUrl = path.substring(0, path.indexOf('/', path.indexOf('itcodescanner')) + 1);
+
+    if ((userdata != null) && (userdata != "")) {
+        userObjs = JSON.parse(userdata);
+        scoresList = userObjs.scores;
+
+        // Iterate over the scoresList array to find the maximum timedate for each score
+        scoresList.forEach((obj) => {
+            const { quiz, time } = obj;
+            if (!latestScores[quiz] || new Date(time) > new Date(latestScores[quiz])) {
+                latestScores[quiz] = time;
+            }
+        });
+
+        // Filter the scoresList array to include only objects with the maximum timedate for each name
+        const latestUserScoresData = scoresList.filter((obj) => obj.time === latestScores[obj.quiz] );
+
+
+        let quizURL = "";
+
+
+        newHTML = newHTML + "<div class='scoresheader'>Quiz Scores</div>";
+        newHTML = newHTML + "<table class ='scorestablecls' ><tr><th>Quiz</th><th>Score</th><th>Time</th></tr>";
+
+        for (let i = 0; i < quizRows.length; i++) {
+            itemNameOrig = quizRows[i].title;
+            itemName = itemNameOrig.replaceAll(" ", "-");
+    
+            subpath = quizRows[i].subpath;
+    
+            technologyOrig = quizRows[i].technology;
+    
+            technology = technologyOrig.replaceAll(" ", "-");
+
+            quizURL = myUrl + "tutorials/" + technology.toLowerCase() + "/" + itemName.toLowerCase();
+
+            if ((i==0) || ( quizRows[i].technology !=  quizRows[i-1].technology)){
+                newHTML = newHTML + "<tr style='background-color:#4d6981; color:white'><td colspan='3'>" + technologyOrig + "</td></tr>";
+            }
+
+            let latestResultForQuiz = "";
+            let latestTestTime = "";
+
+            let resultForQuiz = latestUserScoresData.filter((obj) => {
+                let qzURL = (obj.quiz).split("/tutorials/");
+                let link = qzURL[1];
+                let dummy1 = link.split("/");
+                return technology.toUpperCase() === dummy1[0].toUpperCase() && itemName.toUpperCase() === dummy1[1].toUpperCase() ; 
+            })
+
+            if (resultForQuiz.length != 0){
+                obj = resultForQuiz[0];
+                latestResultForQuiz = obj.percent;
+                latestTestTime = obj.time;
+
+                newHTML = newHTML + "<tr><td> <a class= 'tutorialLink' href='" + quizURL + "'> " + subpath + " </a></td><td>" + latestResultForQuiz + "% </td><td>" + latestTestTime + "</td></tr>";
+
+            }else{
+                newHTML = newHTML + "<tr><td> <a class= 'tutorialLink' href='" + quizURL + "'> " + subpath + " </a></td><td>" + "" + " </td><td>" + "" + "</td></tr>";
+
+            }
+
+
+        }
+
+
+        newHTML = newHTML + "</table>";
+    } else {
+        newHTML = newHTML + "<div class='scoresheader'>Quiz Scores</div> No scores found";
+    }
+
+    return newHTML;
+}
+
+function getAllScoresHTML(){
+    let userdata = sessionStorage.getItem("userdata");
+    let userObjs;
+    let scoresList;
+
+    let newHTML = "";
+    if ((userdata != null) && (userdata != "")) {
+        userObjs = JSON.parse(userdata);
+        scoresList = userObjs.scores;
+
+        // Sort the array based on multiple fields: 'grade' in ascending order and 'age' in descending order
+        scoresList.sort((a, b) => {
+            if (a.quiz !== b.quiz) {
+                // Sort by 'grade' field in ascending order
+                return a.quiz.localeCompare(b.quiz);
+            } else {
+                // Sort by 'time' field in descending order
+                const dateA = new Date(a.time);
+                const dateB = new Date(b.time);
+                return dateB - dateA;
+            }
+        });
+
+        newHTML = newHTML + "<div class='scoresheader'>Quiz Scores</div>";
+        newHTML = newHTML + "<table class ='scorestablecls' ><tr><th>Quiz</th><th>Score</th><th>Time</th></tr>";
+        let lastSubject = "";
+        for (let key in scoresList) {
+            let obj = scoresList[key];
+
+            let qzURL = (obj.quiz).split("/tutorials/");
+            let link = qzURL[1];
+
+            let title = obj.title;
+            if (title == undefined){
+                title = qzURL[1];
+            }
+
+            let dummy1 = link.split("/");
+            let subject = dummy1[0];
+
+            if (lastSubject != ""){
+                if (lastSubject != subject){
+                    newHTML = newHTML + "<tr style='background-color:#4d6981; color:white'><td colspan='3'>" + subject + "</td></tr>";
+                }
+            }else{
+                newHTML = newHTML + "<tr style='background-color:#4d6981; color:white'><td colspan='3'>" + subject + "</td></tr>"; 
+            }
+            newHTML = newHTML + "<tr><td> <a class= 'tutorialLink' href='" + obj.quiz + "'> " + title + " </a></td><td>" + obj.percent + "% </td><td>" + obj.time + "</td></tr>"
+            lastSubject = subject;
+        }
+        newHTML = newHTML + "</table>";
+    } else {
+        newHTML = newHTML + "<div class='scoresheader'>Quiz Scores</div> No scores found";
+    }
+
+    return newHTML;
 }
 
 function refreshPage() {
@@ -6931,3 +7042,6 @@ function getCookie(c_name) {
 function logCommon(msg) {
     //console.log("At " + new Date().toLocaleString() + " from common-functions.js " + msg )
 }
+
+
+  

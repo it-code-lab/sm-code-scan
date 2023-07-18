@@ -688,6 +688,8 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_collapsible
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   margin: 10px auto;
+  color: #4c4949;
+  background: #8bc1c3;
 }
 
 .scorestablecls td, .scorestablecls th {
@@ -696,9 +698,9 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_collapsible
 
 }
 
-.scorestablecls tr:nth-child(even){background-color: #f2f2f2;}
+.scorestablecls tr:nth-child(even){background-color: #8dadc2;}
 
-.scorestablecls tr:hover {background-color: #ddd;}
+.scorestablecls tr:hover {background-color: #a0a8b5;}
 
 .scorestablecls th {
   text-align: left;
