@@ -2,64 +2,14 @@
     <!-- Page content wrapper-->
     <div id="page-content-wrapper">
        <!-- Top navigation-->
-       <div class="topnav" id="myTopnav">
-          <a id="homeLinkId" href="/itcodescanner/?target=home">HOME</a>
-
-          <a id="tutorialLinkId" href="/itcodescanner/?target=tutorial">TUTORIALS <i  class="fa fa-caret-down"></i></a> 
-          <div id="dropDownTutListId" class="dropdown-content">
-             <a href="#">Link 1</a>
-             <a href="#">Link 2</a>
-             <a href="#">Link 3</a>
-          </div>   
-                   
-
-          <a id="projectscannerLinkId" href="/itcodescanner/?target=projectscanner">PROJECT SCANNER</a>
-          <a id="filescannerLinkId" href="/itcodescanner/?target=filescanner">FILE SCANNER</a>
-          <a id="HelpTopicsLinkId" style="display:none" href="/itcodescanner/?target=HelpTopics">HELP TOPICS</a>
-          <a id="howtoLinkId" href="/itcodescanner/?target=howto">HOW TO VIDEOS</a>
-          <a id="contactusLinkId" href="/itcodescanner/?target=contactus">CONTACT US</a>
-          <a id="loginLinkId" href="/itcodescanner/?target=login">LOG IN</a>
-          <a id="logoutLinkId" style="display:none" href="javascript:Logout()">LOGOUT</a>
-          <a id="profileLinkId" style="display:none" href="/itcodescanner/?target=profile"">PROFILE</a>
-          <a id="buymecoffee" href="https://www.buymeacoffee.com/smah" target="_blank">
-             <i id="coffeeBtn" class="fas fa-coffee"
-                style=" font-size: 12px; border-radius: 5px; padding: 2px; ">&nbsp; <span
-                   style="font-family: var(--bs-font-sans-serif); font-size: 14px; font-weight: 300;">Buy me a coffee
-                   <span></i>
-          </a>
-
-          <a class="searchWrapper"><span id="itemsearchDivId">
-             <form autocomplete="off" class="dummyForm">
-                <input id='tutorial-search-box' data-dropdownset='n' type='text' name='item' autocomplete='off'
-                   placeholder='search' />
-                <button id="itemsearchBtnId" class='' onclick='searchTutorial(); return false;'><i
-                      class="fas fa-search"></i></button>
-             </form>
-             </span>
-          </a>
-
-          <a href="javascript:void(0);" class="icon" style="margin-right: 20px" onclick="myTopNavFunction()">
-             <i class="fa fa-bars"></i>
-          </a>
-       </div>
-       
+       <body>
+         <?php include 'topnav.php'; ?>
+         </body>
        <!-- End of Top navigation-->
        <!-- Page content-->
-       <div id="loaderDivId" class="displayNone">
-          <div class="loader2">
-             <span></span>
-             <span></span>
-             <span></span>
-             <span></span>
-          </div>
-
-          <!-- SM:DONOTDELETE -->
-          <!-- <div class="loader">
-             <i class="loaderDot"></i>
-             <i class="loaderDot"></i>
-             <i class="loaderDot"></i>
-          </div> -->
-       </div>
+       <body>
+         <?php include 'loader.html'; ?>
+         </body>
        <div id="containerNHelpDivId" >
           <svg id="bgSVGId" class="bgSVG displayNone" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#7559DA" fill-opacity="1" d="M0,224L30,197.3C60,171,120,117,180,117.3C240,117,300,171,360,197.3C420,224,480,224,540,208C600,192,660,160,720,165.3C780,171,840,213,900,245.3C960,277,1020,299,1080,272C1140,245,1200,171,1260,165.3C1320,160,1380,224,1410,256L1440,288L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path></svg>
 
@@ -68,74 +18,7 @@
              <!--*************************************************************--->
              <!--***********************START - HOME DIV**********************--->
              <!--*************************************************************--->
-             <div id="homeDivId" class="displayNone">
-                <div class="bannerParent">
-                   <div class="bannerContainer">
-                      <div class="bannerContent" >
-                         <!-- <div class="bannerinner">
-                            <i class='fas fa-desktop desktop-icon'></i> <i class="divider"></i> IT CODE SCANNER
-                         </div> -->
-                         <label class="bannerLargeText scale-in-center" style="animation-delay: 0.8s; animation-duration: 0.5s;">IT Code Scanner</label>
-                         <br>
-                         <hr class="slide-in-left" style="animation-delay: 0.2s">
-                         <label class="bannerSmallText scale-in-center" style="animation-delay: 1.2s; animation-duration: 1s;">Spend
-                            less time in learning the code</label>
-                      </div>
-                   </div>
-                   <div id="homeCardsContainerDivId">
-                      <div class="menucard" onclick="Show('tutorial')"">
-                         <img src="/itcodescanner/images/tutorials.png" alt="Tutorials" class="homeCardImg">
-                         <div class="homeCardText">Tutorials</div>
-                         <hr>
-                         <div class="cardMsg">Tutorials and sample programs.</div>
-                         <!-- <p><button onclick="Show('tutorial')">Go</button></p> -->
-                      </div>
-                      <!-- <div class="menucard" onclick="Show('projectscanner')">
-                         <img src="/itcodescanner/images/prjscan.png" alt="Project Scan" class="homeCardImg">
-                         <div class="homeCardText">Project Scanner</div>
-                         <hr>
-                         <div class="cardMsg">Scan all the files in the project folder and see the help content for
-                            easy interpretation.</div>
-                      </div>
-                      <div class="menucard" onclick="Show('filescanner')">
-                         <img src="/itcodescanner/images/filescan.png" alt="File Scan" class="homeCardImg">
-                         <div class="homeCardText">File Scanner</div>
-                         <hr>
-                         <div class="cardMsg">Scan single file or program and see the help content</div>
-                      </div>
-                      <div class="menucard" onclick="Show('howto')">
-                         <img src="/itcodescanner/images/howto.png" alt="File Scan" class="homeCardImg">
-                         <div class="homeCardText">How to use</div>
-                         <hr>
-                         <div class="cardMsg">Video guides</div>
-                      </div> -->
 
-
-                      <div class="menucard" onclick="Show('contactus')">
-                         <img src="/itcodescanner/images/howto.png" alt="File Scan" class="homeCardImg">
-                         <div class="homeCardText">Question or Comments</div>
-                         <hr>
-                         <div class="cardMsg">Contact Us</div>
-                         <!-- <p><button onclick="Show('howto')">Go</button></p> -->
-                      </div>
-
-                   </div>
-                   <div  style="display:none; background-color: rgba(9, 84, 132); width: 100%; margin: 0px; padding: 20px; ">
-                      <label style="color: white"> Lots of programming languages supported. Some of them are listed
-                         below. </label>
-                      <hr style="color: #ccc">
-                      <div style="display: flex; flex-direction: row; width: 100%; margin: auto; overflow: auto">
-                         <img src="/itcodescanner/images/java.png" alt="Java" class="languageicon">
-                         <img src="/itcodescanner/images/python.png" alt="python" class="languageicon">
-                         <img src="/itcodescanner/images/javascript.png" alt="JavaScript" class="languageicon">
-                         <img src="/itcodescanner/images/php.png" alt="php" class="languageicon">
-                         <img src="/itcodescanner/images/html.png" alt="html" class="languageicon">
-                         <img src="/itcodescanner/images/csharp.png" alt="c#" class="languageicon">
-                         <img src="/itcodescanner/images/cobol.png" alt="cobol" class="languageicon">
-                      </div>
-                   </div>
-                </div>
-             </div>
              <!--*************************************************************--->
              <!--***********************END - HOME DIV**********************--->
              <!--*************************************************************--->
@@ -144,34 +27,7 @@
              <!--***********************START - TUTORIALS LIST DIV************--->
              <!--*************************************************************--->
 
-             <div class='showTutorialListDiv'>Show List
-             </div>
-
-             <div id="tutorialListDivId">
-                <!-- <div id="tutorialSearchDivId"><input id='tutorial-search-box' type='text' name='tutorial'
-                      autocomplete='off' placeholder='search' />
-                   <button id="tutorialSearchBtnId" class='searchButtonCls'
-                      onclick='searchTutorial(); return false;'>Search</button>
-                </div> -->
-                <div id="slideInDivId" class="slideIn cursor_pointer" onclick="toggleLeftSideMenu(); return false;" ><i class="fa fa-list" ></i></div>
-                <div id="tutorialListInnerDivId"></div>
-
-             </div>
-             <div id="tutorialDivId">
-               <?php if (!$isCrawler || !$isPHPUrl): ?>
-
-               <?php else: ?>
-                     <h1> <?= $_SESSION['webTitle'] ?> </h1><br>
-                  
-                  
-                     <div style="margin: auto; padding:10px">
-                     <?= $_SESSION['webFullDesc'] ?>
-                     </div>
-               <?php endif; ?>
-             </div>
-
-             <div id="tutorialEditDivId">
-             </div>
+            <!-- MOVED to Tutorials -->
 
              <!--*************************************************************--->
              <!--***********************END - TUTORIALS LIST DIV**************--->
@@ -180,7 +36,7 @@
              <!--*************************************************************--->
              <!--***********************START - PROJECT SCANNER DIV***********--->
              <!--*************************************************************--->
-             <div id="projectscannerDivId">
+             <div id="projectscannerDivId" class="displayNone">
                 <!--
                       <input type="file" id="ctrl" onchange="handleFolderSelect(this)" webkitdirectory directory multiple/>
                       -->
@@ -279,7 +135,7 @@
              <!--*************************************************************--->
              <!--***********************START - FILE SCANNER DIV**************--->
              <!--*************************************************************--->
-             <div id="filescannerDivId">
+             <div id="filescannerDivId" class="displayNone">
                 <div id="filescannerInnerDivId" >
                    <!--	
                          <div id="prjSelectionMsg" style=" padding: 5px; text-align: justify; text-justify: inter-word; border: 1px solid #ccc; color: #545454; font-family: 'Roboto-Bold', Verdana, Sans-serif !important; font-weight: 500; background: #e6e0e7; margin-bottom: 0px;">File Scanner
@@ -374,7 +230,7 @@
              <!--***********************START - HELP TOPICS ******************--->
              <!--*************************************************************--->
 
-             <div id="HelpTopicsDivId">
+             <div id="HelpTopicsDivId" class="displayNone">
                 <div id="HelpTopicsDivInn1Id" >
                    <div id="HelpTopicsDivInn2Id"  >
                       <input id="helpTopics-lang-box" type="text" name="language" autocomplete="off"
@@ -400,163 +256,18 @@
              <!--*************************************************************--->
              <!--***********************END - HELP TOPICS ********************--->
              <!--*************************************************************--->
-             <div id="profileDivId" class="profile" >
-               <div id="tabContentParent">
-                  <div class="tabContainer">
-                    <ul class="tabs">
-                      <li><a src="latestScoresTab" href="javascript:void(0);" class="active">Latest Scores</a></li>
-                      <li><a src="allScoresTab" href="javascript:void(0);">All Scores</a></li>
-                    </ul>
-                    <div class="tabContent">
-                      <div id="latestScoresTab">
-                      </div>
-                      <div id="allScoresTab">
-                      </div>
-                    </div>
-                    <!-- /tabContent -->
-                  </div>
-                  <!-- /tabContainer -->
-                </div>
-                <!-- /content -->
-             </div>
+               <!-- PROFILE MOVED -->
              <!--*************************************************************--->
              <!--**START - LOGIN, REGISTER, FORGOT PASSWORD, ACTIVATE ACC*****--->
              <!--*************************************************************--->
 
-             <div id="loginDivId" class="login displayNone" >
-                <div id="loginSecDivId" style="margin-top: 20px;">
-                   <label style="font-size: 14px; font-weight: 900; color: #333 "> LOGIN </label>
-                   <hr>
-                   <input class="un " id='emailid' type="text" align="center" placeholder="Login Email Id">
-                   <input class="pass" id='password' type="password" align="center" placeholder="Password">
-                   <br>
-                   <label id="loginerrormsg" style="color: #cc0000; font-size: 14px;"></label>
-                   <br>
-                   <br>
-                   <button class="helper btnCenterAlign" style="width: 60%" onclick="login();">Log in</button>
-                   <br>
-                   <br>
-                   <a href="#!" style="color: #888;  " onMouseOver="this.style.color='#000'"
-                      onMouseOut="this.style.color='#888'" onclick="showCreateAccount();">Not registered? Create
-                      account</a>
-                   <br>
-                   <a href="#!" style="color: #888;  " onMouseOver="this.style.color='#000'"
-                      onMouseOut="this.style.color='#888'" onclick="showForgotPassword();">Forgot Password? Reset</a>
-                </div>
-                <div id="registerSecDivId" class="displayNone" style="margin-top: 20px;">
-                   <label style="font-size: 14px; font-weight: 900; color: #333 "> REGISTER </label>
-                   <hr>
-                   <input class="un" id='registerusname' type="text" placeholder="Your full name">
-                   <input class="un " id='registeremailid' type="text" align="center" placeholder="Login Email Id">
-                   <input class="pass" id='registerpassword' type="password" align="center"
-                      placeholder="Set Password">
-                   <input class="pass" id='registerpasswordre' type="password" align="center"
-                      placeholder="Re-enter Password">
-                   <br>
-                   <label id="registererrormsg" style="color: #cc0000; font-size: 14px"></label>
-                   <br>
-                   <br>
-                   <button class="helper btnCenterAlign" style="width: 300px" onclick="register();">Register</button>
-                   <!---->
-                   <br>
-                   <br>
-                   <a href="#!" style="color: #888;  " onMouseOver="this.style.color='#000'"
-                      onMouseOut="this.style.color='#888'" onclick="showLogin();">Go back to Login</a>
-                </div>
-                <div id="forgotPasswordSecDivId" class="displayNone" style=" margin-top: 20px; ">
-                   <label style="font-size: 14px; font-weight: 900; color: #333 "> FORGOT PASSWORD </label>
-                   <hr>
-                   <label>Enter your email address and we will email you instructions on password reset</label>
-                   <br>
-                   <br>
-                   <input class="un " id='forgotpwemailid' type="text" align="center" placeholder="Login Email Id">
-                   <br>
-                   <label id="forgotpwerrormsg" style="color: #cc0000; font-size: 14px"></label>
-                   <br>
-                   <br>
-                   <button class="helper btnCenterAlign" style="width: 300px" align="center" onclick="forgotpw();">Send</button>
-                   <!---->
-                   <br>
-                   <br>
-                   <a href="#!" style="color: #888;  " onMouseOver="this.style.color='#000'"
-                      onMouseOut="this.style.color='#888'" onclick="showLogin();">Go back to Login</a>
-                </div>
-                <div id="accActivatedDivId" class="displayNone" style="margin-top: 20px;">
-                   <label style="font-size: 14px; font-weight: 900; color: #333 "> ACCOUNT ACTIVATED </label>
-                   <hr>
-                   <label>Your account has been activated successfully. You can proceed to login</label>
-                   <!---->
-                   <br>
-                   <br>
-                   <a href="#!" style="color: #888;  " onMouseOver="this.style.color='#000'"
-                      onMouseOut="this.style.color='#888'" onclick="showLogin();">Login</a>
-                </div>
-                <div id="forgotPWDivId" class="displayNone" style="margin-top: 20px; ">
-                   <label style="font-size: 14px; font-weight: 900; color: #333 "> SET PASSWORD </label>
-                   <hr>
-                   <!---->
-                   <br>
-                   <input class="pass" id='newpassword' type="password" align="center" placeholder="Set New Password">
-                   <br>
-                   <input class="pass" id='newpasswordRe' type="password" align="center"
-                      placeholder="Re-enter New Password">
-                   <br>
-                   <label id="newpwerrormsg" style="color: #cc0000; font-size: 14px"></label>
-                   <br>
-                   <div id="setPwDivId">
-                      <button class="helper btnCenterAlign" style="width: 300px" align="center" onclick="setPassword();">Set
-                         Password</button>
-                   </div>
-                   <div id="setPwSuccessDivId" style="display: none">
-                      <label style="color: orange">Your account password has been set successfully. You can proceed to
-                         login</label>
-                      <!---->
-                      <br>
-                      <br>
-                      <a href="#!" style="color: #888;  " onMouseOver="this.style.color='#000'"
-                         onMouseOut="this.style.color='#888'" onclick="showLogin();">Login</a>
-                   </div>
-                </div>
-             </div>
+             <!-- LOGIN DIV - MOVED -->
              <!--*************************************************************--->
              <!--****END - LOGIN, REGISTER, FORGOT PASSWORD, ACTIVATE ACC*****--->
              <!--*************************************************************--->               
 
-             <div id="contactusDivId" class="displayNone">
-                <div id="contactusSecDivId" style="margin: 0 auto;   padding: 20px; ">
-                   <label style="font-size: 14px; font-weight: 900; color: #333 "> CONTACT US </label>
-                   
-                   <div id="sndmsgdivid">
-                   <hr>
-                   <input class="un formInputText " style='width: calc(100% - 8px);' id='contactusname' type="text"
-                      placeholder="Your full name">
-                   <input class="un formInputText  " style='width: calc(100% - 8px);' id='contactusemailid'
-                      type="text" placeholder="Email Id">
-                   <textarea id="contactus_msg" class="fullWidth" style="border: 1px solid rgba(0, 0, 0, 0.3);"
-                      placeholder="Your message" rows="3"></textarea>
-                   <br>
-                   <div style=" width: 220px; background-color: #C8C8C8; border-radius: 5px; ">
-                      <ul class="captchaList" style="padding: 5px;">
-                         <li style="margin: 5px;">
-                            <div class="captchaBackground" style="position: relative; ">
-                               <canvas id="captcha">captcha text</canvas>
-                               <i class="fa fa-refresh" id="refreshButton"
-                                  style="float: right;  position: absolute; top:1px; right: 1px; color:white; cursor: pointer"
-                                  onclick="refreshCaptcha();"></i>
-                            </div>
-                         </li>
-                         <li style="margin: 5px;">
-                            <div><input id="enteredCaptchaText" style="width: 188px; height:30px"
-                                  placeholder="Enter displayed code" type="text" autocomplete="off" name="text"></div>
-                         </li>
-                      </ul>
-                   </div>
-                   <label id="contactuserrormsg" style="color: #cc0000; font-size: 14px"></label>
-                   <br> <br>
-                   <button class="helper btnCenterAlign" align="center" onclick="contactus();">Submit</button>
-                   </div>
-                </div>
-             </div>
+             <!-- CONTACT US - MOVED -->
+
              <div id="onMobileMsgDivId" class="displayNone" style="margin:10px; padding:10px; text-align: justify">
                 Because the code upload and scanning limitations, the site has restricted functionality on mobile
                 device.
@@ -568,7 +279,7 @@
           <!-- *****END OF MAIN CONTAINER DIV -->
           <div class="splitter">
           </div>
-          <div class="border-end bg-white panel-right" id="helpDisplayDivId"
+          <div class="border-end bg-white panel-right displayNone" id="helpDisplayDivId"
              style="resize: horizontal; max-height: 90vh; overflow: hidden; padding: 0px; ">
              <div id="helpboxDivId" class="helpbox">
                 <form action="/">
@@ -907,68 +618,9 @@
        <!--**************START: HELP DISPLAY DIV**************-->
     </div>
  </div>
- <div class="footerDiv">
- <footer>
-    <div class="footer-main">
-      <div class="footer-col1">
-        <ul>
-          <li>
-             <img src="/itcodescanner/assets/favicon-1.png" alt="IT Code Scanner" class="languageicon">
-          </li>
-  
-        </ul>
-      </div>
-  
-      <div class="footer-col2">
-        <h3 class="footer-heading">
-          KEY LINKS
-        </h3>
-        <div class="footer-languages">
-          <a href="/itcodescanner/?target=home">Home</a>
-          <a href="/itcodescanner/?target=tutorial">Tutorials</a>
-          <!-- <a href="/itcodescanner/?target=projectscanner">Project Scanner</a>
-          <a href="/itcodescanner/?target=filescanner">File Scanner</a> -->
-          <a href="/itcodescanner/?target=contactus">Contact Us</a>
-        </div>
-      </div>
-  
-      <div class="footer-col3">
-        <h3 class="footer-heading">
-          FOLLOW US
-        </h3>
-        <div class="footer-social">
-          <a href="https://www.facebook.com/profile.php?id=100077594436233">
-             <i class="fa fa-facebook-square" style="font-size:48px;color:white"></i>
-          </a>
-   
-        </div>
-      </div>
-    </div>
-  
-    <p class="footer-terms">
-      <a href="#">© 2022 IT Code Scanner. All rights reserved</a>
-  
-    </p>
-  </footer>
-  </div>
-  <?php if (!$isCrawler): ?>
-      <div id="cookie-div-id" class="cookie-consent-banner displayNone">
-         <div class="cookie-consent-banner__inner">
-            <div class="cookie-consent-banner__copy">
-               <div class="cookie-consent-banner__header">We USE COOKIES</div>
-               <div class="cookie-consent-banner__description">We use cookies and other tracking technologies to improve
-                  your browsing experience on our website, to show you personalized content and targeted ads, to analyze
-                  our website traffic, and to understand where our visitors are coming from. You consent to our cookies if
-                  you continue to use our website.</div>
-            </div>
-            <div class="cookie-consent-banner__actions">
-               <a href="#" onclick="cookieAccepted()" class="cookie-consent-banner__cta">
-                  Understood
-               </a>
-            </div>
-         </div>
-      </div>
- <?php endif; ?>
+
+ <?php include 'footer.html'; ?>
+
  <!--
        </div>
        -->
@@ -1011,6 +663,6 @@
     getSpecialFiles();
     checkURL();
  </script>
- <script src="/itcodescanner/web/onload-v0.02.js"></script>
+ <script src="/itcodescanner/web/onload-v0.03.js"></script>
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-63324d242f787b67"></script>

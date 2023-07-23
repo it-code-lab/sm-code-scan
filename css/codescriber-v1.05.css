@@ -675,13 +675,15 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_collapsible
 /*START - LOGIN, REGISTER, FORGOT PASSWORD, ACTIVATE ACC******/
 /*************************************************************/
 #loginDivId{
-  display:none;  height:90vh; margin:auto; padding: 0px 0px 20px 0px; background-color: #fff;
+  /* display:none;   */
+  height:90vh; margin:auto; padding: 0px 0px 20px 0px; background-color: #fff;
 }
 /*************************************************************/
 /*END - LOGIN, REGISTER, FORGOT PASSWORD, ACTIVATE ACC********/
 /*************************************************************/
 #profileDivId{
-  display:none; width:100% ; min-height:90vh; margin:auto; padding: 0px 0px 20px 0px; background-color: #fff;
+  /* display:none;  */
+  width:100% ; min-height:90vh; margin:auto; padding: 0px 0px 20px 0px; background-color: #fff;
 }
 
 .scorestablecls {
@@ -783,7 +785,7 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_collapsible
   display: block;
   color: #f2f2f2;
   text-align: center;
-  padding: 14px 14px;
+  padding: 17px 14px;
   text-decoration: none;
   font-size: 14px;
 }
@@ -2365,6 +2367,11 @@ width: 100%;
   min-width: 350px; 
   background-color: rgb(250, 250, 250);
   transition: ease 0.5s;
+
+}
+
+#tutorialListInnerDivId{
+  padding-bottom: 50px;
 }
 #tutorialEditDivId{
   /* height: 100vh; */
@@ -2703,7 +2710,8 @@ div:has(> .hideParentDiv) {display: none; }
 }
 
 @media print {
-  .videoIframeDiv, .printBtnDivCls, .pageinfo-desc, .chartDiv, .topnav, .sbmtqz-div, .topNavDivCls, .bottomNavDivCls, .bottomCommentDivCls, .footerDiv, #tutorialListDivId, #tutorialEditDivId {
+
+  .noPrint, #qzres, #sndmsgdivid, .videoIframeDiv, .printBtnDivCls, .pageinfo-desc, .chartDiv, .topnav, .sbmtqz-div, .topNavDivCls, .bottomNavDivCls, .bottomCommentDivCls, .footerDiv, #tutorialListDivId, #tutorialEditDivId {
     display: none !important;
   }
 }

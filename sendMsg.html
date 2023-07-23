@@ -1,0 +1,65 @@
+<div id="sndmsgdivid">
+  <hr />
+  <input
+    class="un formInputText"
+    style="width: calc(100% - 8px)"
+    id="contactusname"
+    type="text"
+    placeholder="Your full name"
+  />
+  <input
+    class="un formInputText"
+    style="width: calc(100% - 8px)"
+    id="contactusemailid"
+    type="text"
+    placeholder="Email Id"
+  />
+  <textarea
+    id="contactus_msg"
+    class="fullWidth"
+    style="border: 1px solid rgba(0, 0, 0, 0.3)"
+    placeholder="Your message"
+    rows="3"
+  ></textarea>
+  <br />
+  <div style="width: 220px; background-color: #c8c8c8; border-radius: 5px">
+    <ul class="captchaList" style="padding: 5px">
+      <li style="margin: 5px">
+        <div class="captchaBackground" style="position: relative">
+          <canvas id="captcha">captcha text</canvas>
+          <i
+            class="fa fa-refresh"
+            id="refreshButton"
+            style="
+              float: right;
+              position: absolute;
+              top: 1px;
+              right: 1px;
+              color: white;
+              cursor: pointer;
+            "
+            onclick="refreshCaptcha();"
+          ></i>
+        </div>
+      </li>
+      <li style="margin: 5px">
+        <div>
+          <input
+            id="enteredCaptchaText"
+            style="width: 188px; height: 30px"
+            placeholder="Enter displayed code"
+            type="text"
+            autocomplete="off"
+            name="text"
+          />
+        </div>
+      </li>
+    </ul>
+  </div>
+  <label id="contactuserrormsg" style="color: #cc0000; font-size: 14px"></label>
+  <br />
+  <br />
+  <button class="helper btnCenterAlign" align="center" onclick="contactus();">
+    Submit
+  </button>
+</div>

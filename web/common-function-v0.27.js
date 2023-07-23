@@ -3359,9 +3359,7 @@ function getTutorial(tutorialStr) {
             } else if (localStorage.getItem("userLvl") == "9") {
 
                 sessionStorage.setItem("data-description", description);
-
-                //newHTML = newHTML + '<a href="#" class="btn" onclick="editItem(' + "'" + itemid + "'," + "'" + technology + "'," + "'" + technologyseq + "'," + "'" + subpath + "',"+ "'" + subpathseq + "',"+ "'" + title + "',"+ "'" + titleseq + "',"+ "'" + shortdescription + "',"+ "'" + description + "',"+ "'" + writer + "',"+ "'" + keywords + "',"+ "'" + discontinue + "'"+');return false;" >Edit</a>';
-
+ 
                 newHTML = newHTML + '<button class="btn" data-itemid= "' + itemid + '" data-technology= "' + technology + '" data-technologyseq= "' + technologyseq + '" data-subpath= "' + subpath + '" data-subpathseq= "' + subpathseq + '" data-title= "' + title + '" data-titleseq= "' + titleseq + '" data-shortdescription= "' + shortdescription + '"  data-writer= "' + writer + '" data-keywords= "' + keywords + '" data-discontinue= "' + discontinue + '" onclick="editItem(this)" >Edit</button>';
             }
             newHTML = newHTML + '<div class="printBtnDivCls"><button class="printBtn" onclick="window.print()">Printable</button></div>'
@@ -3389,10 +3387,6 @@ function getTutorial(tutorialStr) {
                     let quizScores = userObjs.scores;
                     
                     let thisQuizResults = quizScores.filter(quizDet => quizDet.quiz === document.URL);
-                    //let thisQuizResults = quizScores.filter(quiz => quiz.title === pageHdr);
-    
-                    // Sort the John students by grade in ascending order
-                    //thisQuizResults.sort((a, b) => b.time.localeCompare(a.time));
     
                     thisQuizResults.sort((a, b)=> {
                         const dateA = new Date(a.time);
@@ -3520,6 +3514,9 @@ function editItem(btn) {
     shortdescription = btn.dataset.shortdescription;
     //description = btn.dataset.description;
     description = sessionStorage.getItem("data-description");
+
+
+
     writer = btn.dataset.writer;
     keywords = btn.dataset.keywords;
     discontinue = btn.dataset.discontinue;
@@ -4924,6 +4921,8 @@ function updateItem(itemid, createNewItem) {
 
             sessionStorage.setItem("tutorialList", null);
             //sessionStorage.setItem("itemList", null);
+
+            
             getTutorialList();
             if (itemid == "") {
                 //showMdaItems();
@@ -5823,7 +5822,7 @@ function searchTutorial() {
     }
     document.getElementById("tutorialDivId").style.display = "none";
     document.getElementById("tutorialListDivId").style.width = "100%";
-    document.getElementById("homeDivId").style.display = "none";
+    //document.getElementById("homeDivId").style.display = "none";
 
     populateTutorialList(rows);
     $(".cardsContainerDivClassPadd").css("width", "95%");
@@ -5990,7 +5989,7 @@ function populateTutorialList(rows = "") {
         if (previousSubpath == currentSubpath) {
             //It is a child tutorial same as previous
             innerHTML = innerHTML + '<div id="tutorialDiv-' + rows[i].itemid + '" class="tutorialDiv tutorialChild ' + discontinuedFlgCls + technologySqueezed + '" >';
-            innerHTML = innerHTML + '<a class="tutorialLink" onclick="getItemAfterURLHistUpd(' + "'" + itemStr + "'" + '); return false;" href ="' + tutorialTitleURL + '"> <span class="tutorialTitleSpan"  > <h2 class="tutorialTitleH2" >';
+            innerHTML = innerHTML + '<a class="tutorialLink"  href ="' + tutorialTitleURL + '"> <span class="tutorialTitleSpan"  > <h2 class="tutorialTitleH2" >';
 
             if (the.smusr) {
                 innerHTML = innerHTML + rows[i].titleseq + '. ';
@@ -6006,7 +6005,7 @@ function populateTutorialList(rows = "") {
             innerHTML = innerHTML + '</div>';
 
             innerHTML = innerHTML + '<div id="tutorialDiv-' + rows[i].itemid + '" class="tutorialDiv tutorialChild ' + discontinuedFlgCls + technologySqueezed + '" >';
-            innerHTML = innerHTML + '<a class="tutorialLink" onclick="getItemAfterURLHistUpd(' + "'" + itemStr + "'" + '); return false;" href ="' + tutorialTitleURL + '"> <span class="tutorialTitleSpan"  > <h2 class="tutorialTitleH2" >';
+            innerHTML = innerHTML + '<a class="tutorialLink"  href ="' + tutorialTitleURL + '"> <span class="tutorialTitleSpan"  > <h2 class="tutorialTitleH2" >';
 
             if (the.smusr) {
                 innerHTML = innerHTML + rows[i].titleseq + '. ';
@@ -6017,7 +6016,7 @@ function populateTutorialList(rows = "") {
         } else {
             //It is not a new child tutorial 
             innerHTML = innerHTML + '<div id="tutorialDiv-' + rows[i].itemid + '" class="tutorialDiv ' + discontinuedFlgCls + technologySqueezed + '" >';
-            innerHTML = innerHTML + '<a class="tutorialLink" onclick="getItemAfterURLHistUpd(' + "'" + itemStr + "'" + '); return false;" href ="' + tutorialTitleURL + '"> <span class="tutorialTitleSpan"  > <h2 class="tutorialTitleH2" >';
+            innerHTML = innerHTML + '<a class="tutorialLink"  href ="' + tutorialTitleURL + '"> <span class="tutorialTitleSpan"  > <h2 class="tutorialTitleH2" >';
 
             if (the.smusr) {
                 innerHTML = innerHTML + rows[i].titleseq + '. ';
@@ -6498,13 +6497,27 @@ function login() {
                 sessionStorage.setItem("userdata", retstatus.substring(3));
                 localStorage.setItem("userEmail", StrEmail);
                 getStoredProjectList();
-                var myUrl = window.location.protocol + "//" + window.location.host +
-                    window.location.pathname;
 
-                var lastUrl = sessionStorage.getItem("lastUrl");
+                var path = window.location.pathname;
+                var dummyUrl = path.substring(0, path.indexOf('/', path.indexOf('itcodescanner')) + 1)
+
+                var myUrl = window.location.protocol + "//" + window.location.host +
+                dummyUrl;
+
+                //var lastUrl = sessionStorage.getItem("lastUrl");
+                lastUrl = document.referrer;
 
                 if (lastUrl == null) {
-                    lastUrl = myUrl + "?target=" + "home"
+                    //lastUrl = myUrl + "?target=" + "home"
+                    lastUrl = myUrl + "home";
+                }else{
+                    if (lastUrl.indexOf('itcodescanner') > 0){
+                        if (lastUrl.indexOf('login') > 0){
+                            lastUrl = myUrl + "home";
+                        }
+                    }else{
+                        lastUrl = myUrl + "home";
+                    }
                 }
                 window.open(lastUrl, "_self");
 

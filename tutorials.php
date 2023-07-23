@@ -1,5 +1,5 @@
 <?php
-include_once("php/session.php");
+include("php/session.php");
 
 $title = "IT Tutorials";
 $description = "Easy to understand tutorials with lots of sample codes in programming languages Java,
@@ -45,15 +45,17 @@ if (strpos($path, 'tutorials/') !== false) {
         $tutData = $database->getTutorial($technologyNItemstr);
         $tutDivHTML = populateTutorialHTML($tutData, $database);
         $tutListHTML = getTutorialsListHTML($database, $technology, $tutTitle);
+        
     } else {
         $technology = urldecode($technologyNItemstr);
         $tutListHTML = getTutorialsListHTML($database, $technology, $tutTitle);
+        $title = $technology. " | ITCodeScanner";
     }
 
     if (strpos($technologyNItemstr, '/') !== false) {
         $isPHPUrl = true;
 
-        $title = $_SESSION['webTitle'];
+        $title = $_SESSION['webTitle']. " | ITCodeScanner";
         $description = $_SESSION['webDesc'];
         //$image_url = "https://itcodescanner.com/getimage/".$_SESSION['image_nm'];
         $keywords = $_SESSION['webKeywords'];
@@ -62,6 +64,7 @@ if (strpos($path, 'tutorials/') !== false) {
     }
 } else {
     $tutListHTML = getTutorialsListHTML($database, "", "");
+    $title = "Tutorials | ITCodeScanner";
 }
 
 function populateTutorialHTML($tutData, $database)
