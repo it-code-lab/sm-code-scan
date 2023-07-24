@@ -4204,7 +4204,7 @@ function toggleDescView(itemid) {
     if (document.getElementById("descriptionTextId").style.display == "block") {
         newHTML = document.getElementById("descriptionTextId").value;
         //**SM - May need to be reverted* */
-        //newHTML = removeNewLine(newHTML);
+        newHTML = removeNewLine(newHTML);
         document.getElementById(divId).innerHTML = newHTML;
 
         document.getElementById(divId).style.display = "block";
@@ -4212,7 +4212,7 @@ function toggleDescView(itemid) {
     } else {
         newHTML = document.getElementById(divId).innerHTML;
         //**SM - May need to be reverted* */
-        //newHTML = addNewLineInText(newHTML);
+        newHTML = addNewLineInText(newHTML);
         document.getElementById("descriptionTextId").value = newHTML;
 
         document.getElementById(divId).style.display = "none";
@@ -4222,18 +4222,68 @@ function toggleDescView(itemid) {
 }
 
 function addNewLineInText(innerHTML) {
-    innerHTML = innerHTML.replaceAll("<div", "\r\n<div");
-    innerHTML = innerHTML.replaceAll("<h1", "\r\n<h1");
-    innerHTML = innerHTML.replaceAll("<h2", "\r\n<h2");
-    innerHTML = innerHTML.replaceAll("<h3", "\r\n<h3");
-    innerHTML = innerHTML.replaceAll("<ol", "\r\n<ol");
-    innerHTML = innerHTML.replaceAll("<ul", "\r\n<ul");
+    // innerHTML = innerHTML.replaceAll("<div", "\r\n<div");
+    // innerHTML = innerHTML.replaceAll("<h1", "\r\n<h1");
+    // innerHTML = innerHTML.replaceAll("<h2", "\r\n<h2");
+    // innerHTML = innerHTML.replaceAll("<h3", "\r\n<h3");
+    // innerHTML = innerHTML.replaceAll("<ol", "\r\n<ol");
+    // innerHTML = innerHTML.replaceAll("<ul", "\r\n<ul");
+
+    // Add line breaks before and after certain HTML tags in the textarea
+    innerHTML = innerHTML.replace(/<div>/g, "\n\n<div>");
+    innerHTML = innerHTML.replace(/<\/div>/g, "</div>\n\n");
+    innerHTML = innerHTML.replace(/<p>/g, "\n\n<p>");
+    innerHTML = innerHTML.replace(/<\/p>/g, "</p>\n\n");
+    innerHTML = innerHTML.replace(/<br>/g, "\n\n<br>");
+    innerHTML = innerHTML.replace(/<h1>/g, "\n\n<h1>");
+    innerHTML = innerHTML.replace(/<\/h1>/g, "</h1>\n\n");
+
+    innerHTML = innerHTML.replace(/<h2>/g, "\n\n<h2>");
+    innerHTML = innerHTML.replace(/<\/h2>/g, "</h2>\n\n");
+
+    innerHTML = innerHTML.replace(/<h3>/g, "\n\n<h3>");
+    innerHTML = innerHTML.replace(/<\/h3>/g, "</h3>\n\n");
+
+    innerHTML = innerHTML.replace(/<li>/g, "\n<li>");
+    innerHTML = innerHTML.replace(/<\/li>/g, "</li>\n");
+
+    innerHTML = innerHTML.replace(/<ul>/g, "\n\n<ul>");
+    innerHTML = innerHTML.replace(/<\/ul>/g, "</ul>\n\n");
+
+    innerHTML = innerHTML.replace(/<ol>/g, "\n\n<ol>");
+    innerHTML = innerHTML.replace(/<\/ol>/g, "</ol>\n\n");
+
     return innerHTML;
 }
 
 function removeNewLine(innerHTML) {
     //innerHTML = innerHTML.replaceAll( "&#13;&#10;", "");
-    innerHTML = innerHTML.replace(/\r\n|\r|\n/g, "")
+    //innerHTML = innerHTML.replace(/\r\n|\r|\n/g, "")
+
+    innerHTML = innerHTML.replace(/\n\n<div>/g, "<div>");
+    innerHTML = innerHTML.replace(/<\/div>\n\n/g, "</div>");
+    innerHTML = innerHTML.replace(/\n\n<p>/g, "<p>");
+    innerHTML = innerHTML.replace(/<\/p>\n\n/g, "</p>");
+    innerHTML = innerHTML.replace(/\n\n<br>/g, "<br>");
+
+    innerHTML = innerHTML.replace(/\n\n<h1>/g, "<h1>");
+    innerHTML = innerHTML.replace(/<\/h1>\n\n/g, "</h1>");
+
+    innerHTML = innerHTML.replace(/\n\n<h2>/g, "<h2>");
+    innerHTML = innerHTML.replace(/<\/h2>\n\n/g, "</h2>");
+
+    innerHTML = innerHTML.replace(/\n\n<h3>/g, "<h3>");
+    innerHTML = innerHTML.replace(/<\/h3>\n\n/g, "</h3>");
+
+    innerHTML = innerHTML.replace(/\n<li>/g, "<li>");
+    innerHTML = innerHTML.replace(/<\/li>\n/g, "</li>");
+
+    innerHTML = innerHTML.replace(/\n\n<ul>/g, "<ul>");
+    innerHTML = innerHTML.replace(/<\/ul>\n\n/g, "</ul>");
+
+    innerHTML = innerHTML.replace(/\n\n<ol>/g, "<ol>");
+    innerHTML = innerHTML.replace(/<\/ol>\n\n/g, "</ol>");
+
     return innerHTML;
 }
 function addComponent(itemid, type) {

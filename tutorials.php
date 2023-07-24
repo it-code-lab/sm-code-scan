@@ -430,7 +430,7 @@ function isMobileDevice()
 
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
    <meta name="author" content="Numerouno" />
-   <title>IT Tutorials</title>
+
    <!-- Favicon-->
    <link rel="icon" type="image/x-icon" href="/itcodescanner/assets/favicon.ico" />
    <link rel="canonical" href="https://itcodescanner.com" />
