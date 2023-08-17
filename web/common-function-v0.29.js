@@ -54,7 +54,7 @@ document.onpaste = function (event) {
     }
 
     let items = (event.clipboardData || event.originalEvent.clipboardData).items;
-    console.log(JSON.stringify(items)); // might give you mime types
+    //console.log(JSON.stringify(items)); // might give you mime types
     for (let index in items) {
         let item = items[index];
         if (item.kind === 'file') {
@@ -138,6 +138,46 @@ function insertImageAtCaret(html) {
             // some browsers (IE9, for one)
             var el = document.createElement("div");
             el.innerHTML = html;
+            var frag = document.createDocumentFragment(), node, lastNode;
+            while ((node = el.firstChild)) {
+                lastNode = frag.appendChild(node);
+            }
+            range.insertNode(frag);
+
+            // Preserve the selection
+            if (lastNode) {
+                range = range.cloneRange();
+                range.setStartAfter(lastNode);
+                range.collapse(true);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        }
+    } else if (document.selection && document.selection.type != "Control") {
+        // IE < 9
+        document.selection.createRange().pasteHTML(html);
+    }
+}
+
+function insertClipboardHTMLAtCaret() {
+
+    
+    let htmlData = document.getElementById("htmlDataInsert").value;;
+
+
+    var sel, range;
+    if (window.getSelection) {
+        // IE9 and non-IE
+        sel = window.getSelection();
+        if (sel.getRangeAt && sel.rangeCount) {
+            range = sel.getRangeAt(0);
+            range.deleteContents();
+
+            // Range.createContextualFragment() would be useful here but is
+            // only relatively recently standardized and is not supported in
+            // some browsers (IE9, for one)
+            var el = document.createElement("div");
+            el.innerHTML = htmlData ;
             var frag = document.createDocumentFragment(), node, lastNode;
             while ((node = el.firstChild)) {
                 lastNode = frag.appendChild(node);
@@ -3627,6 +3667,10 @@ function editItem(btn) {
         "<button data-title='Quiz1'' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','qz1') >Q1</button>" +
         "<button data-title='Quiz2' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','qz2') >Q2</button>" +
         "<button data-title='Submit Quiz Button' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','sbmtqz') >SbmtQz</button>" +
+
+        "<label class='toolBarlabel'>Insert Clipboard HTML</label>" +
+        "<button data-title='insertClipboardHTMLAtCaret'' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=insertClipboardHTMLAtCaret() >insertClipboardHTMLAtCaret</button>" +
+        "<input type='text' id='htmlDataInsert' value='<div>Insert HTML</div>' placeholder='HTML to insert'>" +
 
         "<label for='insertInner'>Insert component before active Div:</label>" +
         "<input type='checkbox' id='insertInner' >" +
