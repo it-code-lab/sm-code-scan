@@ -28,9 +28,10 @@ var the = {
     hostnm: 'itcodescanner',
 
 };
-
+let timerInterval;
 var last_focused_div_id;
-
+// Record the start time
+const startTime = new Date().getTime();
 // requirejs.config({
 //     //By default load any module IDs from js/lib
 //     baseUrl: 'js/lib',
@@ -3455,6 +3456,9 @@ function getTutorial(tutorialStr) {
     
                     newHTML = newHTML + '</div>';
                 }
+                if (description.includes("sbmtoneqzdivid")) {
+                    showOneQnAtATimeKnowledgeTest("0");
+                }
             }catch{
 
             }
@@ -4647,8 +4651,165 @@ function submitQuiz() {
     }
 }
 
+function showOneQnAtATimeKnowledgeTest(currentQnNbr){
+    let rtans = 0;
+    let wans = 0;
+
+    if (currentQnNbr != "0"){
+        rtans = sessionStorage.getItem("rtans");
+        wans = sessionStorage.getItem("wans");
+    } 
+
+    document.getElementById("retryqzdivid").style.display = "none";
+    document.getElementById("sbmtoneqzdivid").style.display = "block";
+
+    let obj = JSON.parse(document.getElementById("hdmidivid").innerText);
+    let keys = Object.keys(obj);
+    for (i = 0; i < keys.length; i++) {
+        let id = keys[i];
+        
+        if(i == currentQnNbr ){
+            //document.getElementById(id + "-qs").style.display = "none";
+            $("#" + id + "-qs").show();
+            let elements = $('[name="'+ id +'"]');
+            elements.parent().show();
+        }else{
+            //document.getElementById(id + "-qs").style.display = "none";
+
+            $("#" + id + "-qs").hide();
+            let elements = $('[name="'+ id +'"]');
+            elements.parent().hide();
+
+        }
+    }
+    sessionStorage.setItem("rtans", rtans);
+    sessionStorage.setItem("wans", wans);
+    sessionStorage.setItem("currentQnNbr", currentQnNbr);
+
+    if (currentQnNbr == "0"){
+        createQzTimeAndStatus();
+        // Update the timer every second
+        timerInterval = setInterval(updateTimer, 1000);
+    }else{
+        updateQzTimeAndStatus();
+    }
+}
+
+function showNextQ(){
+    let currentQnNbr = sessionStorage.getItem("currentQnNbr");
+    showOneQnAtATimeKnowledgeTest(parseInt(currentQnNbr) + 1);
+}
+
+function checkOneQuestion(){
+    let obj = JSON.parse(document.getElementById("hdmidivid").innerText);
+    let keys = Object.keys(obj);
+
+    let currentQnNbr = sessionStorage.getItem("currentQnNbr");
+    let rtans = sessionStorage.getItem("rtans");
+    let wans = sessionStorage.getItem("wans");
+
+    document.getElementById("qzerr").innerHTML = "";
+    document.getElementById("qzerr").style.display = "none";
+    document.getElementById("qzerr").style.width = "0%";
+
+    let elems = $('.dynamicradio:visible');
+
+    let ansMarked = 0;
+
+    for (i = 0; i < elems.length; i++) {
+        if (elems[i].checked) {
+            ansMarked = 1;
+            if (elems[i].value == obj[elems[i].name]) {
+                rtans = parseInt(rtans) + 1;
+                elems[i].parentElement.style.backgroundColor = "#C1F1E0";
+            } else {
+                wans = parseInt(wans) + 1;
+                elems[i].parentElement.style.backgroundColor = "#FDCFC0";
+            }
+        } else if (elems[i].value == obj[elems[i].name]) {
+            elems[i].parentElement.style.backgroundColor = "#C1F1E0";
+        } else {
+            elems[i].parentElement.style.backgroundColor = "white";
+        }
+    }
+    if (!ansMarked){
+        for (i = 0; i < elems.length; i++) {
+            elems[i].parentElement.style.backgroundColor = "white";
+        }
+
+        document.getElementById("qzerr").innerHTML = "Please select an answer option";
+        document.getElementById("qzerr").style.display = "block";
+        document.getElementById("qzerr").style.width = "100%";
+    } else{
+        sessionStorage.setItem("rtans", rtans);
+        sessionStorage.setItem("wans", wans);
+        sessionStorage.setItem("currentQnNbr", currentQnNbr);
+        updateQzTimeAndStatus();
+
+        document.getElementById("sbmtoneqzdivid").style.display = "none";
+
+        if (currentQnNbr < (keys.length - 1) ){
+            document.getElementById("retryqzdivid").style.display = "block";
+        }else{
+             clearInterval(timerInterval); // Stop the timer interval
+        }
+        
+    }
+
+}
+
+function createQzTimeAndStatus(){
+    let newHTML = "";
+    let timeElapsed = "00:00";
+    let obj = JSON.parse(document.getElementById("hdmidivid").innerText);
+    let keys = Object.keys(obj);
+
+    let currentQnNbr = sessionStorage.getItem("currentQnNbr");
+    let rtans = sessionStorage.getItem("rtans");
+    let wans = sessionStorage.getItem("wans");
+
+
+    newHTML = newHTML + "<div id='currentQnNbrDivId' style='width:32%; text-align:left'>" + "#" + (parseInt(currentQnNbr) + 1) + "/" + (keys.length) + "</div>" + "<div id='scoresDivId' style='width:33%; text-align:center'> Score: " + rtans + "/" + (parseInt(rtans) + parseInt(wans)) + "</div>" + "<div id='timer' class='timerCls' style='width:35%; text-align:right'>" + timeElapsed + "</div>" ;
+    document.getElementById("timeAndStatusDivId").innerHTML = newHTML;
+}
+
+function updateQzTimeAndStatus(){
+    //let newHTML = "";
+    //let timeElapsed = "00:00";
+    let obj = JSON.parse(document.getElementById("hdmidivid").innerText);
+    let keys = Object.keys(obj);
+
+    let currentQnNbr = sessionStorage.getItem("currentQnNbr");
+    let rtans = sessionStorage.getItem("rtans");
+    let wans = sessionStorage.getItem("wans");
+
+    document.getElementById("currentQnNbrDivId").innerHTML = "#" + (parseInt(currentQnNbr) + 1) + "/" + (keys.length);
+    document.getElementById("scoresDivId").innerHTML = "Score: " + rtans + "/" + (parseInt(rtans) + parseInt(wans));
+
+    //newHTML = newHTML + "<div class='currentQnNbrCls' style='width:32%; text-align:left'>" + "#" + (parseInt(currentQnNbr) + 1) + "/" + (keys.length) + "</div>" + "<div class='scoresCls' style='width:33%; text-align:center'> Score: " + rtans + "/" + (parseInt(rtans) + parseInt(wans)) + "</div>" + "<div id='timer' class='timerCls' style='width:35%; text-align:right'>" + timeElapsed + "</div>" ;
+    //document.getElementById("timeAndStatusDivId").innerHTML = newHTML;
+}
+
+// Function to update the timer
+function updateTimer() {
+    const timerElement = document.getElementById("timer");
+    const currentTime = new Date().getTime();
+    const elapsedTime = currentTime - startTime;
+    
+    // Calculate minutes and seconds
+    const minutes = Math.floor(elapsedTime / 60000);
+    const seconds = Math.floor((elapsedTime % 60000) / 1000);
+    
+    // Format the time as MM:SS
+    const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    
+    // Update the timer element
+    timerElement.textContent = formattedTime;
+}
+
+
 function storeTestResults(percent, url) {
-    var StrFunction = "storeTestResults"
+    let StrFunction = "storeTestResults"
     let title = document.getElementById("docHeader").innerHTML;
 
     $.ajax({
