@@ -4608,6 +4608,9 @@ function submitQuiz() {
         var percent = rtans * 100 / (rtans + wans);
         percent = percent.toFixed(2);
         storeTestResults(percent, window.location.pathname);
+
+        $(".ansAddInfo").show();
+
         if (localStorage.getItem("userLoggedIn") == "n") {
             document.getElementById("qzres").innerHTML = "You scored " + percent + "%. Click on the button below to retry.<br> You can " + '<a href="' + the.hosturl + '/?target=login">login</a>' + " to store your scores and track progress.";
             document.getElementById("qzres").style.display = "block";
@@ -4665,6 +4668,9 @@ function showOneQnAtATimeKnowledgeTest(currentQnNbr){
 
     let obj = JSON.parse(document.getElementById("hdmidivid").innerText);
     let keys = Object.keys(obj);
+
+    $(".ansAddInfo").hide();
+
     for (i = 0; i < keys.length; i++) {
         let id = keys[i];
         
@@ -4744,6 +4750,20 @@ function checkOneQuestion(){
         sessionStorage.setItem("rtans", rtans);
         sessionStorage.setItem("wans", wans);
         sessionStorage.setItem("currentQnNbr", currentQnNbr);
+
+        
+        let obj = JSON.parse(document.getElementById("hdmidivid").innerText);
+        let keys = Object.keys(obj);
+        for (i = 0; i < keys.length; i++) {
+            let id = keys[i];
+            
+            if(i == currentQnNbr ){
+                //document.getElementById(id + "-qs").style.display = "none";
+                let elements = $('[addInfo="'+ id +'"]');
+                elements.show();
+            }
+        }
+        
         updateQzTimeAndStatus();
 
         document.getElementById("sbmtoneqzdivid").style.display = "none";

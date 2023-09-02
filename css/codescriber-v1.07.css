@@ -2141,6 +2141,10 @@ margin-top: 40px !important;
     display: none;
   }
 
+  .ansAddInfo{
+    display: none;
+  }
+  
   .hdmicls{
     display: none;
   }
@@ -2199,6 +2203,10 @@ margin-top: 40px !important;
 .editDescriptionDiv .qz1-rtans {
   display: block;
 } 
+
+.editDescriptionDiv .ansAddInfo {
+  display: block;
+}
 
 .editDescriptionDiv .hdmicls {
   display: block;
