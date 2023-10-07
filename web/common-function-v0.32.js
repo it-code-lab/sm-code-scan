@@ -3648,6 +3648,7 @@ function editItem(btn) {
 
         "<button data-title='Convert selected text to h2 inline' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','convert-to-h2-inline') >Convert text to h2</button>" +
         "<button data-title='Convert selected text to h3 inline' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','convert-to-h3-inline') >Convert text to h3</button>" +
+        "<button data-title='Convert selected text to blue h3 inline' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','convert-to-blue-h3-inline') >Convert text to blue h3</button>" +
 
         "<label class='toolBarlabel'>Alignment</label>" +
         "<button data-title='Left Align selected text' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','left-align') >Left</button>" +
@@ -4401,7 +4402,22 @@ function addComponent(itemid, type) {
           range.deleteContents();
           range.insertNode(h3Element);
         }
-    } else if (type == "left-align") {
+    } else if (type == "convert-to-blue-h3-inline") {
+        let selectedText = window.getSelection().toString();
+      
+        if (selectedText !== '') {
+          // Create an h2 element
+          let h3Element = document.createElement('h3');
+          
+          // Set the text content of the h2 element to the selected text
+          h3Element.textContent = selectedText;
+          h3Element.classList.add('convert-to-blue-h3-inline-cls');
+          // Replace the selected text with the h2 element
+          let range = window.getSelection().getRangeAt(0);
+          range.deleteContents();
+          range.insertNode(h3Element);
+        }
+    }else if (type == "left-align") {
         // let selectedRange = window.getSelection().getRangeAt(0);
 
         // // Create a span element

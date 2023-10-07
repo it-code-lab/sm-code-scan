@@ -2695,6 +2695,14 @@ div:has(> .hideParentDiv) {display: none; }
   font-size: 20px;
 }
 
+.convert-to-blue-h3-inline-cls{
+  display: inline;
+  margin-left: 0px !important;
+  font-weight: 500 !important;
+  font-size: 20px;
+  color: blueviolet;
+}
+
 .printBtn{
   width: 100px;
   padding: 5px;
