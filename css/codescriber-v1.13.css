@@ -2855,3 +2855,7 @@ div:has(> .hideParentDiv) {display: none; }
   width: 90%;
   margin-bottom: 5px;
 }
+
+.intq_showans {
+  margin-right: 10px;
+}

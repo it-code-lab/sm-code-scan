@@ -435,7 +435,7 @@ function isMobileDevice()
    <?php include 'head-add.html'; ?>
 
     <!-- ****SM-TO-SMADM******* -->
-    <script src="/itcodescanner/web/smadm-common-function0.08.js"></script>
+    <script src="/itcodescanner/web/smadm-common-function0.10.js"></script>
 
     <script src='https://cdn.jsdelivr.net/npm/sanitize-html@1.18.2/dist/sanitize-html.min.js'></script><script  src="./script.js"></script>
 
@@ -472,7 +472,7 @@ function isMobileDevice()
 
                    
                     <?php if ($mobileDevice): ?>
-                        <div id="tutorialListDivId" style="width:10%; min-width: 0px;">
+                        <div id="tutorialListDivId" style="min-width: 0px;">
                         <div id="slideInDivId" class="slideIn cursor_pointer" onclick="toggleLeftSideMenu(); return false;" ><i class="fa fa-list" ></i></div>
 
                         <div id="tutorialListInnerDivId" style="display: none;" >
@@ -530,12 +530,15 @@ function isMobileDevice()
             
 
             // ****SM-TO-SMADM*******
-            admcheckURL();
+            
 
             setTimeout(function () {
                 admGetIntQTechs();
-            }, 100);
+            }, 10);
 
+            setTimeout(function () {
+                admcheckURL();
+            }, 1000);
 
         </script>
 </body>

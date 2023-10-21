@@ -63,6 +63,8 @@ function admcheckURL() {
     if (myCookie == null) {
         localStorage.setItem("userLoggedIn", "n");
         admhideMenuItemsForLoggedOut();
+        document.getElementById("loginLinkId").style.display = "block";
+        document.getElementById("logoutLinkId").style.display = "none";
         document.getElementById("loginDivId").style.display = "block";
         return;
 
@@ -86,6 +88,8 @@ function admcheckURL() {
                     localStorage.setItem("userLoggedIn", "n");
                     admhideMenuItemsForLoggedOut();
                     document.getElementById("loginDivId").style.display = "block";
+                    document.getElementById("loginLinkId").style.display = "block";
+                    document.getElementById("logoutLinkId").style.display = "none";
                     return;
                 }else {
                     admshowAdditionalMenuItemsForLoggedIn();
@@ -460,7 +464,10 @@ function populateInterviewQsTechList(){
     }
     //document.getElementById("dropDownTutListId").innerHTML = innHTML;
     document.getElementById("tutorialListDivId").style.display = "block";
+    document.getElementById("tutorialListInnerDivId").style.display = "block";
+    
     document.getElementById("tutorialListInnerDivId").innerHTML = innHTML + "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+
 
 }
 
@@ -472,6 +479,17 @@ function showInterviewQs(tech){
         dataType: 'json',
         success: function (response) {
             admlistIntQs(response);
+
+            setTimeout(function () {
+                document.getElementById("intQEasyUpdMode").checked = true;
+                activateEasyUpdateMode();
+            }, 800);
+
+            if ((sessionStorage.getItem("hideLeftMenuBar") == "Y") || (onMobileBrowser())) {
+                setTimeout(() => {
+                    toggleLeftSideMenu("hide");
+                }, 50);
+            }
         },
         error: function (xhr, status, error) {
             //alert(xhr);
@@ -483,11 +501,11 @@ function showInterviewQs(tech){
 
 function admlistIntQs(rows = []){
     let innerHTML = "<div class='intQToolBox'>";
-    innerHTML = innerHTML + "<label><input id='intQPracticeMode' type='checkbox' onchange='intQPracticeMode(this);'>Practice Mode (Show questions. Hide answers which can be displayed using button. Hide other fields.)</label>";
+    innerHTML = innerHTML + "<label><input id='intQPracticeModeId' type='checkbox' onchange='intQPracticeMode(this);'>Practice Mode (Show questions. Hide answers which can be displayed using button. Hide other fields.)</label>";
     innerHTML = innerHTML + "<label><input id='intQEasyUpdMode' type='checkbox' onchange='intQEasyMode(this);'>Easy Update Mode (When need to update only question/answers. Hide other fields.)</label>";
     innerHTML = innerHTML + "</div>";
     
-    let path = window.location.pathname;
+    //let path = window.location.pathname;
 
     for (let record of rows) {
         let questionid = record.questionid;
@@ -549,6 +567,10 @@ function admlistIntQs(rows = []){
         innerHTML = innerHTML + '<button class="intq_sanitize btn btn-primary" style="float:center" onclick="sanitizeQnA(event)">Sanitize Q-Ans Texts</button>';
 
         innerHTML = innerHTML + '<button class="intq_savechanges btn btn-primary" onclick="admsaveIntQChanges(event)">Save Changes</button>';
+        
+        innerHTML = innerHTML + '<button class="intq_showallfields btn btn-primary displayNone" onclick="showAllFieldsOfParent(event)">Show All Fields</button>';
+
+        
         innerHTML = innerHTML + '</div>';
     }
 
@@ -566,6 +588,7 @@ function admlistIntQs(rows = []){
 
 function intQPracticeMode(cb){
     if (cb.checked){
+        document.getElementById("intQEasyUpdMode").checked = false;
         // Hide elements
         $(".intq_questionid").hide();
         $(".intq_seqid").hide();
@@ -599,6 +622,7 @@ function intQPracticeMode(cb){
 
         // Display elements 
         $(".intq_showans").show();
+        $(".intq_showallfields").show();
     }else {
         // Hide elements
         $(".intq_questionid").show();
@@ -628,6 +652,7 @@ function intQPracticeMode(cb){
 
         // Display elements 
         $(".intq_showans").hide();
+        $(".intq_showallfields").hide();
     }
 
 }
@@ -644,71 +669,123 @@ function showAns(evt){
     }
 }
 
+function activateEasyUpdateMode(){
+    $(".intq_questionid").hide();
+    $(".intq_seqid").hide();
+    $(".intq_tech").hide();
+    $(".intq_subtech").hide();
+    $(".intq_questiontype").hide();
+    
+    
+    $('.intq_questiontype').each(function() {
+        let $parent = $(this).closest('.intq_container');
+        let qtype = $(this).text().toUpperCase();
+      
+        if (qtype !== 'MCQ') {
+          $parent.find('.intq_opt1, .intq_opt2, .intq_opt3, .intq_opt4, .intq_rtoptn').hide();
+        }else{
+           $parent.find(".intq_ansdesc").hide();
+        }
+      });
+
+
+    //$(".intq_ansdesc").hide();
+
+    //$(".intq_rtoptn").hide();
+
+    $(".intq_complexity").hide();
+    $(".intq_discontinue").hide();
+    $(".intq_lastupdatedate").hide();
+    $(".intq_writer").hide();
+    
+    //$(".intq_reviewed").hide();
+    $(".intq_saveasnew").hide();
+    //$(".intq_sanitize").hide();
+    //$(".intq_savechanges").hide();
+
+    // Display elements 
+    //$(".intq_showans").show();
+
+    $(".intq_showallfields").show();
+}
+
+function showAllFields(){
+    $(".intq_showallfields").hide();
+
+    $(".intq_questionid").show();
+    $(".intq_seqid").show();
+    $(".intq_tech").show();
+    $(".intq_subtech").show();
+    $(".intq_questiontype").show();
+
+    $(".intq_ansdesc").show();
+
+    $(".intq_opt1").show();
+    $(".intq_opt2").show();
+    $(".intq_opt3").show();
+    $(".intq_opt4").show();
+
+    $(".intq_rtoptn").show();
+
+    $(".intq_complexity").show();
+    $(".intq_discontinue").show();
+    $(".intq_lastupdatedate").show();
+    $(".intq_writer").show();
+
+    $(".intq_reviewed").show();
+    $(".intq_saveasnew").show();
+    $(".intq_sanitize").show();
+
+    
+
+    $(".intq_savechanges").show();
+
+}
+
+function showAllFieldsOfParent(evt){
+    let $parent = $(evt.currentTarget).closest('.intq_container');
+
+
+    $parent.find(".intq_questionid").show();
+    $parent.find(".intq_seqid").show();
+    $parent.find(".intq_tech").show();
+    $parent.find(".intq_subtech").show();
+    $parent.find(".intq_questiontype").show();
+
+    $parent.find(".intq_ansdesc").show();
+
+    $parent.find(".intq_opt1").show();
+    $parent.find(".intq_opt2").show();
+    $parent.find(".intq_opt3").show();
+    $parent.find(".intq_opt4").show();
+
+    $parent.find(".intq_rtoptn").show();
+
+    $parent.find(".intq_complexity").show();
+    $parent.find(".intq_discontinue").show();
+    $parent.find(".intq_lastupdatedate").show();
+    $parent.find(".intq_writer").show();
+
+    $parent.find(".intq_reviewed").show();
+    $parent.find(".intq_saveasnew").show();
+    $parent.find(".intq_sanitize").show();    
+
+    $parent.find(".intq_savechanges").show();
+}
+
 function intQEasyMode(cb){
     //alert(cb.checked);
 
     if (cb.checked){
-        // Hide elements
-        $(".intq_questionid").hide();
-        $(".intq_seqid").hide();
-        $(".intq_tech").hide();
-        $(".intq_subtech").hide();
-        $(".intq_questiontype").hide();
-
-        $('.intq_questiontype').each(function() {
-            let $parent = $(this).closest('.intq_container');
-            let qtype = $(this).text().toUpperCase();
-          
-            if (qtype !== 'MCQ') {
-              $parent.find('.intq_opt1, .intq_opt2, .intq_opt3, .intq_opt4, .intq_rtoptn').hide();
-            }else{
-               $parent.find(".intq_ansdesc").hide();
-            }
-          });
-
-
-        //$(".intq_ansdesc").hide();
-
-        //$(".intq_rtoptn").hide();
-
-        $(".intq_complexity").hide();
-        $(".intq_discontinue").hide();
-        $(".intq_lastupdatedate").hide();
-        $(".intq_writer").hide();
         
-        //$(".intq_reviewed").hide();
-        $(".intq_saveasnew").hide();
-        //$(".intq_sanitize").hide();
-        //$(".intq_savechanges").hide();
-
-        // Display elements 
-        //$(".intq_showans").show();
+        // Hide elements
+        showAllFields();
+        activateEasyUpdateMode();
+        document.getElementById("intQPracticeModeId").checked = false;
+        $(".intq_showans").hide();
     }else {
         // Hide elements
-        $(".intq_questionid").show();
-        $(".intq_seqid").show();
-        $(".intq_tech").show();
-        $(".intq_subtech").show();
-        $(".intq_questiontype").show();
-
-        $(".intq_ansdesc").show();
-
-        $(".intq_opt1").show();
-        $(".intq_opt2").show();
-        $(".intq_opt3").show();
-        $(".intq_opt4").show();
-
-        $(".intq_rtoptn").show();
-
-        $(".intq_complexity").show();
-        $(".intq_discontinue").show();
-        $(".intq_lastupdatedate").show();
-        $(".intq_writer").show();
-
-        $(".intq_reviewed").show();
-        $(".intq_saveasnew").show();
-        $(".intq_sanitize").show();
-        $(".intq_savechanges").show();
+        showAllFields();
 
         // Display elements 
         //$(".intq_showans").hide();
