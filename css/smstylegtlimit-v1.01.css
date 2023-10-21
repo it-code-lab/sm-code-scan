@@ -49,6 +49,10 @@
 	}	
 
   #tutorialLinkId:hover + .dropdown-content {display: block; } 
+
+  .dropDownNav:hover + .dropdown-content {
+	display: block;
+	}
 }
 
 /*************************************************************/
