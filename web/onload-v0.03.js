@@ -55,9 +55,10 @@
 // });
 
 
+//SM: Below is used to highlight the code REF: https://highlightjs.org/#usage
 setTimeout(function () {
     hljs.highlightAll();
-}, 800);
+}, 3000);
 
 // setTimeout(function () {
 //     $(".qz1-ans").on("click", function () {

@@ -3650,6 +3650,8 @@ function editItem(btn) {
         "<button data-title='Convert selected text to h3 inline' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','convert-to-h3-inline') >Convert text to h3</button>" +
         "<button data-title='Convert selected text to blue h3 inline' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','convert-to-blue-h3-inline') >Convert text to blue h3</button>" +
 
+        "<button data-title='Convert selected text to formatted code' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','convert-to-formated-code') >Convert text to formatted code</button>" +
+
         "<label class='toolBarlabel'>Alignment</label>" +
         "<button data-title='Left Align selected text' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','left-align') >Left</button>" +
         "<button data-title='Center Align selected text' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','center-align') >Center</button>" +
@@ -4440,7 +4442,7 @@ function addComponent(itemid, type) {
         }
     } else if (type == "convert-to-blue-h3-inline") {
         let selectedText = window.getSelection().toString();
-      
+
         if (selectedText !== '') {
           // Create an h2 element
           let h3Element = document.createElement('h3');
@@ -4452,6 +4454,30 @@ function addComponent(itemid, type) {
           let range = window.getSelection().getRangeAt(0);
           range.deleteContents();
           range.insertNode(h3Element);
+        }
+    }else if (type == "convert-to-formated-code") {
+        //let selectedText = window.getSelection().toString();
+        let selection = window.getSelection();
+        let range = selection.getRangeAt(0);
+   
+        let container = document.createElement("div");
+        container.appendChild(range.cloneContents());
+        let selectedText = container.innerHTML;
+
+        selectedText = selectedText.replace(/<div>/g, '').replace(/<\/div>/g, '\n');
+        //alert(selectedText);
+
+        if (selectedText !== '') {
+          // Create an div element
+          let codeDivElement = document.createElement('div');
+          
+          // Set the text content of the h2 element to the selected text
+          codeDivElement.innerHTML = "<pre><code>" + selectedText + "</code></pre>";
+          codeDivElement.classList.add('codescript4-desc');
+          // Replace the selected text with the h2 element
+          let range = window.getSelection().getRangeAt(0);
+          range.deleteContents();
+          range.insertNode(codeDivElement);
         }
     }else if (type == "left-align") {
         // let selectedRange = window.getSelection().getRangeAt(0);

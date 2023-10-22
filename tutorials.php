@@ -562,6 +562,7 @@ function isMobileDevice()
 
 
         </script>
+        <script src="/itcodescanner/web/onload-v0.03.js"></script>
 </body>
 
 </html>

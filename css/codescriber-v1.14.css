@@ -2859,3 +2859,7 @@ div:has(> .hideParentDiv) {display: none; }
 .intq_showans {
   margin-right: 10px;
 }
+
+.intq_sanitize {
+  margin-right: 10px;
+}

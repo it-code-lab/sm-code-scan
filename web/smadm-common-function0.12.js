@@ -115,6 +115,15 @@ function admproceedWithRequest() {
     var path = window.location.pathname;
 
     LocationSearchStr = LocationSearchStr.replace(re, ' ');
+    
+    if (sessionStorage.getItem("intQTechList") == null) {
+        //document.getElementById("loaderDivId").style.display = "block";
+        setTimeout(function () {
+            //document.getElementById("loaderDivId").style.display = "none";
+            admcheckURL();
+        }, 500);
+        return;
+    }
 
     if (path.indexOf('tutorials/') > 0) {
         //var songtitle = path.replaceAll("/antaksharee/lyrics/","");
@@ -123,7 +132,7 @@ function admproceedWithRequest() {
             //document.getElementById("loaderDivId").style.display = "block";
             setTimeout(function () {
                 //document.getElementById("loaderDivId").style.display = "none";
-                checkURL();
+                admcheckURL();
             }, 500);
             return;
         }
@@ -565,6 +574,7 @@ function admlistIntQs(rows = []){
         innerHTML = innerHTML + '<button class="intq_showans btn btn-primary displayNone" style="float:center" onclick="showAns(event)">Show/Hide Answer</button>';
         
         innerHTML = innerHTML + '<button class="intq_sanitize btn btn-primary" style="float:center" onclick="sanitizeQnA(event)">Sanitize Q-Ans Texts</button>';
+        innerHTML = innerHTML + '<button class="intq_formatcode btn btn-primary" style="float:center" onclick="formatcode(event)">Format Selected Code</button>';
 
         innerHTML = innerHTML + '<button class="intq_savechanges btn btn-primary" onclick="admsaveIntQChanges(event)">Save Changes</button>';
         
@@ -618,6 +628,7 @@ function intQPracticeMode(cb){
         $(".intq_reviewed").hide();
         $(".intq_saveasnew").hide();
         $(".intq_sanitize").hide();
+        $(".intq_formatcode").hide();
         $(".intq_savechanges").hide();
 
         // Display elements 
@@ -648,6 +659,7 @@ function intQPracticeMode(cb){
         $(".intq_reviewed").show();
         $(".intq_saveasnew").show();
         $(".intq_sanitize").show();
+        $(".intq_formatcode").show();
         $(".intq_savechanges").show();
 
         // Display elements 
@@ -735,6 +747,7 @@ function showAllFields(){
     $(".intq_reviewed").show();
     $(".intq_saveasnew").show();
     $(".intq_sanitize").show();
+    $(".intq_formatcode").show();
 
     
 
@@ -769,7 +782,7 @@ function showAllFieldsOfParent(evt){
     $parent.find(".intq_reviewed").show();
     $parent.find(".intq_saveasnew").show();
     $parent.find(".intq_sanitize").show();    
-
+    $parent.find(".intq_formatcode").show(); 
     $parent.find(".intq_savechanges").show();
 }
 
@@ -818,6 +831,31 @@ function sanitizeQnA(evt){
     let rtoptn = parentDiv.querySelector('.intq_rtoptn').innerHTML;
     parentDiv.querySelector('.intq_rtoptn').innerHTML= sanitize(rtoptn);
 
+}
+
+function formatcode(event){
+    let selection = window.getSelection();
+    let range = selection.getRangeAt(0);
+
+    let container = document.createElement("div");
+    container.appendChild(range.cloneContents());
+    let selectedText = container.innerHTML;
+
+    selectedText = selectedText.replace(/<div>/g, '').replace(/<\/div>/g, '\n');
+    //alert(selectedText);
+
+    if (selectedText !== '') {
+      // Create an div element
+      let codeDivElement = document.createElement('div');
+      
+      // Set the text content of the h2 element to the selected text
+      codeDivElement.innerHTML = "<pre><code>" + selectedText + "</code></pre>";
+      codeDivElement.classList.add('codescript4-desc');
+      // Replace the selected text with the h2 element
+      let range = window.getSelection().getRangeAt(0);
+      range.deleteContents();
+      range.insertNode(codeDivElement);
+    }
 }
 
 function admsaveAsNewIntQ(evt){
