@@ -8,7 +8,14 @@ const deleteEmptyTags = [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'p',
 
 const blockSelectTags = [ 'h1', 'h2', 'h3', 'h4', 'h5', 'p' ];
 
+document.addEventListener('keydown', function (event) {
+    // Check if the Ctrl key (Cmd key on macOS) and the 'C' key are pressed simultaneously.
+    if (event.ctrlKey && event.key === 'm') {
+        formatcode();
+    }
+});
 
+  
 function admshowAdditionalMenuItemsForLoggedIn() {
     document.getElementById("logoutLinkId").style.display = "block";
     document.getElementById("admLinkId").style.display = "block";
@@ -574,7 +581,7 @@ function admlistIntQs(rows = []){
         innerHTML = innerHTML + '<button class="intq_showans btn btn-primary displayNone" style="float:center" onclick="showAns(event)">Show/Hide Answer</button>';
         
         innerHTML = innerHTML + '<button class="intq_sanitize btn btn-primary" style="float:center" onclick="sanitizeQnA(event)">Sanitize Q-Ans Texts</button>';
-        innerHTML = innerHTML + '<button class="intq_formatcode btn btn-primary" style="float:center" onclick="formatcode(event)">Format Selected Code</button>';
+        innerHTML = innerHTML + '<button data-title="CTRL + m" class="intq_formatcode btn btn-primary" style="float:center" onclick="formatcode()">Format Selected Code</button>';
 
         innerHTML = innerHTML + '<button class="intq_savechanges btn btn-primary" onclick="admsaveIntQChanges(event)">Save Changes</button>';
         
@@ -683,7 +690,7 @@ function showAns(evt){
 
 function activateEasyUpdateMode(){
     $(".intq_questionid").hide();
-    $(".intq_seqid").hide();
+    //$(".intq_seqid").hide();
     $(".intq_tech").hide();
     $(".intq_subtech").hide();
     $(".intq_questiontype").hide();
@@ -833,7 +840,7 @@ function sanitizeQnA(evt){
 
 }
 
-function formatcode(event){
+function formatcode(){
     let selection = window.getSelection();
     let range = selection.getRangeAt(0);
 
@@ -1007,9 +1014,14 @@ function admsaveIntQChanges(evt){
                 x.innerHTML = "Updates failed";
             }
             x.classList.add("show");
+
             setTimeout(function () {
                 x.classList.remove("show");
             }, 3000);
+
+            setTimeout(function () {
+                hljs.highlightAll();
+            }, 1000);
         },
         error: function (xhr, status, error) {
             let x = document.getElementById("toastsnackbar");
