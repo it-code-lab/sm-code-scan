@@ -634,7 +634,7 @@ function recordResponse(evt){
                 var transcript = event.results[i][0].transcript;
                 transcript.replace("\n", "<br>");
                 if(event.results[i].isFinal) {
-                    finalTranscripts += transcript;
+                    finalTranscripts += transcript + '. '; // Add a full stop after each final result
                 }else{
                     //interimTranscripts += transcript;
                 }
