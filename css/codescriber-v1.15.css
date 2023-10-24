@@ -2824,6 +2824,16 @@ div:has(> .hideParentDiv) {display: none; }
   background-color: #fff !important;
 }
 
+.intq_response{
+  border: 1px solid rgb(118, 66, 149);
+  box-shadow: 2px 2px 2px rgb(118, 66, 149);
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: rgb(96, 21, 133);
+}
+
 .intq_opt1, .intq_opt2, .intq_opt3, .intq_opt4 {
   background-color: #fff !important;
 }
@@ -2862,4 +2872,9 @@ div:has(> .hideParentDiv) {display: none; }
 
 .intq_sanitize {
   margin-right: 10px;
+}
+
+.intq_recordresponse, .intq_stoprecording{
+    background-color: darkorange;
+    margin: 20px;
 }

@@ -15,6 +15,7 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
+let speechRecognizer;
   
 function admshowAdditionalMenuItemsForLoggedIn() {
     document.getElementById("logoutLinkId").style.display = "block";
@@ -557,6 +558,8 @@ function admlistIntQs(rows = []){
         innerHTML = innerHTML + '<div contenteditable="true" class="intq_questiontype" data-title="questiontype-mcq/desc/other" >' + questiontype + '</div>';
 
         innerHTML = innerHTML + '<div contenteditable="true" class="intq_question"  >' + question + '</div>';
+        innerHTML = innerHTML + '<div contenteditable="true" class="intq_response displayNone"  >' + '' + '</div>';
+
         innerHTML = innerHTML + '<div contenteditable="true" class="intq_ansdesc"  >' + ansdesc + '</div>';
 
         innerHTML = innerHTML + '<div contenteditable="true" class="intq_opt1" data-title="opt1" >' + opt1 + '</div>';
@@ -587,6 +590,9 @@ function admlistIntQs(rows = []){
         
         innerHTML = innerHTML + '<button class="intq_showallfields btn btn-primary displayNone" onclick="showAllFieldsOfParent(event)">Show All Fields</button>';
 
+        innerHTML = innerHTML + '<button data-title="Record Response" class="intq_recordresponse btn" onclick="recordResponse(event)"><i style="font-size:24px" class="fa">&#xf130;</i></button>';
+        innerHTML = innerHTML + '<button data-title="Stop Recording" class="intq_stoprecording btn displayNone" onclick="stopRecording(event)"><i style="font-size:24px" class="fa">&#xf04c;</i></button>';
+
         
         innerHTML = innerHTML + '</div>';
     }
@@ -603,12 +609,64 @@ function admlistIntQs(rows = []){
     document.getElementById("tutorialDivId").style.width = "100%";
 }
 
+function recordResponse(evt){
+    let $parent = $(evt.currentTarget).closest('.intq_container');
+
+    $parent.find(".intq_stoprecording").show();
+    $parent.find(".intq_recordresponse").hide();
+
+    $parent.find(".intq_response").show();
+
+    if('webkitSpeechRecognition' in window) {
+        if (!speechRecognizer) {
+            speechRecognizer = new webkitSpeechRecognition();
+        }
+        speechRecognizer.continuous = true;
+        speechRecognizer.interimResults = true;
+        speechRecognizer.lang = 'en-US';
+        speechRecognizer.start();
+    
+        var finalTranscripts = '';
+    
+        speechRecognizer.onresult = function(event) {
+            var interimTranscripts = '';
+            for(var i = event.resultIndex; i < event.results.length; i++){
+                var transcript = event.results[i][0].transcript;
+                transcript.replace("\n", "<br>");
+                if(event.results[i].isFinal) {
+                    finalTranscripts += transcript;
+                }else{
+                    //interimTranscripts += transcript;
+                }
+            }
+            //$parent.find(".intq_response").append(finalTranscripts);
+            $parent.find(".intq_response").html(finalTranscripts);
+        };
+        speechRecognizer.onerror = function (event) {
+    
+        };
+    }else {
+        result.innerHTML = $parent.find(".intq_response").html('Sorry, your browser is not supported. Please download Google chrome or Update your Google chrome!!');
+    }	
+}
+
+function stopRecording(evt){
+    let $parent = $(evt.currentTarget).closest('.intq_container');
+
+    $parent.find(".intq_stoprecording").hide();
+    $parent.find(".intq_recordresponse").show();
+
+    if (speechRecognizer) {
+        speechRecognizer.stop();
+    }
+}
+
 function intQPracticeMode(cb){
     if (cb.checked){
         document.getElementById("intQEasyUpdMode").checked = false;
         // Hide elements
         $(".intq_questionid").hide();
-        $(".intq_seqid").hide();
+        //$(".intq_seqid").hide();
         $(".intq_tech").hide();
         $(".intq_subtech").hide();
         $(".intq_questiontype").hide();
