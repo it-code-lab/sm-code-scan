@@ -2832,6 +2832,7 @@ div:has(> .hideParentDiv) {display: none; }
   margin-top: 10px;
   margin-bottom: 10px;
   color: rgb(73 7 234);
+  background-color: #e5e7ea;
 }
 
 .intq_opt1, .intq_opt2, .intq_opt3, .intq_opt4 {
