@@ -435,7 +435,7 @@ function isMobileDevice()
    <?php include 'head-add.html'; ?>
 
     <!-- ****SM-TO-SMADM******* -->
-    <script src="/itcodescanner/web/smadm-common-function0.14.js"></script>
+    <script src="/itcodescanner/web/smadm-common-function0.15.js"></script>
 
     <script src='https://cdn.jsdelivr.net/npm/sanitize-html@1.18.2/dist/sanitize-html.min.js'></script><script  src="./script.js"></script>
 
