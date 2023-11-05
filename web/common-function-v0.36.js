@@ -32,6 +32,37 @@ let timerInterval;
 var last_focused_div_id;
 // Record the start time
 const startTime = new Date().getTime();
+
+let allowedTags = [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'p', 'a', 'ul', 'ol',
+  'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'code', 'hr', 'br', 'div',
+  'table', 'thead', 'caption', 'tbody', 'tr', 'th', 'td', 'pre' ];
+
+let deleteEmptyTags = [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'p', 'a', 'ul', 'ol',
+  'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'code', 'hr', 'div',
+  'table', 'thead', 'caption', 'tbody', 'pre' ];
+
+let blockSelectTags = [ 'h1', 'h2', 'h3', 'h4', 'h5', 'p' ];
+
+document.addEventListener('keydown', function (event) {
+    
+    // Check if the Ctrl key (Cmd key on macOS) and the 'C' key are pressed simultaneously.
+    if (event.ctrlKey && event.key === 's') {
+        const saveButton = document.getElementById("saveChangesBtnId");
+        // Check if the button is visible
+        if (saveButton) {
+            const computedStyle = window.getComputedStyle(saveButton);
+            const isButtonVisible = computedStyle.display !== 'none' && computedStyle.visibility !== 'hidden';
+            
+            if (isButtonVisible) {
+                saveButton.click();
+                event.preventDefault();
+            } 
+        }
+    }
+    
+    //return false;
+});
+
 // requirejs.config({
 //     //By default load any module IDs from js/lib
 //     baseUrl: 'js/lib',
@@ -3653,6 +3684,8 @@ function editItem(btn) {
         "<button data-title='Convert selected text to formatted code' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','convert-to-formated-code') >Convert text to formatted code</button>" +
 
         "<label class='toolBarlabel'>Format</label>" +
+        "<button data-title='Sanitize Div having Text Selected' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','sanitize-div') >Sanitize Div having Selection</button>" +
+
         "<button data-title='Sanitize' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','sanitize') >Sanitize Full Page</button>" +
         "<button data-title='Apply Highlighter' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','apply-highlighter') >Apply Highlighter</button>" +
         "<button data-title='Format Selected Code' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','format-code') >Format Selected Code</button>" +
@@ -3746,7 +3779,7 @@ function editItem(btn) {
 
     newHTML = newHTML +
         "<div class = 'saveChangesDivCls'>" +
-        "<button  type='button' class='itmUpdSaveBtn btn btn-primary' onclick=updateItem('" + itemid + "','n') >Save Changes</button><br>" +
+        "<button id='saveChangesBtnId' data-title='CTRL + s' type='button' class='itmUpdSaveBtn btn btn-primary' onclick=updateItem('" + itemid + "','n') >Save Changes</button><br>" +
         "<button   type='button' class='itmUpdSaveBtn btn btn-primary' onclick=updateItem('" + itemid + "','y') >Save As New Item</button><br>" +
         "<button   type='button' class='itmUpdSaveBtn btn btn-danger' onclick=refreshPage() >Cancel</button><br>" +
         "</div>" +
@@ -4579,6 +4612,12 @@ function addComponent(itemid, type) {
           range.deleteContents();
           range.insertNode(spanElement);
         }
+        
+    } else if (type == "sanitize-div") {
+        let selection = window.getSelection();
+        let containingDiv = findContainingDiv(selection.getRangeAt(0).commonAncestorContainer);
+        containingDiv.innerHTML = sanitize(containingDiv.innerHTML); 
+
     } else if (type == "sanitize") {
         document.getElementById(componentid).innerHTML = sanitize(AllHTML);
     } else if (type == "apply-highlighter") {
@@ -4659,6 +4698,16 @@ function addComponent(itemid, type) {
     }
 }
 
+function findContainingDiv(element) {
+    while (element) {
+        if (element.tagName === "DIV") {
+            return element;
+        }
+        element = element.parentElement;
+    }
+    return null;
+}
+
 function sanitize (html) {
     let sanitized = sanitizeHtml(html, {
       allowedTags: allowedTags
@@ -4679,7 +4728,30 @@ function sanitize (html) {
     
     return sanitized;
 }
+function formatcode(){
+    let selection = window.getSelection();
+    let range = selection.getRangeAt(0);
 
+    let container = document.createElement("div");
+    container.appendChild(range.cloneContents());
+    let selectedText = container.innerHTML;
+
+    selectedText = selectedText.replace(/<div>/g, '').replace(/<\/div>/g, '\n');
+    //alert(selectedText);
+
+    if (selectedText !== '') {
+      // Create an div element
+      let codeDivElement = document.createElement('div');
+      
+      // Set the text content of the h2 element to the selected text
+      codeDivElement.innerHTML = "<pre><code>" + selectedText + "</code></pre>";
+      codeDivElement.classList.add('codescript4-desc');
+      // Replace the selected text with the h2 element
+      let range = window.getSelection().getRangeAt(0);
+      range.deleteContents();
+      range.insertNode(codeDivElement);
+    }
+}
 function submitQuiz() {
     var obj = JSON.parse(document.getElementById("hdmidivid").innerText);
     var keys = Object.keys(obj);
@@ -5314,6 +5386,13 @@ function updateItem(itemid, createNewItem) {
 
             } else {
                 document.getElementById("updateitemerrormsg-" + itemid).innerHTML = "<font color = #cc0000>" + "Processed successfully" + "</font> ";
+                let x = document.getElementById("toastsnackbar");
+                x.innerHTML = "Updates saved";
+                x.classList.add("show");
+
+                setTimeout(function () {
+                    x.classList.remove("show");
+                }, 3000);
             }
             //displayCart();
 
@@ -5321,6 +5400,13 @@ function updateItem(itemid, createNewItem) {
         error: function (xhr, status, error) {
             if (!itemid == "") {
                 document.getElementById("updateitemerrormsg-" + itemid).innerHTML = "<font color = #cc0000>" + "Failed to update" + "</font> ";
+                let x = document.getElementById("toastsnackbar");
+                x.innerHTML = "Updates failed";
+                x.classList.add("show");
+
+                setTimeout(function () {
+                    x.classList.remove("show");
+                }, 3000);
             }
             //alert(xhr);
 

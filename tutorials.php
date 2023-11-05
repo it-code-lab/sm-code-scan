@@ -530,7 +530,7 @@ function isMobileDevice()
     
 </div>
        <?php include 'footer.html'; ?>
-
+       <div id="toastsnackbar" class="shadow_1"></div>
        <script>
             getTutorialList();
             setTimeout(function () {
