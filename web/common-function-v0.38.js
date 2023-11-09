@@ -7491,6 +7491,103 @@ function onMobileBrowser() {
 
 }
 
+function enableUserPracticeMode(){
+    document.getElementById("intQUserPracticeModeId").checked = true;
+    $('.intq_questiontype').each(function() {
+        let $parent = $(this).closest('.intq_container');
+        let qtype = $(this).text().toUpperCase();
+      
+        if (qtype !== 'MCQ') {
+          $parent.find('.intq_opt1, .intq_opt2, .intq_opt3, .intq_opt4').hide();
+        }else{
+           $parent.find('.intq_opt1, .intq_opt2, .intq_opt3, .intq_opt4').show(); 
+        }
+      });
+
+
+    $(".intq_ansdesc").hide();
+
+    $(".intq_rtoptn").hide();
+}
+
+function intQUserPracticeMode(cb){
+    if (cb.checked){
+
+        $('.intq_questiontype').each(function() {
+            let $parent = $(this).closest('.intq_container');
+            let qtype = $(this).text().toUpperCase();
+          
+            if (qtype !== 'MCQ') {
+              $parent.find('.intq_opt1, .intq_opt2, .intq_opt3, .intq_opt4').hide();
+            }else{
+                $parent.find('.intq_opt1, .intq_opt2, .intq_opt3, .intq_opt4').show(); 
+             }
+          });
+
+
+        $(".intq_ansdesc").hide();
+
+        $(".intq_rtoptn").hide();
+
+
+    }else {
+
+        $('.intq_questiontype').each(function() {
+            let $parent = $(this).closest('.intq_container');
+            let qtype = $(this).text().toUpperCase();
+          
+            if (qtype !== 'MCQ') {
+              $parent.find('.intq_opt1, .intq_opt2, .intq_opt3, .intq_opt4, .intq_rtoptn').hide();
+              $parent.find('.intq_ansdesc').show();
+            }else{
+              $parent.find('.intq_opt1, .intq_opt2, .intq_opt3, .intq_opt4, .intq_rtoptn').show();
+              $parent.find('.intq_ansdesc').hide();
+            }
+          });
+    }
+
+}
+function showAns(evt){
+    let $parent = $(evt.currentTarget).closest('.intq_container');
+
+    let qtype = $parent.find(".intq_questiontype").text().toUpperCase();
+
+    if (qtype !== 'MCQ') {
+        $parent.find('.intq_ansdesc').toggle();
+    }else{
+        $parent.find('.intq_rtoptn').toggle(); 
+    }
+}
+
+function sanitizeUserQnA(){
+
+    document.querySelectorAll('.intq_question, .intq_ansdesc , .intq_opt1 , .intq_opt2 , .intq_opt3 , .intq_opt4 , .intq_rtoptn' ).forEach(function(element) {
+        element.innerHTML = sanitize(element.innerHTML);
+    });
+
+}
+
+function sanitize (html) {
+    let sanitized = sanitizeHtml(html, {
+      allowedTags: allowedTags
+    });
+    sanitized = sanitized
+      // <br /><br /> -> </p><p>
+      .replace(/<br \/>(\s)*(<br \/>)+/g, '</p><p>')
+      // </p><br /> -> </p>
+      .replace(/<p \/>(\s)*(<br \/>)+/g, '</p>')
+      // <p><br /> -> </p>
+      .replace(/<p>(\s)*(<br \/>)+/g, '<p>');
+    // delete empty tags
+    deleteEmptyTags.forEach(tag => {
+      let regex = new RegExp(`<${tag}>(\\s)*</${tag}>`, 'g');
+      sanitized = sanitized
+        .replace(regex, '');
+    })
+    
+    return sanitized;
+}
+
 function getInfo() {
     let tags = sessionStorage.getItem("locset")
     if (tags != "y") {

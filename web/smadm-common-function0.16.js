@@ -734,18 +734,6 @@ function intQPracticeMode(cb){
 
 }
 
-function showAns(evt){
-    let $parent = $(evt.currentTarget).closest('.intq_container');
-
-    let qtype = $parent.find(".intq_questiontype").text().toUpperCase();
-
-    if (qtype !== 'MCQ') {
-        $parent.find('.intq_ansdesc').toggle();
-    }else{
-        $parent.find('.intq_rtoptn').toggle(); 
-    }
-}
-
 function activateEasyUpdateMode(){
     $(".intq_questionid").hide();
     //$(".intq_seqid").hide();
@@ -1092,23 +1080,3 @@ function admsaveIntQChanges(evt){
     });
 }
 
-function sanitize (html) {
-    let sanitized = sanitizeHtml(html, {
-      allowedTags: allowedTags
-    });
-    sanitized = sanitized
-      // <br /><br /> -> </p><p>
-      .replace(/<br \/>(\s)*(<br \/>)+/g, '</p><p>')
-      // </p><br /> -> </p>
-      .replace(/<p \/>(\s)*(<br \/>)+/g, '</p>')
-      // <p><br /> -> </p>
-      .replace(/<p>(\s)*(<br \/>)+/g, '<p>');
-    // delete empty tags
-    deleteEmptyTags.forEach(tag => {
-      let regex = new RegExp(`<${tag}>(\\s)*</${tag}>`, 'g');
-      sanitized = sanitized
-        .replace(regex, '');
-    })
-    
-    return sanitized;
-}
