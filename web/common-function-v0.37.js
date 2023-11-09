@@ -1655,13 +1655,20 @@ function cleanWord(word, codeToExclude) {
 function autocomplete(inp, arr) {
 
     var currentFocus;
+    let timeoutId;
 
     inp
         .addEventListener(
             "input",
             function (e) {
+
+                clearTimeout(timeoutId);
+                let val = this.value;
+                let element = this;
+                timeoutId = setTimeout(function () {
+
                 //document.getElementById("SVDReviewDiv").style.display = "none";
-                var a, b, i, val = this.value;
+                var a, b, i; 
                 var strPos;
                 /*close any already open lists of autocompleted values*/
                 //closeAllLists();
@@ -1678,7 +1685,7 @@ function autocomplete(inp, arr) {
                     return false;
                 }
 
-                var elemnt = this;
+                var elemnt = element;
                 //Start Async
                 setTimeout(function () {
                     closeAllLists();
@@ -1779,7 +1786,7 @@ function autocomplete(inp, arr) {
 
                 }, 0);
                 // End Async
-
+            }, 300);
             });
     /*execute a function presses a key on the keyboard:*/
     inp.addEventListener("keydown", function (e) {
