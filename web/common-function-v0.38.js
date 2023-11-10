@@ -7492,22 +7492,36 @@ function onMobileBrowser() {
 }
 
 function enableUserPracticeMode(){
-    document.getElementById("intQUserPracticeModeId").checked = true;
+    document.getElementById("intQUserPracticeModeId").checked = false;
+
     $('.intq_questiontype').each(function() {
         let $parent = $(this).closest('.intq_container');
         let qtype = $(this).text().toUpperCase();
       
         if (qtype !== 'MCQ') {
-          $parent.find('.intq_opt1, .intq_opt2, .intq_opt3, .intq_opt4').hide();
+          $parent.find('.intq_opt1, .intq_opt2, .intq_opt3, .intq_opt4, .intq_rtoptn').hide();
+          $parent.find('.intq_ansdesc').show();
         }else{
-           $parent.find('.intq_opt1, .intq_opt2, .intq_opt3, .intq_opt4').show(); 
+          $parent.find('.intq_opt1, .intq_opt2, .intq_opt3, .intq_opt4, .intq_rtoptn').show();
+          $parent.find('.intq_ansdesc').hide();
         }
       });
+      
+    // $('.intq_questiontype').each(function() {
+    //     let $parent = $(this).closest('.intq_container');
+    //     let qtype = $(this).text().toUpperCase();
+      
+    //     if (qtype !== 'MCQ') {
+    //       $parent.find('.intq_opt1, .intq_opt2, .intq_opt3, .intq_opt4').hide();
+    //     }else{
+    //        $parent.find('.intq_opt1, .intq_opt2, .intq_opt3, .intq_opt4').show(); 
+    //     }
+    //   });
 
 
-    $(".intq_ansdesc").hide();
+    // $(".intq_ansdesc").hide();
 
-    $(".intq_rtoptn").hide();
+    // $(".intq_rtoptn").hide();
 }
 
 function intQUserPracticeMode(cb){
