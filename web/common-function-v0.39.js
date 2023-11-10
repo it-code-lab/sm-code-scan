@@ -5458,8 +5458,8 @@ function updateInfoItem(itemid, createNewItem) {
 
     } else {
 
-        description = document.getElementById("description-" + itemid).innerHTML;
-
+        //description = document.getElementById("description-" + itemid).innerHTML;
+        description = $('.songLyrics').html();
         if (localStorage.getItem("userLoggedIn") == "n") {
 
             error_message = "Not authorized";
@@ -5478,8 +5478,8 @@ function updateInfoItem(itemid, createNewItem) {
     //let regex = /\\/g;
     description = description.replace(/\\/g, "\\\\");
 
-    writer = writer.replaceAll("'", "''");
-    keywords = keywords.replaceAll("'", "''");
+    
+    
 
 
     $.ajax({

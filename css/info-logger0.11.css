@@ -1,0 +1,63 @@
+table.activity-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.activity-table th,
+td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+table.activity-table tr {
+  padding: 5px;
+}
+
+/* Style for table header cells */
+table.activity-table th {
+  background-color: #f2f2f2;
+}
+
+.colorSelect {
+  padding: 5px;
+  font-size: 16px;
+  width: 150px;
+}
+
+.btnControlDiv {
+  background-color: beige;
+}
+.btnControlDiv > * {
+  margin: 10px;
+}
+
+.time-column {
+  width: 20%;
+}
+.activity-column {
+  width: 60%;
+}
+/* CSS media query for small screens */
+@media screen and (max-width: 768px) {
+  table.activity-table thead {
+    display: none;
+  }
+
+  /* Set table headers and cells to full width */
+  table.activity-table th,
+  td {
+    width: 95% !important;
+    display: block;
+  }
+
+  table.activity-table tr {
+    margin-bottom: 5px;
+    display: block;
+  }
+  /* Remove the table border on small screens */
+  table.activity-table {
+    border: none;
+    width: 100%;
+  }
+}

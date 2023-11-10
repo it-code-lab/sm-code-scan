@@ -1,0 +1,45 @@
+<div class="activity-table-container">
+    <table class="activity-table">
+      <thead>
+        <tr>
+          <th class="time-column">Date Time</th>
+          <th class="activity-column">Information</th>
+          <th>Controls</th>
+        </tr>
+      </thead>
+      <tbody id="activityLog">
+        <tr>
+          <td contenteditable="true" class="time-column" id="defaultTime">
+            date()
+          </td>
+          <td contenteditable="true" class="activity-column" style="background-color: lightyellow;"><div id="div-30559" onmousedown="setLastFocusedDivId(this.id)" class="image1-desc"> <img class="movieImageCls" alt="" src="/itcodescanner/img/template-326115.png">  <button title="clear image without deleting from backend" class="deleteDivInnImg" onclick="deleteCurrentComponent(this)"></button><button title="Remove image and delete from backend" class="deleteDivInnImgBk" onclick="deleteCurrentComponentAndRemoveBK(this)"></button></div>
+
+<span>room clean okay. </span></td>
+          <td>
+            <div class="btnControlDiv">
+            <button class="btn intq_recordresponse" onclick="recordInfo(event)" style=""><i style="font-size:24px" class="fa" aria-hidden="true"></i></button>
+            <button class="btn displayNone intq_stoprecording" onclick="stopRecording(event)" style="display: none;"><i style="font-size:24px" class="fa" aria-hidden="true"></i></button>
+            <input type="file" onchange="insertLogImage(event)">
+
+            <select class="colorSelect" onchange="changeColor(this);">
+              <option value="default">Change Color</option>
+              <option value="lightyellow">Yellow</option>
+              <option value="lightgreen">Green</option>
+              <option value="lightpink">Red</option>
+              <option value="white">White</option>
+            </select>
+            <button class="btn" onclick="addNewRow()"><i style="font-size:24px; color: green;" class="fa" aria-hidden="true"></i></button>
+            <button class="btn" onclick="removeRow(event)"><i style="font-size:24px; color:coral;" class="fa" aria-hidden="true"></i></button>
+
+          </div>
+
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+<button id="saveChangesBtnId" data-title="CTRL + s" type="button" class="itmUpdSaveBtn btn btn-primary" onclick="updateInfoItem('31','n')">Save Changes</button>
+<script src="/itcodescanner/web/info-logger-v0.12.js"></script>

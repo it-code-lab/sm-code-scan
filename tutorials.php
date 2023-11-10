@@ -496,7 +496,7 @@ function isMobileDevice()
 
                         <div id="tutorialDivId">
                             <?php echo $tutDivHTML; ?>
-                            <hr>&nbsp;&nbsp;&nbsp;&nbsp; <span class="noPrint"><b>Leave a Comment</b></span>
+                            <hr>&nbsp;&nbsp;&nbsp;&nbsp; <span class="noPrint commentMsg"><b>Leave a Comment</b></span>
                             <?php include 'sendMsg.html'; ?>
                         </div>
 
@@ -513,7 +513,7 @@ function isMobileDevice()
 
                         <div id="tutorialDivId">
                             <?php echo $tutDivHTML; ?>
-                            <hr>&nbsp;&nbsp;&nbsp;&nbsp;<span class="noPrint"><b>Leave a Comment</b></span>
+                            <hr>&nbsp;&nbsp;&nbsp;&nbsp;<span class="noPrint commentMsg"><b>Leave a Comment</b></span>
                             <?php include 'sendMsg.html'; ?>
                         </div>
 
