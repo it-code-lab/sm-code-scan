@@ -520,9 +520,33 @@ function admlistIntQs(rows = []){
     let innerHTML = "<div class='intQToolBox'>";
     innerHTML = innerHTML + "<label><input id='intQPracticeModeId' type='checkbox' onchange='intQPracticeMode(this);'>Practice Mode (Show questions. Hide answers which can be displayed using button. Hide other fields.)</label>";
     innerHTML = innerHTML + "<label><input id='intQEasyUpdMode' type='checkbox' onchange='intQEasyMode(this);'>Easy Update Mode (When need to update only question/answers. Hide other fields.)</label>";
+    try{
+        if (document.getElementById("hideNonReviewed").checked){
+            innerHTML = innerHTML + "<label><input id='hideNonReviewed' type='checkbox' checked >Hide Non-Reviewed (Click topic link again to fetch)</label>";
+    
+        }else{
+            innerHTML = innerHTML + "<label><input id='hideNonReviewed' type='checkbox' >Hide Non-Reviewed (Click topic link again to fetch)</label>";
+    
+        }
+    }catch (e){
+        innerHTML = innerHTML + "<label><input id='hideNonReviewed' type='checkbox' >Hide Non-Reviewed (Click topic link again to fetch)</label>";
+
+    }
+
     innerHTML = innerHTML + "</div>";
     
     //let path = window.location.pathname;
+
+    try{
+        if (document.getElementById("hideNonReviewed").checked){
+            rows = rows.filter(function (entry) {
+               return entry.reviewed === "1";
+            });
+        }
+    }catch(e){
+
+    }
+
 
     for (let record of rows) {
         let questionid = record.questionid;

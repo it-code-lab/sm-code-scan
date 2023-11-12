@@ -145,6 +145,8 @@ function recordInfo(evt) {
 
         let finalTranscripts = '';
         let spanElement = $('<span></span>');
+        $parent.find(".activity-column").append(spanElement);
+        
         speechRecognizer.onresult = function (event) {
             //var interimTranscripts = '';
             for (var i = event.resultIndex; i < event.results.length; i++) {
@@ -160,7 +162,7 @@ function recordInfo(evt) {
             spanElement.html(finalTranscripts);
         };
 
-        $parent.find(".activity-column").append(spanElement);
+        
 
         speechRecognizer.onerror = function (event) {
 
