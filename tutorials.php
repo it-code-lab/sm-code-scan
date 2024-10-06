@@ -207,7 +207,14 @@ function populateTutorialHTML($tutData, $database)
     }
 
     if (!empty($description)) {
-        $newHTML .= "<div class='songLyrics'>" . $description . "</div>";
+        if (!$_SESSION['smusr']) {
+            // Do something if user is not logged in
+            if ($discontinue == "0"){
+                $newHTML .= "<div class='songLyrics'>" . $description . "</div>";
+            }
+        }else {
+            $newHTML .= "<div class='songLyrics'>" . $description . "</div>";
+        }       
     }
 
     $newHTML .= "</div>";
