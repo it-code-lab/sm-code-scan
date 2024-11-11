@@ -1,6 +1,10 @@
 <?php
 include_once("php/session.php");
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); // Start session if not already started
+}
+
 $title = "IT Tutorials";
 $description = "Easy to understand tutorials with lots of sample codes in programming languages Java,
  Python, JavaScript, PHP, HTML, CSS, C++, C# etc.";
@@ -22,6 +26,12 @@ $tutTitleItemId = "";
 $tutDivHTML = "";
 $tutListHTML = "";
 $mobileDevice = isMobileDevice();
+
+//Saurabh-SM-Change for - PHP 7 to 8 
+$_SESSION['smusr'] = $_SESSION['smusr'] ?? null;
+$_SESSION['userlevel'] = $_SESSION['userlevel'] ?? null;
+$_SESSION['isLoggedin'] = $_SESSION['isLoggedin'] ?? false;
+
 $smusr = $_SESSION['smusr'];
 $userlevel = $_SESSION['userlevel'];
 $isLoggedin = $_SESSION['isLoggedin'];
