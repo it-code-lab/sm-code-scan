@@ -2891,3 +2891,7 @@ div:has(> .hideParentDiv) {display: none; }
     background-color: darkorange;
     margin: 20px;
 }
+
+.marker-span {
+  background-color: rgb(249, 249, 95);
+}

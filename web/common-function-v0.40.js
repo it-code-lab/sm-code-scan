@@ -3692,6 +3692,8 @@ function editItem(btn) {
         "<button data-title='Convert selected text to formatted code' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','convert-to-formated-code') >Convert text to formatted code</button>" +
 
         "<label class='toolBarlabel'>Format</label>" +
+        "<button data-title='Apply Marker' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','apply-marker') >Apply Marker</button>" +
+
         "<button data-title='Sanitize Div having Text Selected' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','sanitize-div') >Sanitize Div having Selection</button>" +
 
         "<button data-title='Sanitize' type='button' class='itmUpdBtnSmall btn btn-primary' onclick=addComponent('" + itemid + "','sanitize') >Sanitize Full Page</button>" +
@@ -4632,7 +4634,21 @@ function addComponent(itemid, type) {
         setTimeout(function () {
             hljs.highlightAll();
         }, 100);
-    } else if (type == "format-code") {
+    } else if (type == "apply-marker") {
+        let selection = window.getSelection();
+        if (selection.rangeCount > 0 && selection.toString() !== '') {
+          let range = selection.getRangeAt(0);
+      
+          // Create a wrapper span for the selected text
+          let markerElement = document.createElement('span');
+          markerElement.classList.add('marker-span');
+          markerElement.appendChild(range.extractContents()); // Wrap the selected text
+          range.insertNode(markerElement);
+      
+          // Clear the selection
+          selection.removeAllRanges();
+        }
+    }else if (type == "format-code") {
         formatcode();
     } else if (type == "image1") {
         var imagename = document.getElementById("image-" + itemid).value;
