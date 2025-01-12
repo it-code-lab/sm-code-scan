@@ -3734,7 +3734,7 @@ function editItem(btn) {
 
     toolbarHTML = toolbarHTML +
         "Max image height/width (px):" +
-        "<input type='text' class='imageszCls' id='imagesz-" + itemid + "' style='width:95%; margin:auto;'  value='500'>" +
+        "<input type='text' class='imageszCls' id='imagesz-" + itemid + "' style='width:95%; margin:auto;'  value='2000'>" +
         "Upload Image:(e.g. myimage.png)" +
         "<input type='text' id='image-" + itemid + "' style='width:95%; margin:auto;'  value=''>"
 

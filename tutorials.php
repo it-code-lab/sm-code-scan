@@ -1,5 +1,5 @@
 <?php
-include("php/session.php");
+include_once("php/session.php");
 
 //Saurabh-SM-Change for - PHP 7 to 8 
 ini_set('display_errors', 0); // Disable error display
