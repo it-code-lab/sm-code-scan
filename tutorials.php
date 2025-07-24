@@ -569,7 +569,7 @@ function isMobileDevice()
             if ("<?php echo $tutTitleItemId; ?>" != ""){
                 setTimeout(function () {
                 var elemId = "tutorialDiv-" + "<?php echo $tutTitleItemId; ?>";
-                document.getElementById(elemId).style.backgroundColor = "orange";
+                document.getElementById(elemId).style.backgroundColor = "#FFFFCC";
             }, 100);
 
             if ("<?php echo $tutTitle; ?>" != ""){
